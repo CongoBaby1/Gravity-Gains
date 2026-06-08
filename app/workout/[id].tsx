@@ -6,12 +6,17 @@ import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useVoiceCommand } from '@/hooks/useVoiceCommand';
 
 function speak(text: string) {
-  if (typeof window !== 'undefined' && window.speechSynthesis) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.1;
-    utterance.pitch = 1.0;
-    window.speechSynthesis.speak(utterance);
-  }
+  if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  // Chrome hack: wake up synthesizer if it went idle
+  window.speechSynthesis.resume();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 1.1;
+  utterance.pitch = 1.0;
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length > 0) utterance.voice = voices.find((v) => v.lang.startsWith('en')) || voices[0];
+  utterance.onstart = () => console.log('[TTS]', text);
+  utterance.onerror = (e) => console.warn('[TTS Error]', (e as any).error, (e as any).message);
+  window.speechSynthesis.speak(utterance);
 }
 
 interface ExercisePlan {
