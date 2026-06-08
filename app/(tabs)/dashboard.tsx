@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xs,
   },
   brandLogo: {
-    width: 180,
-    height: 50,
+    width: 200,
+    height: 60,
     marginTop: Spacing.sm,
   },
   brand: {
