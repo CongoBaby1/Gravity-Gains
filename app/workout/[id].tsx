@@ -137,9 +137,18 @@ export default function WorkoutScreen() {
   const [records, setRecords] = useState<{ exercise: string; set: number; time: number }[]>([]);
   const [prFlash, setPrFlash] = useState(false);
   const [lastHeard, setLastHeard] = useState('');
+  const [micReady, setMicReady] = useState(false);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const cdRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Request mic permission early so the browser popup doesn't interrupt the countdown
+  useEffect(() => {
+    if (typeof window === 'undefined' || !navigator.mediaDevices?.getUserMedia) return;
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(() => setMicReady(true))
+      .catch(() => setMicReady(false));
+  }, []);
 
   const exercise = exercises[exIdx];
   const totalSets = exercise.sets;
