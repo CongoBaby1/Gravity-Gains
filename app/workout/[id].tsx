@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, ScrollView } fr
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
+import { useVoiceCommand } from '@/hooks/useVoiceCommand';
 
 interface ExercisePlan {
   id: string;

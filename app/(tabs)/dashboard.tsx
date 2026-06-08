@@ -13,10 +13,16 @@ import { useAuth } from '../../hooks/useAuth';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const RECENT_ACTIVITIES = [
-  { id: '1', title: 'Foundation 5 - Day 3', date: 'Today', duration: '28 min', route: '/programs' as const },
-  { id: '2', title: 'Mobility Flow - Hips', date: 'Yesterday', duration: '15 min', route: '/workout/hip' as const },
-  { id: '3', title: 'Push Pull Ladder', date: '2 days ago', duration: '35 min', route: '/workout/push-pull-ladder' as const },
+  { id: '1', title: 'Foundation 5 — Day 3', date: 'Today', duration: '28 min', route: '/programs' as const, emoji: '🏗️', difficulty: 'Beginner' },
+  { id: '2', title: 'Mobility Flow — Hips', date: 'Yesterday', duration: '15 min', route: '/workout/hip' as const, emoji: '🦵', difficulty: 'Intermediate' },
+  { id: '3', title: 'Push Pull Ladder', date: '2 days ago', duration: '35 min', route: '/workout/push-pull-ladder' as const, emoji: '💪', difficulty: 'Intermediate' },
 ];
+
+const DIFFICULTY_COLORS: Record<string, string> = {
+  Beginner: '#4ADE80',
+  Intermediate: '#FB923C',
+  Advanced: '#EF4444',
+};
 
 export default function DashboardScreen() {
   const router = useRouter();
@@ -93,21 +99,28 @@ export default function DashboardScreen() {
 
         {/* Recent Activity */}
         <Text style={styles.sectionTitle}>Recent Activity</Text>
-        {RECENT_ACTIVITIES.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.activityCard}
-            onPress={() => router.push(item.route)}
-            activeOpacity={0.8}
-          >
-            <View style={styles.activityDot} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.activityTitle}>{item.title}</Text>
-              <Text style={styles.activityMeta}>{item.date} • {item.duration}</Text>
-            </View>
-            <Text style={styles.activityArrow}>›</Text>
-          </TouchableOpacity>
-        ))}
+        {RECENT_ACTIVITIES.map((item) => {
+          const dColor = DIFFICULTY_COLORS[item.difficulty] || Colors.orange;
+          return (
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.activityCard, { borderLeftColor: dColor }]}
+              onPress={() => router.push(item.route)}
+              activeOpacity={0.8}
+            >
+              <View style={styles.activityRow}>
+                <Text style={styles.activityEmoji}>{item.emoji}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.activityTitle}>{item.title}</Text>
+                  <Text style={styles.activityMeta}>{item.date} • {item.duration}</Text>
+                </View>
+                <View style={[styles.difficultyBadge, { backgroundColor: `${dColor}20` }]}>
+                  <Text style={[styles.difficultyText, { color: dColor }]}>{item.difficulty}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -222,30 +235,35 @@ const styles = StyleSheet.create({
     padding: Spacing.lg,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
+    borderLeftWidth: 4,
     marginBottom: Spacing.md,
+  },
+  activityRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: Spacing.md,
   },
-  activityDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: Colors.success,
-    marginRight: Spacing.md,
+  activityEmoji: {
+    fontSize: 32,
   },
   activityTitle: {
     fontSize: FontSizes.base,
     color: Colors.textPrimary,
     fontWeight: '600',
+    marginBottom: Spacing.xs,
   },
   activityMeta: {
     fontSize: FontSizes.sm,
     color: Colors.textSecondary,
-    marginTop: Spacing.xs,
   },
-  activityArrow: {
-    fontSize: FontSizes.xl,
-    color: Colors.textMuted,
-    marginLeft: Spacing.md,
+  difficultyBadge: {
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: Spacing.xs,
+    borderRadius: 8,
+  },
+  difficultyText: {
+    fontSize: FontSizes.xs,
+    fontWeight: '700',
+    textTransform: 'uppercase',
   },
 });
