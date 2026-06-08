@@ -44,7 +44,10 @@ export default function LibraryScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView
+        style={{ width: '100%' }}
+        contentContainerStyle={[styles.scroll, { width: '100%' }]}
+      >
         <Text style={styles.header}>📚 Exercise Library</Text>
         <Text style={styles.sub}>Explore movements by category</Text>
 
@@ -92,16 +95,15 @@ export default function LibraryScreen() {
               key={ex.id}
               activeOpacity={0.8}
               onPress={() => router.push(`/exercise/${ex.id}`)}
+              style={styles.card}
             >
-              <View style={styles.card}>
-                <Text style={styles.cardTitle}>{ex.name}</Text>
-                <Text style={styles.cardMeta}>🎯 {ex.muscles}</Text>
-                <View style={styles.badgeRow}>
-                  <View style={[styles.badge, { backgroundColor: Colors.darkElevated }]}>
-                    <Text style={styles.badgeText}>{ex.difficulty}</Text>
-                  </View>
-                  <Text style={styles.badgeText}>{ex.category}</Text>
+              <Text style={styles.cardTitle}>{ex.name}</Text>
+              <Text style={styles.cardMeta}>🎯 {ex.muscles}</Text>
+              <View style={styles.badgeRow}>
+                <View style={[styles.badge, { backgroundColor: Colors.darkElevated }]}>
+                  <Text style={styles.badgeText}>{ex.difficulty}</Text>
                 </View>
+                <Text style={styles.badgeText}>{ex.category}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -163,6 +165,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: Spacing.md,
+    width: '100%',
+    justifyContent: 'space-between',
   },
   card: {
     backgroundColor: Colors.darkCard,
@@ -170,7 +174,8 @@ const styles = StyleSheet.create({
     padding: Spacing.lg,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
-    width: '47%',
+    width: '48%',
+    minHeight: 140,
   },
   cardTitle: {
     fontSize: FontSizes.lg,
