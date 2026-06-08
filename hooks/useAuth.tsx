@@ -64,6 +64,8 @@ const MOCK_USERS: Record<string, { password: string; user: User }> = {
   },
 };
 
+const AUTH_STORAGE_KEY = 'mock_users';
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,12 +73,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     (async () => {
       try {
-        const stored = await AsyncStorage.getItem('user');
-        if (stored) setUser(JSON.parse(stored));
+        const storedUser = await AsyncStorage.getItem('user');
+        if (storedUser) setUser(JSON.parse(storedUser));
+        const storedMock = await AsyncStorage.getItem(AUTH_STORAGE_KEY);
+        if (storedMock) {
+          const parsed = JSON.parse(storedMock);
+          Object.assign(MOCK_USERS, parsed);
+        }
       } catch { /* ignore */ }
       finally { setIsLoading(false); }
     })();
   }, []);
+
+  const persistMockUsers = async () => {
+    try {
+      await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(MOCK_USERS));
+    } catch { /* ignore */ }
+  };
 
   const signIn = async (email: string, password: string) => {
     const record = MOCK_USERS[email.toLowerCase()];
@@ -105,6 +118,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       joinedAt: new Date().toISOString().split('T')[0],
     };
     MOCK_USERS[email] = { password: data.password, user: newUser };
+    await persistMockUsers();
     setUser(newUser);
     await AsyncStorage.setItem('user', JSON.stringify(newUser));
   };
