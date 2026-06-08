@@ -210,6 +210,12 @@ export default function WorkoutScreen() {
     setPrFlash(false);
   };
 
+  // Voice command: listen for "stop" while timer is active
+  useVoiceCommand({
+    active: phase === 'running' || phase === 'countdown',
+    onCommand: stop,
+  });
+
   if (phase === 'summary') {
     const totalTime = records.reduce((sum, r) => sum + r.time, 0);
     return (

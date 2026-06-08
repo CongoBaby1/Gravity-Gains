@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
+import { useVoiceCommand } from '@/hooks/useVoiceCommand';
 
 export default function VoiceWorkoutScreen() {
   const router = useRouter();
@@ -133,6 +134,18 @@ export default function VoiceWorkoutScreen() {
     clear();
     router.back();
   };
+
+  // Voice command: listen for "stop" while timer is active
+  const handleStop = useCallback(() => {
+    clear();
+    setPhase('done');
+    speak('Session ended. Logging time.');
+  }, [clear, speak]);
+
+  useVoiceCommand({
+    active: phase === 'countdown' || phase === 'work' || phase === 'rest',
+    onCommand: handleStop,
+  });
 
   useEffect(() => {
     return () => clear();
