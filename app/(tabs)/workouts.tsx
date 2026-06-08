@@ -13,6 +13,8 @@ const WORKOUTS = [
   {
     id: '1',
     name: 'Foundation 5',
+    slug: 'programs',
+    isProgram: true,
     duration: '30 min',
     difficulty: 'Beginner',
     muscles: 'Full Body',
@@ -21,6 +23,8 @@ const WORKOUTS = [
   {
     id: '2',
     name: 'Mobility Flow - Hips',
+    slug: 'hip',
+    isProgram: false,
     duration: '15 min',
     difficulty: 'Beginner',
     muscles: 'Hips, Core',
@@ -29,6 +33,8 @@ const WORKOUTS = [
   {
     id: '3',
     name: 'Push Pull Ladder',
+    slug: 'push-pull-ladder',
+    isProgram: false,
     duration: '40 min',
     difficulty: 'Intermediate',
     muscles: 'Upper Body',
@@ -37,6 +43,8 @@ const WORKOUTS = [
   {
     id: '4',
     name: 'Posterior Chain Power',
+    slug: 'posterior-power',
+    isProgram: false,
     duration: '35 min',
     difficulty: 'Intermediate',
     muscles: 'Back, Glutes, Hamstrings',
@@ -45,6 +53,8 @@ const WORKOUTS = [
   {
     id: '5',
     name: 'Core Crusher',
+    slug: 'core-crusher',
+    isProgram: false,
     duration: '20 min',
     difficulty: 'Advanced',
     muscles: 'Core',
@@ -53,6 +63,8 @@ const WORKOUTS = [
   {
     id: '6',
     name: 'Build Session',
+    slug: 'build-session',
+    isProgram: false,
     duration: 'Custom',
     difficulty: 'Any',
     muscles: 'You Choose',
@@ -63,12 +75,16 @@ const WORKOUTS = [
 export default function WorkoutsScreen() {
   const router = useRouter();
 
-  const handleStart = (name: string) => {
-    if (name === 'Build Session') {
+  const handleStart = (w: typeof WORKOUTS[0]) => {
+    if (w.isProgram) {
+      router.push('/programs');
+      return;
+    }
+    if (w.slug === 'build-session') {
       router.push('/build-session');
       return;
     }
-    router.push('/(tabs)/library');
+    router.push(`/workout/${w.slug}`);
   };
 
   return (
@@ -91,7 +107,7 @@ export default function WorkoutsScreen() {
 
             <TouchableOpacity
               style={[styles.button, { backgroundColor: w.color }]}
-              onPress={() => handleStart(w.name)}
+              onPress={() => handleStart(w)}
               activeOpacity={0.85}
             >
               <Text style={styles.buttonText}>Start Session</Text>

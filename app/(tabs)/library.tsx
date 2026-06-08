@@ -8,26 +8,31 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const EXERCISES = [
-  { id: '1', name: 'Air Squat', muscles: 'Legs', difficulty: 'Beginner', category: 'Legs' },
-  { id: '2', name: 'Lunge Walk', muscles: 'Legs, Glutes', difficulty: 'Beginner', category: 'Legs' },
-  { id: '3', name: 'Plank', muscles: 'Core', difficulty: 'Beginner', category: 'Core' },
-  { id: '4', name: 'Hollow Body Hold', muscles: 'Core', difficulty: 'Intermediate', category: 'Core' },
-  { id: '5', name: 'Push-Up', muscles: 'Chest, Triceps', difficulty: 'Beginner', category: 'Upper Body' },
-  { id: '6', name: 'Pull-Up', muscles: 'Back, Biceps', difficulty: 'Intermediate', category: 'Upper Body' },
-  { id: '7', name: 'Inverted Row', muscles: 'Back, Biceps', difficulty: 'Beginner', category: 'Upper Body' },
-  { id: '8', name: 'Glute Bridge', muscles: 'Glutes, Hamstrings', difficulty: 'Beginner', category: 'Posterior Chain' },
-  { id: '9', name: 'Single-Leg RDL', muscles: 'Hamstrings, Glutes', difficulty: 'Intermediate', category: 'Posterior Chain' },
-  { id: '10', name: '90/90 Hip Switch', muscles: 'Hips', difficulty: 'Beginner', category: 'Mobility' },
-  { id: '11', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility' },
-  { id: '12', name: 'Deep Squat Hold', muscles: 'Hips, Ankles', difficulty: 'Beginner', category: 'Mobility' },
+  { id: 'wall-sit', name: 'Wall Sit', muscles: 'Quads, Glutes', difficulty: 'Beginner', category: 'Legs' },
+  { id: 'plank', name: 'Dead-Stop Plank', muscles: 'Core, Abs', difficulty: 'Beginner', category: 'Core' },
+  { id: 'superman', name: 'Superman Hold', muscles: 'Lower Back, Glutes', difficulty: 'Beginner', category: 'Posterior Chain' },
+  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body' },
+  { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs' },
+  { id: 'air-squat', name: 'Air Squat', muscles: 'Legs', difficulty: 'Beginner', category: 'Legs' },
+  { id: 'lunge-walk', name: 'Lunge Walk', muscles: 'Legs, Glutes', difficulty: 'Beginner', category: 'Legs' },
+  { id: 'hollow-body', name: 'Hollow Body Hold', muscles: 'Core', difficulty: 'Intermediate', category: 'Core' },
+  { id: 'pull-up', name: 'Pull-Up', muscles: 'Back, Biceps', difficulty: 'Intermediate', category: 'Upper Body' },
+  { id: 'inverted-row', name: 'Inverted Row', muscles: 'Back, Biceps', difficulty: 'Beginner', category: 'Upper Body' },
+  { id: 'glute-bridge', name: 'Glute Bridge', muscles: 'Glutes, Hamstrings', difficulty: 'Beginner', category: 'Posterior Chain' },
+  { id: 'single-leg-rdl', name: 'Single-Leg RDL', muscles: 'Hamstrings, Glutes', difficulty: 'Intermediate', category: 'Posterior Chain' },
+  { id: '90-hip', name: '90/90 Hip Switch', muscles: 'Hips', difficulty: 'Beginner', category: 'Mobility' },
+  { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility' },
+  { id: 'deep-squat', name: 'Deep Squat Hold', muscles: 'Hips, Ankles', difficulty: 'Beginner', category: 'Mobility' },
 ];
 
 const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];
 
 export default function LibraryScreen() {
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -83,16 +88,29 @@ export default function LibraryScreen() {
 
         <View style={styles.grid}>
           {filtered.map((ex) => (
-            <View key={ex.id} style={styles.card}>
-              <Text style={styles.cardTitle}>{ex.name}</Text>
-              <Text style={styles.cardMeta}>🎯 {ex.muscles}</Text>
-              <View style={styles.badgeRow}>
-                <View style={[styles.badge, { backgroundColor: Colors.darkElevated }]}>
-                  <Text style={styles.badgeText}>{ex.difficulty}</Text>
+            <TouchableOpacity
+              key={ex.id}
+              activeOpacity={0.8}
+              onPress={() => {
+                const detailIds = ['wall-sit','plank','superman','push-up-hold','horse-stance'];
+                if (detailIds.includes(ex.id)) {
+                  router.push(`/exercise/${ex.id}`);
+                } else {
+                  router.push(`/workout/${ex.id}`);
+                }
+              }}
+            >
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>{ex.name}</Text>
+                <Text style={styles.cardMeta}>🎯 {ex.muscles}</Text>
+                <View style={styles.badgeRow}>
+                  <View style={[styles.badge, { backgroundColor: Colors.darkElevated }]}>
+                    <Text style={styles.badgeText}>{ex.difficulty}</Text>
+                  </View>
+                  <Text style={styles.badgeText}>{ex.category}</Text>
                 </View>
-                <Text style={styles.badgeText}>{ex.category}</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
