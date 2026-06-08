@@ -52,10 +52,10 @@ const WORKOUTS = [
   },
   {
     id: '6',
-    name: 'Custom HIIT',
-    duration: '25 min',
-    difficulty: 'Advanced',
-    muscles: 'Full Body',
+    name: 'Build Session',
+    duration: 'Custom',
+    difficulty: 'Any',
+    muscles: 'You Choose',
     color: Colors.warning,
   },
 ];
@@ -64,8 +64,10 @@ export default function WorkoutsScreen() {
   const router = useRouter();
 
   const handleStart = (name: string) => {
-    // In a real app this would navigate to an active session or details screen.
-    // For now we navigate to the library to pick exercises.
+    if (name === 'Build Session') {
+      router.push('/build-session');
+      return;
+    }
     router.push('/(tabs)/library');
   };
 
