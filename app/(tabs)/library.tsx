@@ -91,14 +91,7 @@ export default function LibraryScreen() {
             <TouchableOpacity
               key={ex.id}
               activeOpacity={0.8}
-              onPress={() => {
-                const detailIds = ['wall-sit','plank','superman','push-up-hold','horse-stance'];
-                if (detailIds.includes(ex.id)) {
-                  router.push(`/exercise/${ex.id}`);
-                } else {
-                  router.push(`/workout/${ex.id}`);
-                }
-              }}
+              onPress={() => router.push(`/exercise/${ex.id}`)}
             >
               <View style={styles.card}>
                 <Text style={styles.cardTitle}>{ex.name}</Text>
