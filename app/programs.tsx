@@ -23,17 +23,22 @@ function ProgramCard({ program }: { program: typeof foundation5[0] }) {
   const router = useRouter();
   return (
     <View style={styles.card}>
-      <View style={styles.cardHeader}>
-        <Text style={styles.emoji}>{program.emoji}</Text>
-        <View style={styles.cardMeta}>
-          <Text style={styles.cardName}>{program.name}</Text>
-          <View style={styles.metaRow}>
-            <Text style={styles.metaText}>⏱ {program.duration}</Text>
-            <Text style={styles.metaText}>📊 {program.difficulty}</Text>
-            <Text style={styles.metaText}>📝 {program.exercises} exercise{program.exercises > 1 ? 's' : ''}</Text>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => router.push(`/exercise/${program.id}`)}
+      >
+        <View style={styles.cardHeader}>
+          <Text style={styles.emoji}>{program.emoji}</Text>
+          <View style={styles.cardMeta}>
+            <Text style={styles.cardName}>{program.name}</Text>
+            <View style={styles.metaRow}>
+              <Text style={styles.metaText}>⏱ {program.duration}</Text>
+              <Text style={styles.metaText}>📊 {program.difficulty}</Text>
+              <Text style={styles.metaText}>📝 {program.exercises} exercise{program.exercises > 1 ? 's' : ''}</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => router.push(`/workout/${program.id}`)}
