@@ -4,12 +4,21 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
+
+const { width } = Dimensions.get('window');
+
+// Exercise images mapping - user will supply images per exercise
+const EXERCISE_IMAGES: Record<string, any> = {
+  'wall-sit': require('@/assets/exercises/wall-sit.png'),
+};
 
 interface ExerciseData {
   name: string;
@@ -424,15 +433,6 @@ const DEFAULT: ExerciseData = {
   holds: { beginner: '20 sec', intermediate: '45 sec', advanced: '90 sec' },
 };
 
-function MuscleBadge({ label, color }: { label: string; color: string }) {
-  return (
-    <View style={[styles.muscleBadge, { backgroundColor: `${color}18`, borderColor: `${color}40` }]}>
-      <View style={[styles.muscleDot, { backgroundColor: color }]} />
-      <Text style={[styles.muscleBadgeText, { color }]}>{label}</Text>
-    </View>
-  );
-}
-
 function GoalCard({ label, value, color }: { label: string; value: string; color: string }) {
   return (
     <View style={[styles.goalCard, { borderColor: `${color}30` }]}>
@@ -448,6 +448,8 @@ export default function ExerciseDetailScreen() {
   const ex = DATA[id ?? ''] ?? DEFAULT;
   const [fav, setFav] = useState(false);
 
+  const imageSource = EXERCISE_IMAGES[id as string];
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -460,43 +462,12 @@ export default function ExerciseDetailScreen() {
         </View>
         <Text style={styles.title}>{ex.name}</Text>
 
-        {/* Diagram + Muscles Row */}
-        <View style={styles.diagramRow}>
-          {/* Diagram Panel */}
-          <View style={styles.diagramPanel}>
-            <Text style={styles.panelTitle}>Exercise Position</Text>
-            {ex.diagram.map((d, i) => (
-              <View key={i} style={styles.diagramItem}>
-                <View style={styles.diagramNumber}>
-                  <Text style={styles.diagramNumberText}>{i + 1}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.diagramLabel}>{d.label}</Text>
-                  <Text style={styles.diagramDetail}>{d.detail}</Text>
-                </View>
-              </View>
-            ))}
+        {/* Exercise Image - Full Width Reference Diagram */}
+        {imageSource && (
+          <View style={styles.imageCard}>
+            <Image source={imageSource} style={styles.exerciseImage} resizeMode="contain" />
           </View>
-
-          {/* Muscles Panel */}
-          <View style={styles.musclesPanel}>
-            <Text style={styles.panelTitle}>Muscles Worked</Text>
-
-            <Text style={styles.muscleSectionLabel}>Primary</Text>
-            <View style={styles.muscleGroup}>
-              {ex.primary.map((m) => (
-                <MuscleBadge key={m} label={m} color={Colors.danger} />
-              ))}
-            </View>
-
-            <Text style={styles.muscleSectionLabel}>Secondary</Text>
-            <View style={styles.muscleGroup}>
-              {ex.secondary.map((m) => (
-                <MuscleBadge key={m} label={m} color={Colors.orange} />
-              ))}
-            </View>
-          </View>
-        </View>
+        )}
 
         {/* How to Perform */}
         <View style={styles.section}>
@@ -528,7 +499,7 @@ export default function ExerciseDetailScreen() {
           <Text style={styles.cueText}>"{ex.cue}"</Text>
         </View>
 
-        {/* Goal Cards */}
+        {/* Target Holds */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Target Holds</Text>
           <View style={styles.goalsRow}>
@@ -574,94 +545,17 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
 
-  diagramRow: {
-    flexDirection: 'row',
-    gap: Spacing.md,
+  imageCard: {
+    backgroundColor: Colors.darkCard,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: Colors.darkBorder,
+    overflow: 'hidden',
     marginBottom: Spacing.lg,
   },
-  diagramPanel: {
-    flex: 1,
-    backgroundColor: Colors.darkCard,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: Colors.darkBorder,
-    padding: Spacing.md,
-  },
-  musclesPanel: {
-    flex: 1,
-    backgroundColor: Colors.darkCard,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: Colors.darkBorder,
-    padding: Spacing.md,
-  },
-  panelTitle: {
-    color: Colors.textPrimary,
-    fontSize: FontSizes.sm,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: Spacing.md,
-  },
-  diagramItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: Spacing.sm,
-    gap: Spacing.sm,
-  },
-  diagramNumber: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: Colors.orange,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  diagramNumberText: {
-    color: Colors.textPrimary,
-    fontSize: FontSizes.sm,
-    fontWeight: '700',
-  },
-  diagramLabel: {
-    color: Colors.textPrimary,
-    fontSize: FontSizes.sm,
-    fontWeight: '600',
-  },
-  diagramDetail: {
-    color: Colors.textSecondary,
-    fontSize: FontSizes.xs,
-  },
-
-  muscleSectionLabel: {
-    color: Colors.textSecondary,
-    fontSize: FontSizes.xs,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    marginBottom: Spacing.xs,
-    marginTop: Spacing.sm,
-  },
-  muscleGroup: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.xs,
-  },
-  muscleBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 8,
-    borderWidth: 1,
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 4,
-    gap: 4,
-  },
-  muscleDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-  },
-  muscleBadgeText: {
-    fontSize: FontSizes.xs,
-    fontWeight: '700',
+  exerciseImage: {
+    width: width - Spacing.lg * 2,
+    height: (width - Spacing.lg * 2) * 0.75,
   },
 
   section: {
