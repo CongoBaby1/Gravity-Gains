@@ -4,6 +4,7 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
@@ -41,7 +42,7 @@ export default function DashboardScreen() {
         <View style={styles.header}>
           <Text style={styles.greeting}>👋 Welcome back, {user?.name || 'Athlete'}</Text>
           <TouchableOpacity onPress={handleBrandTap} activeOpacity={1}>
-            <Text style={styles.brand}>Master Your Own Weight</Text>
+            <Image source={require('@/assets/images/logo.jpg')} style={styles.brandLogo} resizeMode="contain" />
           </TouchableOpacity>
         </View>
 
@@ -124,6 +125,11 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
     fontWeight: '700',
     marginBottom: Spacing.xs,
+  },
+  brandLogo: {
+    width: 180,
+    height: 50,
+    marginTop: Spacing.sm,
   },
   brand: {
     fontSize: FontSizes.lg,

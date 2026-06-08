@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -43,8 +44,7 @@ export default function LoginScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
-          <Text style={styles.logo}>🏋️‍♂️</Text>
-          <Text style={styles.title}>Welcome Back</Text>
+          <Image source={require('@/assets/images/logo.jpg')} style={styles.logo} resizeMode="contain" />
           <Text style={styles.subtitle}>Sign in to continue your journey</Text>
         </View>
 
@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xl,
   },
   logo: {
-    fontSize: FontSizes.hero,
+    width: 240,
+    height: 160,
     marginBottom: Spacing.md,
   },
   title: {
