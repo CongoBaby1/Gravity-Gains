@@ -12,12 +12,18 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
-const CATEGORY_META: Record<string, { color: string; emoji: string }> = {
-  Legs: { color: '#FF6B35', emoji: '🦵' },
-  Core: { color: '#4ECDC4', emoji: '📏' },
-  'Upper Body': { color: '#45B7D1', emoji: '💪' },
-  'Posterior Chain': { color: '#96CEB4', emoji: '🦸' },
-  Mobility: { color: '#DDA0DD', emoji: '🔄' },
+const DIFFICULTY_COLORS: Record<string, string> = {
+  Beginner: '#4ADE80',
+  Intermediate: '#FB923C',
+  Advanced: '#EF4444',
+};
+
+const CATEGORY_EMOJIS: Record<string, string> = {
+  Legs: '🦵',
+  Core: '📏',
+  'Upper Body': '💪',
+  'Posterior Chain': '🦸',
+  Mobility: '🔄',
 };
 
 const EXERCISES = [
@@ -80,19 +86,19 @@ export default function LibraryScreen() {
         >
           {CATEGORIES.map((cat) => {
             const active = activeCategory === cat;
-            const meta = CATEGORY_META[cat] || { color: Colors.orange, emoji: '🏋️' };
+            const emoji = CATEGORY_EMOJIS[cat] || '🏋️';
             return (
               <TouchableOpacity
                 key={cat}
                 style={[
                   styles.chip,
-                  active && { backgroundColor: meta.color, borderColor: meta.color },
+                  active && { backgroundColor: Colors.orange, borderColor: Colors.orange },
                 ]}
                 onPress={() => setActiveCategory(cat)}
                 activeOpacity={0.8}
               >
                 <Text style={[styles.chipEmoji, active && { opacity: 1 }]}>
-                  {meta.emoji}
+                  {emoji}
                 </Text>
                 <Text
                   style={[
@@ -109,22 +115,22 @@ export default function LibraryScreen() {
 
         <View style={styles.grid}>
           {filtered.map((ex) => {
-            const meta = CATEGORY_META[ex.category] || { color: Colors.orange };
+            const dColor = DIFFICULTY_COLORS[ex.difficulty] || Colors.orange;
             return (
               <TouchableOpacity
                 key={ex.id}
                 activeOpacity={0.8}
                 onPress={() => router.push(`/exercise/${ex.id}`)}
-                style={[styles.card, { width: cardWidth, borderLeftColor: meta.color }]}
+                style={[styles.card, { width: cardWidth, borderLeftColor: dColor }]}
               >
                 <Text style={styles.cardEmoji}>{ex.emoji}</Text>
                 <Text style={styles.cardTitle}>{ex.name}</Text>
                 <Text style={styles.cardMeta}>{ex.muscles}</Text>
                 <View style={styles.badgeRow}>
-                  <View style={[styles.badge, { backgroundColor: `${meta.color}20` }]}>
-                    <Text style={[styles.badgeText, { color: meta.color }]}>{ex.difficulty}</Text>
+                  <View style={[styles.badge, { backgroundColor: `${dColor}20` }]}>
+                    <Text style={[styles.badgeText, { color: dColor }]}>{ex.difficulty}</Text>
                   </View>
-                  <Text style={[styles.catText, { color: meta.color }]}>{ex.category}</Text>
+                  <Text style={[styles.catText, { color: dColor }]}>{ex.category}</Text>
                 </View>
               </TouchableOpacity>
             );
