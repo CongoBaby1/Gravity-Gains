@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
@@ -7,11 +14,12 @@ import { Colors, Spacing, FontSizes } from '@/constants/colors';
 interface ExerciseData {
   name: string;
   emoji: string;
-  primary: string;
-  secondary: string;
+  diagram: { label: string; detail: string }[];
+  primary: string[];
+  secondary: string[];
   instructions: string[];
   mistakes: string[];
-  tips: string[];
+  cue: string;
   holds: { beginner: string; intermediate: string; advanced: string };
 }
 
@@ -19,82 +27,93 @@ const DATA: Record<string, ExerciseData> = {
   'wall-sit': {
     name: 'Wall Sit',
     emoji: '🪑',
-    primary: 'Quads, Glutes',
-    secondary: 'Core, Calves',
+    diagram: [
+      { label: 'Back flat', detail: 'against wall' },
+      { label: 'Knees at', detail: '90°' },
+      { label: 'Feet flat', detail: 'on the ground' },
+    ],
+    primary: ['Quadriceps'],
+    secondary: ['Glutes', 'Calves', 'Core (Abs)'],
     instructions: [
-      'Stand with your back flat against a wall.',
-      'Slide down until knees are at 90° and thighs parallel to the floor.',
-      'Keep feet shoulder-width apart and flat on the ground.',
-      'Rest arms at your sides or extend them forward for balance.',
-      'Hold position while breathing steadily.',
+      'Stand with your back against a wall.',
+      'Walk your feet forward about 2 feet.',
+      'Slide down until knees reach 90 degrees.',
+      'Keep your back flat against the wall.',
+      'Hold the position with steady breathing.',
     ],
     mistakes: [
-      'Knees extending past toes',
-      'Lifting heels off the floor',
-      'Rounding lower back away from wall',
+      'Knees past toes',
+      'Hips too high',
+      'Leaning forward',
     ],
-    tips: [
-      'Press lower back firmly into the wall for spine safety',
-      'Engage core to reduce hip flexor strain',
-      'Start shorter and build up each week',
-    ],
-    holds: { beginner: '30 sec', intermediate: '90 sec', advanced: '3+ min' },
+    cue: 'Sit down, not forward.',
+    holds: { beginner: '20 sec', intermediate: '60 sec', advanced: '120+ sec' },
   },
   'plank': {
     name: 'Dead-Stop Plank',
     emoji: '📏',
-    primary: 'Core, Abs',
-    secondary: 'Shoulders, Glutes',
+    diagram: [
+      { label: 'Elbows under', detail: 'shoulders' },
+      { label: 'Body straight', detail: 'head to heels' },
+      { label: 'Toes on', detail: 'the ground' },
+    ],
+    primary: ['Core', 'Abs'],
+    secondary: ['Shoulders', 'Glutes', 'Lower Back'],
     instructions: [
-      'Lie face down and prop up on forearms with elbows under shoulders.',
-      'Lift body so only forearms and toes touch the ground.',
-      'Keep body in a straight line from head to heels.',
-      'Hold without sagging hips or arching back.',
+      'Lie face down and prop up on forearms.',
+      'Elbows directly under your shoulders.',
+      'Lift body so only forearms and toes touch.',
+      'Keep a straight line from head to heels.',
+      'Hold without sagging hips or arching.',
     ],
     mistakes: [
       'Hips sagging toward floor',
       'Head dropping — keep neutral neck',
-      'Holding breath instead of steady breathing',
+      'Holding breath',
     ],
-    tips: [
-      'Squeeze glutes to stabilize the posterior chain',
-      'Look slightly ahead, not down at your hands',
-      'Rest when form breaks — quality over quantity',
-    ],
-    holds: { beginner: '20 sec', intermediate: '60 sec', advanced: '2+ min' },
+    cue: 'Brace like someone is going to punch your stomach.',
+    holds: { beginner: '20 sec', intermediate: '60 sec', advanced: '120+ sec' },
   },
   'superman': {
     name: 'Superman Hold',
     emoji: '🦸',
-    primary: 'Lower Back, Glutes',
-    secondary: 'Hamstrings, Core',
+    diagram: [
+      { label: 'Arms extended', detail: 'overhead' },
+      { label: 'Lift chest &', detail: 'legs off floor' },
+      { label: 'Gaze neutral', detail: 'look ahead' },
+    ],
+    primary: ['Lower Back', 'Glutes'],
+    secondary: ['Hamstrings', 'Core', 'Upper Back'],
     instructions: [
       'Lie face down with arms extended overhead.',
-      'Simultaneously lift arms, chest, and legs off the floor.',
-      'Keep gaze neutral — look at the floor slightly ahead.',
-      'Hold the elevated position with controlled breathing.',
+      'Simultaneously lift arms, chest, and legs.',
+      'Keep gaze neutral — look slightly ahead.',
+      'Hold the elevated position with control.',
+      'Breathe steadily throughout.',
     ],
     mistakes: [
       'Overextending neck by looking up',
-      'Jerky lifts instead of smooth controlled raise',
+      'Jerky lifts instead of smooth raise',
       'Holding breath',
     ],
-    tips: [
-      'Lift only as high as you can control',
-      'Pause at top for 1-2 seconds each rep',
-      'Pair with core work for balanced posterior chain',
-    ],
-    holds: { beginner: '15 sec', intermediate: '45 sec', advanced: '90 sec' },
+    cue: 'Fly like Superman. Long body, not a banana.',
+    holds: { beginner: '15 sec', intermediate: '45 sec', advanced: '90+ sec' },
   },
   'push-up-hold': {
     name: 'Mid-Range Push-Up Hold',
     emoji: '💪',
-    primary: 'Chest, Triceps',
-    secondary: 'Core, Shoulders',
+    diagram: [
+      { label: 'Elbows at', detail: '~90°' },
+      { label: 'Body rigid', detail: 'straight line' },
+      { label: 'Shoulders over', detail: 'your hands' },
+    ],
+    primary: ['Chest', 'Triceps'],
+    secondary: ['Core', 'Shoulders', 'Front Delts'],
     instructions: [
       'Start in a standard push-up position.',
-      'Lower yourself halfway so elbows are at ~90°.',
-      'Hold that midpoint without touching the floor.',
+      'Lower yourself halfway down.',
+      'Elbows at roughly 90 degrees.',
+      'Hold the midpoint without touching floor.',
       'Keep body rigid and core engaged.',
     ],
     mistakes: [
@@ -102,21 +121,23 @@ const DATA: Record<string, ExerciseData> = {
       'Elbows flaring too wide',
       'Not keeping shoulders over hands',
     ],
-    tips: [
-      'Micro-adjust hand width to find strongest angle',
-      'Breathe shallowly to avoid collapsing',
-      'Use a mirror or video to check form',
-    ],
+    cue: 'Hold the bottom of the push-up like a statue.',
     holds: { beginner: '10 sec', intermediate: '30 sec', advanced: '60+ sec' },
   },
   'horse-stance': {
     name: 'Horse Stance',
     emoji: '🐴',
-    primary: 'Adductors, Quads',
-    secondary: 'Glutes, Core, Ankles',
+    diagram: [
+      { label: 'Feet wide', detail: 'toes out' },
+      { label: 'Thighs parallel', detail: 'to ground' },
+      { label: 'Back straight', detail: 'chest open' },
+    ],
+    primary: ['Adductors', 'Quads'],
+    secondary: ['Glutes', 'Core', 'Ankles', 'Calves'],
     instructions: [
-      'Stand with feet wider than shoulder-width, toes pointing slightly outward.',
-      'Lower hips until thighs are roughly parallel to the ground.',
+      'Stand with feet wider than shoulder-width.',
+      'Toes pointing slightly outward.',
+      'Lower hips until thighs are parallel.',
       'Keep back straight and chest open.',
       'Hold with steady, deep breathing.',
     ],
@@ -125,25 +146,51 @@ const DATA: Record<string, ExerciseData> = {
       'Heels lifting off ground',
       'Leaning torso too far forward',
     ],
-    tips: [
-      'Drive knees outward actively',
-      'Practice ankle mobility if heels rise',
-      'Build time gradually — this is a marathon hold',
-    ],
-    holds: { beginner: '30 sec', intermediate: '90 sec', advanced: '3+ min' },
+    cue: 'Spread the floor apart with your feet.',
+    holds: { beginner: '30 sec', intermediate: '90 sec', advanced: '180+ sec' },
   },
 };
 
 const DEFAULT: ExerciseData = {
   name: 'Exercise',
   emoji: '🏋️',
-  primary: 'Full Body',
-  secondary: 'Core',
-  instructions: ['Perform with control.', 'Hold the position.', 'Breathe steadily.'],
-  mistakes: ['Rushing the movement', 'Poor posture'],
-  tips: ['Focus on form', 'Progress gradually'],
+  diagram: [
+    { label: 'Position', detail: 'your body' },
+    { label: 'Maintain', detail: 'good form' },
+    { label: 'Hold', detail: 'with control' },
+  ],
+  primary: ['Full Body'],
+  secondary: ['Core', 'Stabilizers'],
+  instructions: [
+    'Assume the starting position.',
+    'Engage the target muscles.',
+    'Hold with controlled breathing.',
+  ],
+  mistakes: [
+    'Rushing the movement',
+    'Poor posture',
+  ],
+  cue: 'Quality over quantity.',
   holds: { beginner: '20 sec', intermediate: '45 sec', advanced: '90 sec' },
 };
+
+function MuscleBadge({ label, color }: { label: string; color: string }) {
+  return (
+    <View style={[styles.muscleBadge, { backgroundColor: `${color}18`, borderColor: `${color}40` }]}>
+      <View style={[styles.muscleDot, { backgroundColor: color }]} />
+      <Text style={[styles.muscleBadgeText, { color }]}>{label}</Text>
+    </View>
+  );
+}
+
+function GoalCard({ label, value, color }: { label: string; value: string; color: string }) {
+  return (
+    <View style={[styles.goalCard, { borderColor: `${color}30` }]}>
+      <Text style={[styles.goalLabel, { color }]}>{label}</Text>
+      <Text style={styles.goalValue}>{value}</Text>
+    </View>
+  );
+}
 
 export default function ExerciseDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -153,7 +200,8 @@ export default function ExerciseDetailScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        {/* Header */}
         <View style={styles.headerRow}>
           <Text style={styles.emoji}>{ex.emoji}</Text>
           <TouchableOpacity activeOpacity={0.7} onPress={() => setFav((f) => !f)} style={styles.starBtn}>
@@ -162,62 +210,93 @@ export default function ExerciseDetailScreen() {
         </View>
         <Text style={styles.title}>{ex.name}</Text>
 
-        {/* Muscle highlight placeholder */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>🎯 Muscles</Text>
-          <Text style={styles.cardText}>Primary: {ex.primary}</Text>
-          <Text style={styles.cardText}>Secondary: {ex.secondary}</Text>
-        </View>
+        {/* Diagram + Muscles Row */}
+        <View style={styles.diagramRow}>
+          {/* Diagram Panel */}
+          <View style={styles.diagramPanel}>
+            <Text style={styles.panelTitle}>Exercise Position</Text>
+            {ex.diagram.map((d, i) => (
+              <View key={i} style={styles.diagramItem}>
+                <View style={styles.diagramNumber}>
+                  <Text style={styles.diagramNumberText}>{i + 1}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.diagramLabel}>{d.label}</Text>
+                  <Text style={styles.diagramDetail}>{d.detail}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
 
-        {/* Instructions */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>📋 Instructions</Text>
-          {ex.instructions.map((step, i) => (
-            <View key={i} style={styles.stepRow}>
-              <View style={styles.badge}><Text style={styles.badgeText}>{i + 1}</Text></View>
-              <Text style={styles.cardText}>{step}</Text>
+          {/* Muscles Panel */}
+          <View style={styles.musclesPanel}>
+            <Text style={styles.panelTitle}>Muscles Worked</Text>
+
+            <Text style={styles.muscleSectionLabel}>Primary</Text>
+            <View style={styles.muscleGroup}>
+              {ex.primary.map((m) => (
+                <MuscleBadge key={m} label={m} color={Colors.danger} />
+              ))}
             </View>
-          ))}
-        </View>
 
-        {/* Mistakes */}
-        <View style={styles.card}>
-          <Text style={[styles.cardTitle, { color: Colors.danger }]}>⚠️ Common Mistakes</Text>
-          {ex.mistakes.map((m, i) => (
-            <Text key={i} style={[styles.cardText, { color: Colors.textSecondary }]}>• {m}</Text>
-          ))}
-        </View>
-
-        {/* Tips */}
-        <View style={styles.card}>
-          <Text style={[styles.cardTitle, { color: Colors.success }]}>💡 Coach Tips</Text>
-          {ex.tips.map((t, i) => (
-            <Text key={i} style={[styles.cardText, { color: Colors.textSecondary }]}>• {t}</Text>
-          ))}
-        </View>
-
-        {/* Target holds */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>🎯 Target Holds</Text>
-          <View style={styles.holdRow}>
-            <View style={styles.holdBox}>
-              <Text style={styles.holdLabel}>Beginner</Text>
-              <Text style={styles.holdValue}>{ex.holds.beginner}</Text>
-            </View>
-            <View style={styles.holdBox}>
-              <Text style={styles.holdLabel}>Intermediate</Text>
-              <Text style={styles.holdValue}>{ex.holds.intermediate}</Text>
-            </View>
-            <View style={styles.holdBox}>
-              <Text style={styles.holdLabel}>Advanced</Text>
-              <Text style={styles.holdValue}>{ex.holds.advanced}</Text>
+            <Text style={styles.muscleSectionLabel}>Secondary</Text>
+            <View style={styles.muscleGroup}>
+              {ex.secondary.map((m) => (
+                <MuscleBadge key={m} label={m} color={Colors.orange} />
+              ))}
             </View>
           </View>
         </View>
 
+        {/* How to Perform */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>How to Perform</Text>
+          {ex.instructions.map((step, i) => (
+            <View key={i} style={styles.stepRow}>
+              <View style={styles.stepBadge}>
+                <Text style={styles.stepBadgeText}>{i + 1}</Text>
+              </View>
+              <Text style={styles.stepText}>{step}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Common Mistakes */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: Colors.danger }]}>Common Mistakes</Text>
+          {ex.mistakes.map((m, i) => (
+            <View key={i} style={styles.mistakeRow}>
+              <Text style={styles.mistakeIcon}>❌</Text>
+              <Text style={styles.mistakeText}>{m}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Coach Cue */}
+        <View style={styles.cueCard}>
+          <Text style={styles.cueLabel}>💬 Coach Cue</Text>
+          <Text style={styles.cueText}>"{ex.cue}"</Text>
+        </View>
+
+        {/* Goal Cards */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Target Holds</Text>
+          <View style={styles.goalsRow}>
+            <GoalCard label="Beginner" value={ex.holds.beginner} color={Colors.success} />
+            <GoalCard label="Intermediate" value={ex.holds.intermediate} color={Colors.gold} />
+            <GoalCard label="Advanced" value={ex.holds.advanced} color={Colors.orange} />
+          </View>
+        </View>
+
+        {/* Start Workout Button */}
         <TouchableOpacity activeOpacity={0.8} onPress={() => router.push(`/workout/${id}`)}>
-          <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
-            <Text style={styles.ctaText}>▶️ Start Exercise</Text>
+          <LinearGradient
+            colors={[Colors.orange, Colors.orangeLight]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.cta}
+          >
+            <Text style={styles.ctaText}>▶️ Start Workout</Text>
           </LinearGradient>
         </TouchableOpacity>
       </ScrollView>
@@ -227,47 +306,220 @@ export default function ExerciseDetailScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.nearBlack },
-  scroll: { padding: Spacing.md, paddingBottom: Spacing.xxl },
-  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: Spacing.sm },
+  scroll: { padding: Spacing.lg, paddingBottom: Spacing.xxl },
+
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
   emoji: { fontSize: FontSizes.hero },
   starBtn: { padding: Spacing.sm },
   star: { color: Colors.gold, fontSize: FontSizes['3xl'] },
-  title: { color: Colors.textPrimary, fontSize: FontSizes['3xl'], fontWeight: 'bold', marginBottom: Spacing.md },
-  card: {
+  title: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes['3xl'],
+    fontWeight: 'bold',
+    marginBottom: Spacing.lg,
+  },
+
+  diagramRow: {
+    flexDirection: 'row',
+    gap: Spacing.md,
+    marginBottom: Spacing.lg,
+  },
+  diagramPanel: {
+    flex: 1,
     backgroundColor: Colors.darkCard,
     borderRadius: 14,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
     padding: Spacing.md,
+  },
+  musclesPanel: {
+    flex: 1,
+    backgroundColor: Colors.darkCard,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: Colors.darkBorder,
+    padding: Spacing.md,
+  },
+  panelTitle: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.sm,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
     marginBottom: Spacing.md,
   },
-  cardTitle: { color: Colors.textPrimary, fontSize: FontSizes.xl, fontWeight: '700', marginBottom: Spacing.sm },
-  cardText: { color: Colors.textSecondary, fontSize: FontSizes.base, marginBottom: Spacing.xs, lineHeight: 22 },
-  stepRow: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: Spacing.sm, gap: Spacing.sm },
-  badge: {
+  diagramItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+    gap: Spacing.sm,
+  },
+  diagramNumber: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: Colors.orange,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  diagramNumberText: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.sm,
+    fontWeight: '700',
+  },
+  diagramLabel: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.sm,
+    fontWeight: '600',
+  },
+  diagramDetail: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.xs,
+  },
+
+  muscleSectionLabel: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.xs,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    marginBottom: Spacing.xs,
+    marginTop: Spacing.sm,
+  },
+  muscleGroup: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.xs,
+  },
+  muscleBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+    borderWidth: 1,
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 4,
+    gap: 4,
+  },
+  muscleDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  muscleBadgeText: {
+    fontSize: FontSizes.xs,
+    fontWeight: '700',
+  },
+
+  section: {
+    marginBottom: Spacing.lg,
+  },
+  sectionTitle: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.xl,
+    fontWeight: '700',
+    marginBottom: Spacing.md,
+  },
+  stepRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: Spacing.sm,
+    gap: Spacing.sm,
+  },
+  stepBadge: {
     width: 24,
     height: 24,
     borderRadius: 12,
     backgroundColor: Colors.orange,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 2,
   },
-  badgeText: { color: Colors.textPrimary, fontSize: FontSizes.sm, fontWeight: '700' },
-  holdRow: { flexDirection: 'row', gap: Spacing.md },
-  holdBox: {
+  stepBadgeText: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.xs,
+    fontWeight: '700',
+  },
+  stepText: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.base,
+    lineHeight: 22,
     flex: 1,
-    backgroundColor: Colors.darkElevated,
-    borderRadius: 10,
-    padding: Spacing.sm,
+  },
+
+  mistakeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+    gap: Spacing.sm,
+  },
+  mistakeIcon: {
+    fontSize: FontSizes.base,
+  },
+  mistakeText: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.base,
+  },
+
+  cueCard: {
+    backgroundColor: `${Colors.blue}10`,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: `${Colors.blue}30`,
+    padding: Spacing.lg,
+    marginBottom: Spacing.lg,
+  },
+  cueLabel: {
+    color: Colors.blue,
+    fontSize: FontSizes.sm,
+    fontWeight: '700',
+    marginBottom: Spacing.xs,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  cueText: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.lg,
+    fontWeight: '600',
+    fontStyle: 'italic',
+  },
+
+  goalsRow: {
+    flexDirection: 'row',
+    gap: Spacing.md,
+  },
+  goalCard: {
+    flex: 1,
+    backgroundColor: Colors.darkCard,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: Spacing.md,
     alignItems: 'center',
   },
-  holdLabel: { color: Colors.textSecondary, fontSize: FontSizes.sm },
-  holdValue: { color: Colors.textPrimary, fontSize: FontSizes.lg, fontWeight: '700', marginTop: Spacing.xs },
+  goalLabel: {
+    fontSize: FontSizes.xs,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    marginBottom: Spacing.xs,
+  },
+  goalValue: {
+    color: Colors.textPrimary,
+    fontSize: FontSizes.lg,
+    fontWeight: '800',
+  },
+
   cta: {
     borderRadius: 14,
-    paddingVertical: Spacing.md,
+    paddingVertical: Spacing.lg,
     alignItems: 'center',
     marginTop: Spacing.sm,
   },
-  ctaText: { color: Colors.textPrimary, fontWeight: '700', fontSize: FontSizes.lg },
+  ctaText: {
+    color: Colors.textPrimary,
+    fontWeight: '800',
+    fontSize: FontSizes.lg,
+  },
 });
