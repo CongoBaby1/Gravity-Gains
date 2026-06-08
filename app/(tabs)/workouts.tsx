@@ -94,7 +94,12 @@ export default function WorkoutsScreen() {
         <Text style={styles.sub}>Choose a session to begin</Text>
 
         {WORKOUTS.map((w) => (
-          <View key={w.id} style={styles.card}>
+          <TouchableOpacity
+            key={w.id}
+            style={styles.card}
+            activeOpacity={0.8}
+            onPress={() => handleStart(w)}
+          >
             <View style={styles.row}>
               <View style={[styles.badge, { backgroundColor: `${w.color}20` }]}>
                 <Text style={[styles.badgeText, { color: w.color }]}>{w.difficulty}</Text>
@@ -105,14 +110,10 @@ export default function WorkoutsScreen() {
             <Text style={styles.name}>{w.name}</Text>
             <Text style={styles.muscles}>🎯 {w.muscles}</Text>
 
-            <TouchableOpacity
-              style={[styles.button, { backgroundColor: w.color }]}
-              onPress={() => handleStart(w)}
-              activeOpacity={0.85}
-            >
+            <View style={[styles.button, { backgroundColor: w.color }]}>
               <Text style={styles.buttonText}>Start Session</Text>
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>

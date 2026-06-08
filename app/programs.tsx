@@ -19,13 +19,13 @@ const mobilityPrograms = [
   { id: 'recovery', name: 'Recovery Flow', emoji: '😌', duration: '15 min', difficulty: 'All Levels', exercises: 10 },
 ];
 
-function ProgramCard({ program }: { program: typeof foundation5[0] }) {
+function ProgramCard({ program, isMobility = false }: { program: typeof foundation5[0]; isMobility?: boolean }) {
   const router = useRouter();
   return (
     <View style={styles.card}>
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => router.push(`/exercise/${program.id}`)}
+        onPress={() => router.push(isMobility ? `/workout/${program.id}` : `/exercise/${program.id}`)}
       >
         <View style={styles.cardHeader}>
           <Text style={styles.emoji}>{program.emoji}</Text>
@@ -70,7 +70,7 @@ export default function ProgramsScreen() {
 
         <Text style={[styles.subtitle, { marginTop: Spacing.lg }]}>Mobility Programs</Text>
         {mobilityPrograms.map((p) => (
-          <ProgramCard key={p.id} program={p} />
+          <ProgramCard key={p.id} program={p} isMobility={true} />
         ))}
       </ScrollView>
     </SafeAreaView>
