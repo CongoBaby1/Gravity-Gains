@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useVoiceCommand } from '@/hooks/useVoiceCommand';
 
-function speak(text: string) {
+function speak(text: string, onEnd?: () => void) {
   if (typeof window === 'undefined' || !window.speechSynthesis) return;
   // Chrome hack: wake up synthesizer if it went idle
   window.speechSynthesis.resume();
@@ -16,6 +16,7 @@ function speak(text: string) {
   if (voices.length > 0) utterance.voice = voices.find((v) => v.lang.startsWith('en')) || voices[0];
   utterance.onstart = () => console.log('[TTS]', text);
   utterance.onerror = (e) => console.warn('[TTS Error]', (e as any).error, (e as any).message);
+  if (onEnd) utterance.onend = onEnd;
   window.speechSynthesis.speak(utterance);
 }
 
@@ -165,27 +166,26 @@ export default function WorkoutScreen() {
   const startCountdown = () => {
     setPhase('countdown');
     setCountdown(5);
-    speak(`Get ready. ${exercise.name} in 5.`);
-    const speakCount = (n: number) => {
-      if (n > 0) speak(String(n));
-      else speak('Go!');
-    };
-    let remaining = 5;
-    cdRef.current = setInterval(() => {
-      remaining -= 1;
-      setCountdown((c) => {
-        const next = c - 1;
-        if (next <= 0) {
-          clearInterval(cdRef.current!);
-          cdRef.current = null;
-          speak('Go!');
-          beginHold();
-          return 0;
-        }
-        speakCount(next);
-        return next;
-      });
-    }, 1000);
+    // Speak intro, then start the synced 5-second interval after it finishes
+    speak(`Get ready. ${exercise.name} in 5.`, () => {
+      let remaining = 5;
+      speak(String(remaining));
+      cdRef.current = setInterval(() => {
+        remaining -= 1;
+        setCountdown((c) => {
+          const next = c - 1;
+          if (next <= 0) {
+            clearInterval(cdRef.current!);
+            cdRef.current = null;
+            speak('Go!');
+            beginHold();
+            return 0;
+          }
+          speak(String(next));
+          return next;
+        });
+      }, 1000);
+    });
   };
 
   const beginHold = () => {
