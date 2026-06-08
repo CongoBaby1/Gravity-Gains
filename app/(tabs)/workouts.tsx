@@ -9,6 +9,13 @@ import {
 import { useRouter } from 'expo-router';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
+const DIFFICULTY_COLORS: Record<string, string> = {
+  Beginner: '#4ADE80',
+  Intermediate: '#FB923C',
+  Advanced: '#EF4444',
+  Any: Colors.orange,
+};
+
 const WORKOUTS = [
   {
     id: '1',
@@ -18,7 +25,7 @@ const WORKOUTS = [
     duration: '30 min',
     difficulty: 'Beginner',
     muscles: 'Full Body',
-    color: Colors.orange,
+    emoji: '🏗️',
   },
   {
     id: '2',
@@ -28,7 +35,7 @@ const WORKOUTS = [
     duration: '15 min',
     difficulty: 'Beginner',
     muscles: 'Hips, Core',
-    color: Colors.blue,
+    emoji: '🦵',
   },
   {
     id: '3',
@@ -38,7 +45,7 @@ const WORKOUTS = [
     duration: '40 min',
     difficulty: 'Intermediate',
     muscles: 'Upper Body',
-    color: Colors.gold,
+    emoji: '💪',
   },
   {
     id: '4',
@@ -48,7 +55,7 @@ const WORKOUTS = [
     duration: '35 min',
     difficulty: 'Intermediate',
     muscles: 'Back, Glutes, Hamstrings',
-    color: Colors.success,
+    emoji: '🦸',
   },
   {
     id: '5',
@@ -58,7 +65,7 @@ const WORKOUTS = [
     duration: '20 min',
     difficulty: 'Advanced',
     muscles: 'Core',
-    color: Colors.danger,
+    emoji: '📏',
   },
   {
     id: '6',
@@ -68,7 +75,7 @@ const WORKOUTS = [
     duration: 'Custom',
     difficulty: 'Any',
     muscles: 'You Choose',
-    color: Colors.warning,
+    emoji: '⚙️',
   },
 ];
 
@@ -93,28 +100,32 @@ export default function WorkoutsScreen() {
         <Text style={styles.header}>💪 Workouts</Text>
         <Text style={styles.sub}>Choose a session to begin</Text>
 
-        {WORKOUTS.map((w) => (
-          <TouchableOpacity
-            key={w.id}
-            style={styles.card}
-            activeOpacity={0.8}
-            onPress={() => handleStart(w)}
-          >
-            <View style={styles.row}>
-              <View style={[styles.badge, { backgroundColor: `${w.color}20` }]}>
-                <Text style={[styles.badgeText, { color: w.color }]}>{w.difficulty}</Text>
+        {WORKOUTS.map((w) => {
+          const dColor = DIFFICULTY_COLORS[w.difficulty] || Colors.orange;
+          return (
+            <TouchableOpacity
+              key={w.id}
+              style={[styles.card, { borderLeftColor: dColor }]}
+              activeOpacity={0.8}
+              onPress={() => handleStart(w)}
+            >
+              <View style={styles.row}>
+                <View style={[styles.badge, { backgroundColor: `${dColor}20` }]}>
+                  <Text style={[styles.badgeText, { color: dColor }]}>{w.difficulty}</Text>
+                </View>
+                <Text style={styles.duration}>⏱️ {w.duration}</Text>
               </View>
-              <Text style={styles.duration}>⏱️ {w.duration}</Text>
-            </View>
 
-            <Text style={styles.name}>{w.name}</Text>
-            <Text style={styles.muscles}>🎯 {w.muscles}</Text>
+              <Text style={styles.emoji}>{w.emoji}</Text>
+              <Text style={styles.name}>{w.name}</Text>
+              <Text style={styles.muscles}>🎯 {w.muscles}</Text>
 
-            <View style={[styles.button, { backgroundColor: w.color }]}>
-              <Text style={styles.buttonText}>Start Session</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+              <View style={[styles.button, { backgroundColor: dColor }]}>
+                <Text style={styles.buttonText}>Start Session</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -146,6 +157,7 @@ const styles = StyleSheet.create({
     padding: Spacing.lg,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
+    borderLeftWidth: 4,
     marginBottom: Spacing.lg,
   },
   row: {
@@ -168,6 +180,10 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.sm,
     color: Colors.textSecondary,
   },
+  emoji: {
+    fontSize: 32,
+    marginBottom: Spacing.sm,
+  },
   name: {
     fontSize: FontSizes.xl,
     color: Colors.textPrimary,
@@ -185,7 +201,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#000',
     fontWeight: '800',
     fontSize: FontSizes.base,
   },

@@ -13,9 +13,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const RECENT_ACTIVITIES = [
-  { id: '1', title: 'Foundation 5 - Day 3', date: 'Today', duration: '28 min' },
-  { id: '2', title: 'Mobility Flow - Hips', date: 'Yesterday', duration: '15 min' },
-  { id: '3', title: 'Push Pull Ladder', date: '2 days ago', duration: '35 min' },
+  { id: '1', title: 'Foundation 5 - Day 3', date: 'Today', duration: '28 min', route: '/programs' as const },
+  { id: '2', title: 'Mobility Flow - Hips', date: 'Yesterday', duration: '15 min', route: '/workout/hip' as const },
+  { id: '3', title: 'Push Pull Ladder', date: '2 days ago', duration: '35 min', route: '/workout/push-pull-ladder' as const },
 ];
 
 export default function DashboardScreen() {
@@ -94,14 +94,19 @@ export default function DashboardScreen() {
         {/* Recent Activity */}
         <Text style={styles.sectionTitle}>Recent Activity</Text>
         {RECENT_ACTIVITIES.map((item) => (
-          <View key={item.id} style={styles.activityCard}>
+          <TouchableOpacity
+            key={item.id}
+            style={styles.activityCard}
+            onPress={() => router.push(item.route)}
+            activeOpacity={0.8}
+          >
             <View style={styles.activityDot} />
             <View style={{ flex: 1 }}>
               <Text style={styles.activityTitle}>{item.title}</Text>
               <Text style={styles.activityMeta}>{item.date} • {item.duration}</Text>
             </View>
             <Text style={styles.activityArrow}>›</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>

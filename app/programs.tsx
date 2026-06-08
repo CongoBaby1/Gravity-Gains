@@ -3,6 +3,13 @@ import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
+const DIFFICULTY_COLORS: Record<string, string> = {
+  Beginner: '#4ADE80',
+  Intermediate: '#FB923C',
+  Advanced: '#EF4444',
+  'All Levels': Colors.orange,
+};
+
 const foundation5 = [
   { id: 'wall-sit', name: 'Wall Sit', emoji: '🪑', duration: '3-5 min', difficulty: 'Beginner', exercises: 1 },
   { id: 'plank', name: 'Dead-Stop Plank', emoji: '📏', duration: '2-4 min', difficulty: 'Beginner', exercises: 1 },
@@ -21,44 +28,37 @@ const mobilityPrograms = [
 
 function ProgramCard({ program, isMobility = false }: { program: typeof foundation5[0]; isMobility?: boolean }) {
   const router = useRouter();
+  const dColor = DIFFICULTY_COLORS[program.difficulty] || Colors.orange;
+  const target = isMobility ? `/workout/${program.id}` : `/exercise/${program.id}`;
+
   return (
-    <View style={styles.card}>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => router.push(isMobility ? `/workout/${program.id}` : `/exercise/${program.id}`)}
-      >
-        <View style={styles.cardHeader}>
-          <Text style={styles.emoji}>{program.emoji}</Text>
-          <View style={styles.cardMeta}>
-            <Text style={styles.cardName}>{program.name}</Text>
-            <View style={styles.metaRow}>
-              <Text style={styles.metaText}>⏱ {program.duration}</Text>
-              <Text style={styles.metaText}>📊 {program.difficulty}</Text>
-              <Text style={styles.metaText}>📝 {program.exercises} exercise{program.exercises > 1 ? 's' : ''}</Text>
+    <TouchableOpacity
+      style={[styles.card, { borderLeftColor: dColor }]}
+      activeOpacity={0.8}
+      onPress={() => router.push(target)}
+    >
+      <View style={styles.cardHeader}>
+        <Text style={styles.emoji}>{program.emoji}</Text>
+        <View style={styles.cardMeta}>
+          <Text style={styles.cardName}>{program.name}</Text>
+          <View style={styles.metaRow}>
+            <Text style={styles.metaText}>⏱ {program.duration}</Text>
+            <View style={[styles.badge, { backgroundColor: `${dColor}20` }]}>
+              <Text style={[styles.badgeText, { color: dColor }]}>{program.difficulty}</Text>
             </View>
+            <Text style={styles.metaText}>📝 {program.exercises} exercise{program.exercises > 1 ? 's' : ''}</Text>
           </View>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => router.push(`/workout/${program.id}`)}
-      >
-        <LinearGradient
-          colors={[Colors.orange, Colors.orangeLight]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={styles.startBtn}
-        >
-          <Text style={styles.startBtnText}>▶️ Start Program</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    </View>
+      </View>
+
+      <View style={[styles.startBtn, { backgroundColor: dColor }]}>
+        <Text style={styles.startBtnText}>▶️ Start Program</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 export default function ProgramsScreen() {
-  const router = useRouter();
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -87,19 +87,30 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
+    borderLeftWidth: 4,
     padding: Spacing.md,
     marginBottom: Spacing.md,
   },
   cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: Spacing.md },
-  emoji: { fontSize: FontSizes['3xl'], marginRight: Spacing.md },
+  emoji: { fontSize: 32, marginRight: Spacing.md },
   cardMeta: { flex: 1 },
   cardName: { color: Colors.textPrimary, fontSize: FontSizes.xl, fontWeight: '700', marginBottom: Spacing.xs },
-  metaRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.sm },
+  metaRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: Spacing.sm },
   metaText: { color: Colors.textSecondary, fontSize: FontSizes.sm },
+  badge: {
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: Spacing.xs,
+    borderRadius: 8,
+  },
+  badgeText: {
+    fontSize: FontSizes.xs,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+  },
   startBtn: {
     borderRadius: 10,
     paddingVertical: Spacing.sm,
     alignItems: 'center',
   },
-  startBtnText: { color: Colors.textPrimary, fontWeight: '700', fontSize: FontSizes.base },
+  startBtnText: { color: '#000', fontWeight: '700', fontSize: FontSizes.base },
 });
