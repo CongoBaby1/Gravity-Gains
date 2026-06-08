@@ -462,10 +462,14 @@ export default function ExerciseDetailScreen() {
         </View>
         <Text style={styles.title}>{ex.name}</Text>
 
-        {/* Exercise Image - Full Width Reference Diagram */}
-        {imageSource && (
+        {/* Exercise Image or Emoji Banner */}
+        {imageSource ? (
           <View style={styles.imageCard}>
             <Image source={imageSource} style={styles.exerciseImage} resizeMode="contain" />
+          </View>
+        ) : (
+          <View style={[styles.emojiBanner, { backgroundColor: `${Colors.orange}15`, borderColor: `${Colors.orange}30` }]}>
+            <Text style={styles.emojiBannerText}>{ex.emoji}</Text>
           </View>
         )}
 
@@ -556,6 +560,18 @@ const styles = StyleSheet.create({
   exerciseImage: {
     width: width - Spacing.lg * 2,
     height: (width - Spacing.lg * 2) * 0.75,
+  },
+  emojiBanner: {
+    backgroundColor: `${Colors.orange}15`,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: `${Colors.orange}30`,
+    paddingVertical: Spacing.xl,
+    alignItems: 'center',
+    marginBottom: Spacing.lg,
+  },
+  emojiBannerText: {
+    fontSize: FontSizes.hero,
   },
 
   section: {
