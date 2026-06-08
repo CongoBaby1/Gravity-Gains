@@ -42,9 +42,14 @@ export default function VoiceWorkoutScreen() {
   };
 
   const speak = useCallback((text: string) => {
-    // Placeholder for TTS integration
-    // In production: Speech.speak(text)
-    console.log('[Coach]', text);
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.1;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.log('[Coach]', text);
+    }
   }, []);
 
   const startCountdown = () => {
@@ -135,6 +140,8 @@ export default function VoiceWorkoutScreen() {
     router.back();
   };
 
+  const [lastHeard, setLastHeard] = useState('');
+
   // Voice command: listen for "stop" while timer is active
   const handleStop = useCallback(() => {
     clear();
@@ -142,9 +149,10 @@ export default function VoiceWorkoutScreen() {
     speak('Session ended. Logging time.');
   }, [clear, speak]);
 
-  useVoiceCommand({
+  const { listening } = useVoiceCommand({
     active: phase === 'countdown' || phase === 'work' || phase === 'rest',
     onCommand: handleStop,
+    transcript: (text) => setLastHeard(text),
   });
 
   useEffect(() => {
@@ -246,6 +254,17 @@ export default function VoiceWorkoutScreen() {
             <Text style={styles.controlButtonDangerText}>⏹ End</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Voice status */}
+        {(listening || lastHeard) && (
+          <View style={styles.micRow}>
+            {listening && <View style={styles.micDot} />}
+            <Text style={styles.micText}>
+              {listening ? '🎙️ Listening' : ''}
+              {lastHeard ? `  ·  Heard: "${lastHeard}"` : ''}
+            </Text>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -327,4 +346,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   doneButtonText: { color: '#000', fontWeight: '800', fontSize: FontSizes.lg },
+  micRow: { flexDirection: 'row', alignItems: 'center', marginTop: Spacing.sm, gap: Spacing.xs, paddingHorizontal: Spacing.md },
+  micDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444' },
+  micText: { color: Colors.textSecondary, fontSize: FontSizes.sm },
 });

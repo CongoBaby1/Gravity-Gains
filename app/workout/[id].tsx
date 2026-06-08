@@ -5,6 +5,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useVoiceCommand } from '@/hooks/useVoiceCommand';
 
+function speak(text: string) {
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1.1;
+    utterance.pitch = 1.0;
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
 interface ExercisePlan {
   id: string;
   name: string;
@@ -122,6 +131,7 @@ export default function WorkoutScreen() {
   const [elapsed, setElapsed] = useState(0);
   const [records, setRecords] = useState<{ exercise: string; set: number; time: number }[]>([]);
   const [prFlash, setPrFlash] = useState(false);
+  const [lastHeard, setLastHeard] = useState('');
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const cdRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -141,15 +151,25 @@ export default function WorkoutScreen() {
   const startCountdown = () => {
     setPhase('countdown');
     setCountdown(5);
+    speak(`Get ready. ${exercise.name} in 5.`);
+    const speakCount = (n: number) => {
+      if (n > 0) speak(String(n));
+      else speak('Go!');
+    };
+    let remaining = 5;
     cdRef.current = setInterval(() => {
+      remaining -= 1;
       setCountdown((c) => {
-        if (c <= 1) {
+        const next = c - 1;
+        if (next <= 0) {
           clearInterval(cdRef.current!);
           cdRef.current = null;
+          speak('Go!');
           beginHold();
           return 0;
         }
-        return c - 1;
+        speakCount(next);
+        return next;
       });
     }, 1000);
   };
@@ -165,10 +185,12 @@ export default function WorkoutScreen() {
   const pause = () => {
     clearTimers();
     setPhase('paused');
+    speak('Paused.');
   };
 
   const resume = () => {
     setPhase('running');
+    speak('Resume.');
     timerRef.current = setInterval(() => {
       setElapsed((e) => e + 1);
     }, 1000);
@@ -177,10 +199,12 @@ export default function WorkoutScreen() {
   const stop = () => {
     clearTimers();
     setPhase('stopped');
+    speak('Stopped.');
     const record = { exercise: exercise.name, set: setIdx + 1, time: elapsed };
     setRecords((prev) => [...prev, record]);
     if (elapsed >= exercise.holdSeconds) {
       setPrFlash(true);
+      speak('Personal record!');
       setTimeout(() => setPrFlash(false), 2000);
     }
   };
@@ -211,9 +235,10 @@ export default function WorkoutScreen() {
   };
 
   // Voice command: listen for "stop" while timer is active
-  useVoiceCommand({
+  const { listening } = useVoiceCommand({
     active: phase === 'running' || phase === 'countdown',
     onCommand: stop,
+    transcript: (text) => setLastHeard(text),
   });
 
   if (phase === 'summary') {
@@ -244,6 +269,15 @@ export default function WorkoutScreen() {
         <Text style={styles.headerEmoji}>{exercise.emoji}</Text>
         <Text style={styles.headerName}>{exercise.name}</Text>
         <Text style={styles.headerSets}>Set {setIdx + 1} of {totalSets}</Text>
+        {(listening || lastHeard) && (
+          <View style={styles.micRow}>
+            {listening && <View style={styles.micDot} />}
+            <Text style={styles.micText}>
+              {listening ? '🎙️ Listening' : ''}
+              {lastHeard ? `  ·  Heard: "${lastHeard}"` : ''}
+            </Text>
+          </View>
+        )}
       </View>
 
       <View style={styles.timerWrap}>
@@ -355,6 +389,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   controlText: { color: Colors.textPrimary, fontWeight: '700', fontSize: FontSizes.lg },
+  micRow: { flexDirection: 'row', alignItems: 'center', marginTop: Spacing.sm, gap: Spacing.xs },
+  micDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444' },
+  micText: { color: Colors.textSecondary, fontSize: FontSizes.sm },
   title: { color: Colors.textPrimary, fontSize: FontSizes['3xl'], fontWeight: 'bold', textAlign: 'center', marginBottom: Spacing.sm },
   subtitle: { color: Colors.textSecondary, fontSize: FontSizes.lg, textAlign: 'center', marginBottom: Spacing.lg },
   summaryCard: {
