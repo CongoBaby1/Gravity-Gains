@@ -20,6 +20,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'wall-sit': require('@/assets/exercises/wall-sit.png'),
   'plank': require('@/assets/exercises/plank.png'),
   'superman': require('@/assets/exercises/superman.png'),
+  'push-up-hold': require('@/assets/exercises/push-up-hold.png'),
 };
 
 interface ExerciseData {
