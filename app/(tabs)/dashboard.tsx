@@ -14,8 +14,8 @@ import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const RECENT_ACTIVITIES = [
   { id: '1', title: 'Foundation 5 — Day 3', date: 'Today', duration: '28 min', route: '/programs' as const, emoji: '🏗️', difficulty: 'Beginner' },
-  { id: '2', title: 'Mobility Flow — Hips', date: 'Yesterday', duration: '15 min', route: '/workout/hip' as const, emoji: '🦵', difficulty: 'Intermediate' },
-  { id: '3', title: 'Push Pull Ladder', date: '2 days ago', duration: '35 min', route: '/workout/push-pull-ladder' as const, emoji: '💪', difficulty: 'Intermediate' },
+  { id: '2', title: 'Mobility Flow — Hips', date: 'Yesterday', duration: '15 min', route: '/exercise/hip' as const, emoji: '🦵', difficulty: 'Intermediate' },
+  { id: '3', title: 'Push Pull Ladder', date: '2 days ago', duration: '35 min', route: '/exercise/push-pull-ladder' as const, emoji: '💪', difficulty: 'Intermediate' },
 ];
 
 const DIFFICULTY_COLORS: Record<string, string> = {

@@ -26,10 +26,10 @@ const mobilityPrograms = [
   { id: 'recovery', name: 'Recovery Flow', emoji: '😌', duration: '15 min', difficulty: 'All Levels', exercises: 10 },
 ];
 
-function ProgramCard({ program, isMobility = false }: { program: typeof foundation5[0]; isMobility?: boolean }) {
+function ProgramCard({ program }: { program: typeof foundation5[0] }) {
   const router = useRouter();
   const dColor = DIFFICULTY_COLORS[program.difficulty] || Colors.orange;
-  const target = isMobility ? `/workout/${program.id}` : `/exercise/${program.id}`;
+  const target = `/exercise/${program.id}`;
 
   return (
     <TouchableOpacity
@@ -70,7 +70,7 @@ export default function ProgramsScreen() {
 
         <Text style={[styles.subtitle, { marginTop: Spacing.lg }]}>Mobility Programs</Text>
         {mobilityPrograms.map((p) => (
-          <ProgramCard key={p.id} program={p} isMobility={true} />
+          <ProgramCard key={p.id} program={p} />
         ))}
       </ScrollView>
     </SafeAreaView>

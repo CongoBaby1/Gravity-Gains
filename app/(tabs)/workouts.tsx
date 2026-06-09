@@ -91,7 +91,7 @@ export default function WorkoutsScreen() {
       router.push('/build-session');
       return;
     }
-    router.push(`/workout/${w.slug}`);
+    router.push(`/exercise/${w.slug}`);
   };
 
   return (
