@@ -18,6 +18,7 @@ const { width } = Dimensions.get('window');
 // Exercise images mapping - user will supply images per exercise
 const EXERCISE_IMAGES: Record<string, any> = {
   'wall-sit': require('@/assets/exercises/wall-sit.png'),
+  'plank': require('@/assets/exercises/plank.png'),
 };
 
 interface ExerciseData {
