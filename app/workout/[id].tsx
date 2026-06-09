@@ -11,7 +11,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'superman': require('@/assets/exercises/superman.png'),
   'push-up-hold': require('@/assets/exercises/push-up-hold.png'),
   'horse-stance': require('@/assets/exercises/horse-stance.png'),
-  'cat-cow': require('@/assets/exercises/cat-cow.png'),
+  'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
 };
 
 function speak(text: string, onEnd?: () => void) {
