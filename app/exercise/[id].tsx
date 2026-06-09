@@ -19,6 +19,7 @@ const { width } = Dimensions.get('window');
 const EXERCISE_IMAGES: Record<string, any> = {
   'wall-sit': require('@/assets/exercises/wall-sit.png'),
   'plank': require('@/assets/exercises/plank.png'),
+  'superman': require('@/assets/exercises/superman.png'),
 };
 
 interface ExerciseData {
