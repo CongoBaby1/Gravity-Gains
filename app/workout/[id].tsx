@@ -1,9 +1,18 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useVoiceCommand } from '@/hooks/useVoiceCommand';
+
+const EXERCISE_IMAGES: Record<string, any> = {
+  'wall-sit': require('@/assets/exercises/wall-sit.png'),
+  'plank': require('@/assets/exercises/plank.png'),
+  'superman': require('@/assets/exercises/superman.png'),
+  'push-up-hold': require('@/assets/exercises/push-up-hold.png'),
+  'horse-stance': require('@/assets/exercises/horse-stance.png'),
+  'cat-cow': require('@/assets/exercises/cat-cow.png'),
+};
 
 function speak(text: string, onEnd?: () => void) {
   if (typeof window === 'undefined' || !window.speechSynthesis) return;
@@ -294,6 +303,10 @@ export default function WorkoutScreen() {
         )}
       </View>
 
+      {EXERCISE_IMAGES[exercise.id] && (
+        <Image source={EXERCISE_IMAGES[exercise.id]} style={styles.exerciseImage} resizeMode="contain" />
+      )}
+
       <View style={styles.timerWrap}>
         <Text style={styles.timer}>
           {phase === 'countdown' ? String(countdown) : formatTime(elapsed)}
@@ -371,6 +384,11 @@ const styles = StyleSheet.create({
   headerEmoji: { fontSize: FontSizes.hero },
   headerName: { color: Colors.textPrimary, fontSize: FontSizes['2xl'], fontWeight: '700', marginTop: Spacing.sm },
   headerSets: { color: Colors.textSecondary, fontSize: FontSizes.lg, marginTop: Spacing.xs },
+  exerciseImage: {
+    width: '100%',
+    height: 180,
+    marginBottom: Spacing.lg,
+  },
   timerWrap: {
     alignSelf: 'center',
     backgroundColor: Colors.darkCard,
