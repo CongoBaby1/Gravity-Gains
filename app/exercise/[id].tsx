@@ -22,6 +22,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'superman': require('@/assets/exercises/superman.png'),
   'push-up-hold': require('@/assets/exercises/push-up-hold.png'),
   'horse-stance': require('@/assets/exercises/horse-stance.png'),
+  'cat-cow': require('@/assets/exercises/cat-cow.png'),
 };
 
 interface ExerciseData {
@@ -366,26 +367,28 @@ const DATA: Record<string, ExerciseData> = {
     name: 'Cat-Cow',
     emoji: '🐈',
     diagram: [
-      { label: 'On all fours', detail: 'hands under shoulders' },
-      { label: 'Round spine', detail: 'up to ceiling' },
-      { label: 'Arch spine', detail: 'down to floor' },
+      { label: 'Spine rounded', detail: 'upward (Cat)' },
+      { label: 'Spine arched', detail: 'downward (Cow)' },
+      { label: 'Hands under shoulders', detail: 'knees under hips' },
     ],
-    primary: ['Spine', 'Core'],
-    secondary: ['Hips', 'Lower Back', 'Shoulders'],
+    primary: ['Spinal Erectors', 'Deep Core Stabilizers'],
+    secondary: ['Abdominals', 'Hip Flexors', 'Glutes', 'Upper Back', 'Neck Muscles'],
     instructions: [
       'Start on all fours, hands under shoulders, knees under hips.',
       'Cat: round your spine up to the ceiling, tuck chin to chest.',
       'Cow: arch your spine down, lift chest and tailbone.',
-      'Move slowly with your breath.',
+      'Move slowly with your breath, not with momentum.',
       'Inhale on cow, exhale on cat.',
     ],
     mistakes: [
-      'Rushing through reps',
-      'Moving hips instead of spine',
-      'Not linking breath to movement',
+      'Bending elbows',
+      'Moving too fast',
+      'Not using full spinal range',
+      'Shrugging shoulders toward ears',
+      'Holding your breath',
     ],
-    cue: 'Move your spine like a wave, not your hips.',
-    holds: { beginner: '10 reps', intermediate: '20 reps', advanced: '30+ reps' },
+    cue: 'Move with your breath, not with momentum.',
+    holds: { beginner: '30–60 sec', intermediate: '60–90 sec', advanced: '90–120+ sec' },
   },
   'deep-squat': {
     name: 'Deep Squat Hold',
