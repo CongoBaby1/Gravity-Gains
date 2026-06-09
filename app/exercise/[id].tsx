@@ -415,6 +415,32 @@ const DATA: Record<string, ExerciseData> = {
     cue: 'Sink your hips between your ankles, not behind them.',
     holds: { beginner: '20 sec', intermediate: '60 sec', advanced: '120+ sec' },
   },
+  'morning': {
+    name: 'Morning Mobility',
+    emoji: '🌅',
+    diagram: [
+      { label: '6 exercises', detail: 'full-body flow' },
+      { label: '10 minutes', detail: 'total duration' },
+      { label: 'Beginner', detail: 'friendly' },
+    ],
+    primary: ['Hips', 'Spine', 'Core'],
+    secondary: ['Shoulders', 'Lower Back', 'Glutes'],
+    instructions: [
+      '1. Cat-Cow — 2 sets x 60 sec',
+      '2. 90/90 Hip Switch — 2 sets x 60 sec',
+      '3. Deep Squat Hold — 2 sets x 45 sec',
+      '4. Dead-Stop Plank — 2 sets x 45 sec',
+      '5. Superman Hold — 2 sets x 30 sec',
+      '6. Wall Sit — 2 sets x 45 sec',
+    ],
+    mistakes: [
+      'Skipping the warm-up',
+      'Rushing through holds',
+      'Not breathing steadily',
+    ],
+    cue: 'Move with intention. Quality over speed.',
+    holds: { beginner: '10 min', intermediate: '12 min', advanced: '15 min' },
+  },
 };
 
 const DEFAULT: ExerciseData = {
