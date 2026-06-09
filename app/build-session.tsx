@@ -1,233 +1,159 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
+  TextInput,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const EXERCISES = [
-  { id: '1', name: 'Air Squat', muscles: 'Legs', difficulty: 'Beginner', category: 'Legs' },
-  { id: '2', name: 'Lunge Walk', muscles: 'Legs, Glutes', difficulty: 'Beginner', category: 'Legs' },
-  { id: '3', name: 'Plank', muscles: 'Core', difficulty: 'Beginner', category: 'Core' },
-  { id: '4', name: 'Hollow Body Hold', muscles: 'Core', difficulty: 'Intermediate', category: 'Core' },
-  { id: '5', name: 'Push-Up', muscles: 'Chest, Triceps', difficulty: 'Beginner', category: 'Upper Body' },
-  { id: '6', name: 'Pull-Up', muscles: 'Back, Biceps', difficulty: 'Intermediate', category: 'Upper Body' },
-  { id: '7', name: 'Inverted Row', muscles: 'Back, Biceps', difficulty: 'Beginner', category: 'Upper Body' },
-  { id: '8', name: 'Glute Bridge', muscles: 'Glutes, Hamstrings', difficulty: 'Beginner', category: 'Posterior Chain' },
-  { id: '9', name: 'Single-Leg RDL', muscles: 'Hamstrings, Glutes', difficulty: 'Intermediate', category: 'Posterior Chain' },
-  { id: '10', name: '90/90 Hip Switch', muscles: 'Hips', difficulty: 'Beginner', category: 'Mobility' },
-  { id: '11', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility' },
-  { id: '12', name: 'Deep Squat Hold', muscles: 'Hips, Ankles', difficulty: 'Beginner', category: 'Mobility' },
-  { id: '13', name: 'Burpee', muscles: 'Full Body', difficulty: 'Advanced', category: 'Full Body' },
-  { id: '14', name: 'Mountain Climber', muscles: 'Core, Shoulders', difficulty: 'Intermediate', category: 'Core' },
-  { id: '15', name: 'Jump Squat', muscles: 'Legs, Glutes', difficulty: 'Intermediate', category: 'Legs' },
-  { id: '16', name: 'Box Jump', muscles: 'Legs, Glutes', difficulty: 'Intermediate', category: 'Legs' },
-  { id: '17', name: 'Handstand Hold', muscles: 'Shoulders, Core', difficulty: 'Advanced', category: 'Upper Body' },
-  { id: '18', name: 'L-Sit', muscles: 'Core, Hip Flexors', difficulty: 'Advanced', category: 'Core' },
+  { id: 'wall-sit', name: 'Wall Sit', emoji: '🪑' },
+  { id: 'plank', name: 'Dead-Stop Plank', emoji: '📏' },
+  { id: 'superman', name: 'Superman Hold', emoji: '🦸' },
+  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪' },
+  { id: 'horse-stance', name: 'Horse Stance', emoji: '🐴' },
+  { id: 'air-squat', name: 'Air Squat', emoji: '🦵' },
+  { id: 'lunge-walk', name: 'Lunge Walk', emoji: '🚶' },
+  { id: 'hollow-body', name: 'Hollow Body Hold', emoji: '🍩' },
+  { id: 'pull-up', name: 'Pull-Up', emoji: '🤸' },
+  { id: 'inverted-row', name: 'Inverted Row', emoji: '📐' },
+  { id: 'glute-bridge', name: 'Glute Bridge', emoji: '🍑' },
+  { id: 'single-leg-rdl', name: 'Single-Leg RDL', emoji: '🦵' },
+  { id: '90-hip', name: '90/90 Hip Switch', emoji: '🔄' },
+  { id: 'cat-cow', name: 'Cat-Cow', emoji: '🐈' },
+  { id: 'deep-squat', name: 'Deep Squat Hold', emoji: '🪑' },
 ];
-
-const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility', 'Full Body'];
 
 export default function BuildSessionScreen() {
   const router = useRouter();
-
-  const [step, setStep] = useState<'pick' | 'configure'>('pick');
-  const [selected, setSelected] = useState<string[]>([]);
-  const [query, setQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
-
+  const [selected, setSelected] = useState<Set<string>>(new Set());
   const [workTime, setWorkTime] = useState('40');
   const [restTime, setRestTime] = useState('20');
   const [rounds, setRounds] = useState('4');
-  const [sessionName, setSessionName] = useState('');
 
-  const toggleExercise = useCallback((id: string) => {
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-  }, []);
-
-  const filtered = EXERCISES.filter((ex) => {
-    const matchesCategory = activeCategory === 'All' || ex.category === activeCategory;
-    const matchesSearch = ex.name.toLowerCase().includes(query.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
-  const selectedExercises = EXERCISES.filter((ex) => selected.includes(ex.id));
-
-  const handleNext = () => {
-    if (selected.length === 0) {
-      Alert.alert('Select Exercises', 'Pick at least one exercise to build a session.');
-      return;
-    }
-    setStep('configure');
+  const toggle = (id: string) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   };
 
-  const handleStart = () => {
-    const name = sessionName.trim() || `Build Session`;
-    const w = parseInt(workTime, 10) || 40;
-    const r = parseInt(restTime, 10) || 20;
-    const roundCount = parseInt(rounds, 10) || 4;
+  const selectedExercises = EXERCISES.filter((e) => selected.has(e.id));
+  const canStart = selectedExercises.length > 0;
 
-    // Navigate to the voice workout with the custom config
+  const handleStart = () => {
+    if (!canStart) return;
+    const names = selectedExercises.map((e) => e.name);
     router.push({
       pathname: '/voice-workout',
       params: {
-        name,
-        exercises: JSON.stringify(selectedExercises.map((e) => e.name)),
-        workTime: String(w),
-        restTime: String(r),
-        rounds: String(roundCount),
+        name: 'Custom Session',
+        workTime,
+        restTime,
+        rounds,
+        exercises: JSON.stringify(names),
       },
     });
   };
 
-  if (step === 'pick') {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scroll}>
-          <Text style={styles.header}>Build Session</Text>
-          <Text style={styles.sub}>Pick exercises for your interval session</Text>
-
-          <TextInput
-            style={styles.search}
-            placeholder="Search exercises..."
-            placeholderTextColor={Colors.textMuted}
-            value={query}
-            onChangeText={setQuery}
-          />
-
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-            {CATEGORIES.map((cat) => {
-              const active = activeCategory === cat;
-              return (
-                <TouchableOpacity
-                  key={cat}
-                  style={[styles.chip, active && { backgroundColor: Colors.orange, borderColor: Colors.orange }]}
-                  onPress={() => setActiveCategory(cat)}
-                  activeOpacity={0.8}
-                >
-                  <Text style={[styles.chipText, active && { color: '#fff', fontWeight: '700' }]}>{cat}</Text>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-
-          <View style={styles.selectionBar}>
-            <Text style={styles.selectionText}>
-              {selected.length} selected{selected.length > 0 ? ` · ${selected.length * 2} min est.` : ''}
-            </Text>
-          </View>
-
-          {filtered.map((ex) => {
-            const isSelected = selected.includes(ex.id);
-            return (
-              <TouchableOpacity
-                key={ex.id}
-                style={[styles.exerciseCard, isSelected && styles.exerciseCardActive]}
-                onPress={() => toggleExercise(ex.id)}
-                activeOpacity={0.8}
-              >
-                <View style={styles.exerciseRow}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.exerciseName}>{ex.name}</Text>
-                    <Text style={styles.exerciseMeta}>{ex.muscles} · {ex.difficulty}</Text>
-                  </View>
-                  <View style={[styles.checkCircle, isSelected && { backgroundColor: Colors.orange, borderColor: Colors.orange }]}>
-                    {isSelected && <Text style={{ color: '#fff', fontWeight: '800', fontSize: 14 }}>✓</Text>}
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-
-          <TouchableOpacity style={styles.nextButton} onPress={handleNext} activeOpacity={0.85}>
-            <Text style={styles.nextButtonText}>Next: Configure Intervals</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <TouchableOpacity onPress={() => setStep('pick')} style={styles.back} activeOpacity={0.7}>
-          <Text style={styles.backText}>‹ Back to Exercise Selection</Text>
-        </TouchableOpacity>
+        <Text style={styles.header}>⚙️ Build Session</Text>
+        <Text style={styles.sub}>Pick exercises and set your intervals</Text>
 
-        <Text style={styles.header}>Configure Session</Text>
-        <Text style={styles.sub}>{selectedExercises.length} exercises · Set your intervals</Text>
+        {/* Exercise Selector */}
+        <Text style={styles.sectionTitle}>Select Exercises ({selected.size})</Text>
+        <View style={styles.exerciseGrid}>
+          {EXERCISES.map((ex) => {
+            const active = selected.has(ex.id);
+            return (
+              <TouchableOpacity
+                key={ex.id}
+                activeOpacity={0.8}
+                onPress={() => toggle(ex.id)}
+                style={[
+                  styles.exerciseChip,
+                  active && { backgroundColor: Colors.orange, borderColor: Colors.orange },
+                ]}
+              >
+                <Text style={styles.exerciseChipEmoji}>{ex.emoji}</Text>
+                <Text
+                  style={[
+                    styles.exerciseChipText,
+                    active && { color: '#000', fontWeight: '700' },
+                  ]}
+                >
+                  {ex.name}
+                </Text>
+                {active && <Text style={styles.checkMark}>✓</Text>}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
 
-        <Text style={styles.label}>Session Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="e.g., Morning Burn"
-          placeholderTextColor={Colors.textMuted}
-          value={sessionName}
-          onChangeText={setSessionName}
-          maxLength={30}
-        />
-
-        <View style={styles.row}>
-          <View style={styles.col}>
-            <Text style={styles.label}>Work (sec)</Text>
+        {/* Interval Settings */}
+        <Text style={styles.sectionTitle}>Interval Settings</Text>
+        <View style={styles.inputRow}>
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Work (sec)</Text>
             <TextInput
               style={styles.input}
-              keyboardType="numeric"
-              placeholder="40"
-              placeholderTextColor={Colors.textMuted}
+              keyboardType="number-pad"
               value={workTime}
               onChangeText={setWorkTime}
+              placeholderTextColor={Colors.textMuted}
             />
           </View>
-          <View style={styles.col}>
-            <Text style={styles.label}>Rest (sec)</Text>
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Rest (sec)</Text>
             <TextInput
               style={styles.input}
-              keyboardType="numeric"
-              placeholder="20"
-              placeholderTextColor={Colors.textMuted}
+              keyboardType="number-pad"
               value={restTime}
               onChangeText={setRestTime}
+              placeholderTextColor={Colors.textMuted}
             />
           </View>
-          <View style={styles.col}>
-            <Text style={styles.label}>Rounds</Text>
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Rounds</Text>
             <TextInput
               style={styles.input}
-              keyboardType="numeric"
-              placeholder="4"
-              placeholderTextColor={Colors.textMuted}
+              keyboardType="number-pad"
               value={rounds}
               onChangeText={setRounds}
+              placeholderTextColor={Colors.textMuted}
             />
           </View>
         </View>
 
-        <View style={styles.summaryCard}>
-          <Text style={styles.summaryTitle}>Session Preview</Text>
-          {selectedExercises.map((ex) => (
-            <View key={ex.id} style={styles.summaryRow}>
-              <Text style={styles.summaryDot}>•</Text>
-              <Text style={styles.summaryExercise}>{ex.name}</Text>
-              <Text style={styles.summaryInterval}>{workTime}s work / {restTime}s rest</Text>
-            </View>
-          ))}
-          <Text style={styles.summaryTotal}>
-            {rounds} rounds · ~{Math.ceil(((parseInt(workTime) + parseInt(restTime)) * selectedExercises.length * parseInt(rounds)) / 60)} min
-          </Text>
-        </View>
+        {/* Summary */}
+        {canStart && (
+          <View style={styles.summaryCard}>
+            <Text style={styles.summaryText}>
+              {selected.size} exercise{selected.size > 1 ? 's' : ''} · {workTime}s work · {restTime}s rest · {rounds} round{parseInt(rounds) > 1 ? 's' : ''}
+            </Text>
+          </View>
+        )}
 
-        <TouchableOpacity style={styles.startButton} onPress={handleStart} activeOpacity={0.85}>
-          <Text style={styles.startButtonText}>Start Session</Text>
+        {/* Start Button */}
+        <TouchableOpacity activeOpacity={0.8} onPress={handleStart} disabled={!canStart}>
+          <LinearGradient
+            colors={canStart ? [Colors.orange, Colors.orangeLight] : ['#555', '#555']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={[styles.cta, !canStart && { opacity: 0.5 }]}
+          >
+            <Text style={styles.ctaText}>▶️ Start Custom Session</Text>
+          </LinearGradient>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -235,97 +161,111 @@ export default function BuildSessionScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.nearBlack },
-  scroll: { padding: Spacing.lg, paddingBottom: Spacing.xxl },
-  header: { fontSize: FontSizes['3xl'], color: Colors.textPrimary, fontWeight: '800', marginBottom: Spacing.xs },
-  sub: { fontSize: FontSizes.lg, color: Colors.textSecondary, marginBottom: Spacing.xl },
-  search: {
-    backgroundColor: Colors.darkElevated,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.darkBorder,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.md,
+  container: {
+    flex: 1,
+    backgroundColor: Colors.nearBlack,
+  },
+  scroll: {
+    padding: Spacing.lg,
+    paddingBottom: Spacing.xxl,
+  },
+  header: {
+    fontSize: FontSizes['3xl'],
     color: Colors.textPrimary,
-    fontSize: FontSizes.base,
+    fontWeight: '800',
+    marginBottom: Spacing.xs,
+  },
+  sub: {
+    fontSize: FontSizes.lg,
+    color: Colors.textSecondary,
+    marginBottom: Spacing.xl,
+  },
+  sectionTitle: {
+    fontSize: FontSizes.lg,
+    color: Colors.textPrimary,
+    fontWeight: '700',
     marginBottom: Spacing.md,
   },
-  chips: { flexDirection: 'row', gap: Spacing.sm, paddingBottom: Spacing.md },
-  chip: {
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.xs,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: Colors.darkBorder,
-    backgroundColor: Colors.darkElevated,
+  exerciseGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.sm,
+    marginBottom: Spacing.xl,
   },
-  chipText: { fontSize: FontSizes.sm, color: Colors.textSecondary },
-  selectionBar: { marginBottom: Spacing.md },
-  selectionText: { fontSize: FontSizes.sm, color: Colors.orange, fontWeight: '700' },
-  exerciseCard: {
+  exerciseChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.xs,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    marginBottom: Spacing.xs,
+  },
+  exerciseChipEmoji: {
+    fontSize: 16,
+  },
+  exerciseChipText: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.sm,
+    fontWeight: '600',
+  },
+  checkMark: {
+    color: '#000',
+    fontWeight: '800',
+    fontSize: FontSizes.sm,
+    marginLeft: 2,
+  },
+  inputRow: {
+    flexDirection: 'row',
+    gap: Spacing.md,
+    marginBottom: Spacing.xl,
+  },
+  inputGroup: {
+    flex: 1,
+  },
+  inputLabel: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.sm,
+    fontWeight: '600',
+    marginBottom: Spacing.xs,
+  },
+  input: {
     backgroundColor: Colors.darkCard,
     borderRadius: 12,
-    padding: Spacing.md,
-    borderWidth: 1,
-    borderColor: Colors.darkBorder,
-    marginBottom: Spacing.sm,
-  },
-  exerciseCardActive: { borderColor: Colors.orange, backgroundColor: `${Colors.orange}12` },
-  exerciseRow: { flexDirection: 'row', alignItems: 'center' },
-  exerciseName: { fontSize: FontSizes.base, color: Colors.textPrimary, fontWeight: '700' },
-  exerciseMeta: { fontSize: FontSizes.sm, color: Colors.textSecondary, marginTop: 2 },
-  checkCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    borderWidth: 2,
-    borderColor: Colors.darkBorder,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  nextButton: {
-    backgroundColor: Colors.orange,
-    borderRadius: 14,
-    paddingVertical: Spacing.lg,
-    alignItems: 'center',
-    marginTop: Spacing.xl,
-  },
-  nextButtonText: { color: '#000', fontWeight: '800', fontSize: FontSizes.lg },
-  back: { marginBottom: Spacing.md },
-  backText: { color: Colors.orange, fontSize: FontSizes.base, fontWeight: '700' },
-  label: { fontSize: FontSizes.sm, color: Colors.textSecondary, marginBottom: Spacing.sm, fontWeight: '600' },
-  input: {
-    backgroundColor: Colors.darkElevated,
-    borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
     paddingHorizontal: Spacing.md,
     paddingVertical: Spacing.md,
     color: Colors.textPrimary,
     fontSize: FontSizes.base,
-    marginBottom: Spacing.lg,
+    textAlign: 'center',
   },
-  row: { flexDirection: 'row', gap: Spacing.md },
-  col: { flex: 1 },
   summaryCard: {
     backgroundColor: Colors.darkCard,
     borderRadius: 14,
-    padding: Spacing.lg,
     borderWidth: 1,
     borderColor: Colors.darkBorder,
-    marginBottom: Spacing.xl,
+    padding: Spacing.lg,
+    marginBottom: Spacing.lg,
+    alignItems: 'center',
   },
-  summaryTitle: { fontSize: FontSizes.lg, color: Colors.textPrimary, fontWeight: '800', marginBottom: Spacing.md },
-  summaryRow: { flexDirection: 'row', alignItems: 'center', marginBottom: Spacing.xs },
-  summaryDot: { color: Colors.orange, marginRight: Spacing.sm, fontSize: FontSizes.sm },
-  summaryExercise: { flex: 1, fontSize: FontSizes.base, color: Colors.textPrimary },
-  summaryInterval: { fontSize: FontSizes.sm, color: Colors.textSecondary },
-  summaryTotal: { fontSize: FontSizes.sm, color: Colors.gold, fontWeight: '700', marginTop: Spacing.md },
-  startButton: {
-    backgroundColor: Colors.orange,
+  summaryText: {
+    color: Colors.textSecondary,
+    fontSize: FontSizes.base,
+    fontWeight: '600',
+  },
+  cta: {
     borderRadius: 14,
     paddingVertical: Spacing.lg,
     alignItems: 'center',
+    marginTop: Spacing.sm,
   },
-  startButtonText: { color: '#000', fontWeight: '800', fontSize: FontSizes.lg },
+  ctaText: {
+    color: Colors.textPrimary,
+    fontWeight: '800',
+    fontSize: FontSizes.lg,
+  },
 });
