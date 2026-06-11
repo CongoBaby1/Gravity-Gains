@@ -22,6 +22,7 @@ const MOCK_EXERCISES: Exercise[] = [
   { id: '3', name: 'Horse Stance', category: 'Lower Body', difficulty: 'intermediate', muscles: ['Quads', 'Adductors'] },
   { id: '4', name: 'Push-Up Hold', category: 'Upper Body', difficulty: 'intermediate', muscles: ['Chest', 'Triceps'] },
   { id: '5', name: 'Superman Hold', category: 'Core', difficulty: 'beginner', muscles: ['Lower Back', 'Glutes'] },
+  { id: '6', name: 'Hip Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Hip Flexors', 'Glutes'] },
 ];
 
 export default function AdminExercisesScreen() {

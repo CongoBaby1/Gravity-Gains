@@ -33,6 +33,7 @@ const EXERCISES = [
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '' },
   { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs', emoji: '' },
   { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
+  { id: 'hip-mobility', name: 'Hip Mobility', muscles: 'Hip Flexors, Glutes', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
 ];
 
 const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];

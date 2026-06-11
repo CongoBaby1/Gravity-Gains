@@ -10,6 +10,7 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 
 const MOBILITY_EXERCISES = [
   { id: 'cat-cow', name: 'Cat-Cow', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'hip-mobility', name: 'Hip Mobility', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
 ];
 
 function ExerciseCard({ exercise }: { exercise: typeof MOBILITY_EXERCISES[0] }) {

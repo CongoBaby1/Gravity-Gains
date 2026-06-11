@@ -23,6 +23,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'push-up-hold': require('@/assets/exercises/push-up-hold.png'),
   'horse-stance': require('@/assets/exercises/horse-stance.png'),
   'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
+  'hip-mobility': require('@/assets/exercises/hip-mobility.jpg'),
 };
 
 interface ExerciseData {
@@ -189,6 +190,34 @@ const DATA: Record<string, ExerciseData> = {
     ],
     cue: 'Move with your breath, not with momentum.',
     holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '120+ sec' },
+  },
+  'hip-mobility': {
+    name: 'Hip Mobility',
+    emoji: '',
+    diagram: [
+      { label: 'Neutral spine', detail: 'upright posture' },
+      { label: 'Hands on hips', detail: 'for control' },
+      { label: 'Controlled circles', detail: 'full range of motion' },
+    ],
+    primary: ['Hip Flexors', 'Glutes'],
+    secondary: ['Adductors', 'Abductors', 'Lower Back', 'Core'],
+    instructions: [
+      'Stand with feet shoulder-width apart.',
+      'Place hands on hips.',
+      'Slowly rotate your hips in a large circular motion.',
+      'Complete all repetitions in one direction.',
+      'Reverse direction and repeat.',
+      'Keep movements slow and controlled.',
+    ],
+    mistakes: [
+      'Moving too fast',
+      'Making small circles',
+      'Leaning excessively',
+      'Rotating the shoulders instead of the hips',
+      'Holding your breath',
+    ],
+    cue: 'Draw the biggest circle possible with your hips.',
+    holds: { beginner: '30 sec each direction', intermediate: '60 sec each direction', advanced: '90 sec each direction' },
   },
 };
 
