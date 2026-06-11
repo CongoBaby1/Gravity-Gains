@@ -25,6 +25,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
   'hip-mobility': require('@/assets/exercises/hip-mobility.jpg'),
   'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
+  'back-mobility': require('@/assets/exercises/back-mobility.jpg'),
 };
 
 interface ExerciseData {
@@ -247,6 +248,34 @@ const DATA: Record<string, ExerciseData> = {
     ],
     cue: 'Draw the biggest smooth circles you can without lifting your shoulders.',
     holds: { beginner: '30 sec forward / 30 sec backward', intermediate: '60 sec forward / 60 sec backward', advanced: '90+ sec forward / 90+ sec backward' },
+  },
+  'back-mobility': {
+    name: 'Back Mobility',
+    emoji: '',
+    diagram: [
+      { label: 'Bend forward', detail: 'slowly at waist' },
+      { label: 'Stand tall', detail: 'neutral spine' },
+      { label: 'Gentle extension', detail: 'lean backward' },
+    ],
+    primary: ['Spinal Erectors', 'Lower Back'],
+    secondary: ['Upper Back', 'Lats', 'Glutes', 'Core'],
+    instructions: [
+      'Stand with feet shoulder-width apart.',
+      'Place hands on hips or thighs.',
+      'Slowly bend forward at the waist.',
+      'Return to standing.',
+      'Gently lean backward without forcing the movement.',
+      'Move slowly through a comfortable range of motion.',
+    ],
+    mistakes: [
+      'Moving too quickly',
+      'Forcing end ranges',
+      'Holding your breath',
+      'Bending knees excessively',
+      'Arching the neck',
+    ],
+    cue: 'Move your spine smoothly—mobility, not momentum.',
+    holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '90+ sec' },
   },
 };
 

@@ -35,6 +35,7 @@ const EXERCISES = [
   { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'hip-mobility', name: 'Hip Mobility', muscles: 'Hip Flexors, Glutes', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', muscles: 'Deltoids, Rotator Cuff', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
+  { id: 'back-mobility', name: 'Back Mobility', muscles: 'Spinal Erectors, Lower Back', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
 ];
 
 const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];

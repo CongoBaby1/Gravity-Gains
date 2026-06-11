@@ -14,6 +14,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
   'hip-mobility': require('@/assets/exercises/hip-mobility.jpg'),
   'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
+  'back-mobility': require('@/assets/exercises/back-mobility.jpg'),
 };
 
 function speak(text: string, onEnd?: () => void) {
@@ -48,6 +49,7 @@ const PLANS: Record<string, ExercisePlan[]> = {
   'cat-cow': [{ id: 'cat-cow', name: 'Cat-Cow', emoji: '', sets: 2, holdSeconds: 60 }],
   'hip-mobility': [{ id: 'hip-mobility', name: 'Hip Mobility', emoji: '', sets: 2, holdSeconds: 60 }],
   'shoulder-mobility': [{ id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '', sets: 2, holdSeconds: 60 }],
+  'back-mobility': [{ id: 'back-mobility', name: 'Back Mobility', emoji: '', sets: 2, holdSeconds: 30 }],
 };
 
 const DEFAULT_PLAN: ExercisePlan[] = [

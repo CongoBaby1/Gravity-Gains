@@ -12,6 +12,7 @@ const MOBILITY_EXERCISES = [
   { id: 'cat-cow', name: 'Cat-Cow', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
   { id: 'hip-mobility', name: 'Hip Mobility', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'back-mobility', name: 'Back Mobility', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
 ];
 
 function ExerciseCard({ exercise }: { exercise: typeof MOBILITY_EXERCISES[0] }) {
