@@ -26,6 +26,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'hip-mobility': require('@/assets/exercises/hip-mobility.jpg'),
   'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
   'back-mobility': require('@/assets/exercises/back-mobility.jpg'),
+  'hamstring-reach': require('@/assets/exercises/hamstring-reach.jpg'),
 };
 
 interface ExerciseData {
@@ -275,6 +276,34 @@ const DATA: Record<string, ExerciseData> = {
       'Arching the neck',
     ],
     cue: 'Move your spine smoothly—mobility, not momentum.',
+    holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '90+ sec' },
+  },
+  'hamstring-reach': {
+    name: 'Hamstring Reach',
+    emoji: '',
+    diagram: [
+      { label: 'Push hips back', detail: 'hinge at hips' },
+      { label: 'Reach toward toes', detail: 'feel the stretch' },
+      { label: 'Slight knee bend', detail: 'do not lock out' },
+    ],
+    primary: ['Hamstrings'],
+    secondary: ['Calves', 'Glutes', 'Lower Back'],
+    instructions: [
+      'Stand with feet hip-width apart.',
+      'Keep a slight bend in your knees.',
+      'Push your hips backward.',
+      'Reach toward your toes or the floor.',
+      'Feel the stretch along the back of your legs.',
+      'Return to standing under control.',
+    ],
+    mistakes: [
+      'Locking knees completely',
+      'Rounding the lower back excessively',
+      'Bouncing into the stretch',
+      'Holding your breath',
+      'Forcing range of motion',
+    ],
+    cue: 'Push your hips back and lengthen your hamstrings.',
     holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '90+ sec' },
   },
 };
