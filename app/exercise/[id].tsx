@@ -27,6 +27,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
   'back-mobility': require('@/assets/exercises/back-mobility.jpg'),
   'hamstring-reach': require('@/assets/exercises/hamstring-reach.jpg'),
+  'butterfly-stretch': require('@/assets/exercises/butterfly-stretch.jpg'),
 };
 
 interface ExerciseData {
@@ -305,6 +306,34 @@ const DATA: Record<string, ExerciseData> = {
     ],
     cue: 'Push your hips back and lengthen your hamstrings.',
     holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '90+ sec' },
+  },
+  'butterfly-stretch': {
+    name: 'Butterfly Stretch',
+    emoji: '',
+    diagram: [
+      { label: 'Sit with soles together', detail: 'bend knees outward' },
+      { label: 'Chest up', detail: 'tall posture' },
+      { label: 'Knees toward floor', detail: 'gently allow gravity' },
+    ],
+    primary: ['Adductors (Inner Thighs)'],
+    secondary: ['Hip Flexors', 'Groin', 'Lower Back'],
+    instructions: [
+      'Sit on the floor with your legs bent.',
+      'Bring the soles of your feet together.',
+      'Hold your feet or ankles with both hands.',
+      'Sit tall with your chest up.',
+      'Allow your knees to gently move toward the floor.',
+      'Hold the stretch while breathing normally.',
+    ],
+    mistakes: [
+      'Rounding the lower back',
+      'Pulling the feet too close and forcing the stretch',
+      'Bouncing the knees',
+      'Leaning excessively forward',
+      'Holding your breath',
+    ],
+    cue: 'Sit tall and let your knees fall naturally.',
+    holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '120+ sec' },
   },
 };
 
