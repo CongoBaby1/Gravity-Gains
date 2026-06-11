@@ -8,19 +8,19 @@ import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useAuth } from '../../hooks/useAuth';
 
 const navItems = [
-  { label: 'Users', emoji: '👥', href: '/(admin)/users' as const },
-  { label: 'Exercises', emoji: '🏋️', href: '/(admin)/exercises' as const },
-  { label: 'Challenges', emoji: '🏆', href: '/(admin)/challenges' as const },
-  { label: 'Subscriptions', emoji: '💳', href: '/(admin)/subscriptions' as const },
-  { label: 'Analytics', emoji: '📊', href: '/(admin)/analytics' as const },
-  { label: 'AI Prompts', emoji: '🤖', href: '/(admin)/ai-prompts' as const },
+  { label: 'Users', emoji: '', href: '/(admin)/users' as const },
+  { label: 'Exercises', emoji: '', href: '/(admin)/exercises' as const },
+  { label: 'Challenges', emoji: '', href: '/(admin)/challenges' as const },
+  { label: 'Subscriptions', emoji: '', href: '/(admin)/subscriptions' as const },
+  { label: 'Analytics', emoji: '', href: '/(admin)/analytics' as const },
+  { label: 'AI Prompts', emoji: '', href: '/(admin)/ai-prompts' as const },
 ];
 
 const recentActivity = [
-  { emoji: '👤', text: 'New user registered: alex@example.com', time: '2m ago' },
-  { emoji: '⭐', text: 'Pro upgrade: player@gravitygains.com', time: '15m ago' },
-  { emoji: '🔥', text: 'Workout completed: 7-Day Wall Sit', time: '1h ago' },
-  { emoji: '🏆', text: 'Challenge created: 5-Min Plank', time: '3h ago' },
+  { emoji: '', text: 'New user registered: alex@example.com', time: '2m ago' },
+  { emoji: '', text: 'Pro upgrade: player@gravitygains.com', time: '15m ago' },
+  { emoji: '', text: 'Workout completed: 7-Day Wall Sit', time: '1h ago' },
+  { emoji: '', text: 'Challenge created: 5-Min Plank', time: '3h ago' },
 ];
 
 export default function AdminDashboardScreen() {
@@ -38,35 +38,35 @@ export default function AdminDashboardScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>🛡️ Admin Dashboard</Text>
+          <Text style={styles.headerTitle}> Admin Dashboard</Text>
           <View style={styles.headerRow}>
             <TouchableOpacity style={styles.headerBtn} onPress={handleBack}>
               <Text style={styles.headerBtnText}>← Back to App</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.headerBtnDanger} onPress={handleSignOut}>
-              <Text style={styles.headerBtnDangerText}>🚪 Log Out</Text>
+              <Text style={styles.headerBtnDangerText}> Log Out</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.statsRow}>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>👥</Text>
+            <Text style={styles.statEmoji}></Text>
             <Text style={styles.statValue}>2,847</Text>
             <Text style={styles.statLabel}>Total Users</Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>⭐</Text>
+            <Text style={styles.statEmoji}></Text>
             <Text style={styles.statValue}>412</Text>
             <Text style={styles.statLabel}>Pro Subscribers</Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>🔥</Text>
+            <Text style={styles.statEmoji}></Text>
             <Text style={styles.statValue}>1,203</Text>
             <Text style={styles.statLabel}>Active Workouts</Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>⚡</Text>
+            <Text style={styles.statEmoji}></Text>
             <Text style={styles.statValue}>342</Text>
             <Text style={styles.statLabel}>Avg Gravity Score</Text>
           </View>

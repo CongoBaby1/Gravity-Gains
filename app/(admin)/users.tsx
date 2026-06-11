@@ -41,7 +41,7 @@ export default function AdminUsersScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>👥 Users</Text>
+          <Text style={styles.title}> Users</Text>
         </View>
 
         <TextInput
@@ -69,27 +69,27 @@ export default function AdminUsersScreen() {
             <View key={u.id} style={styles.card}>
               <View style={styles.row}>
                 <View style={styles.avatar}>
-                  <Text style={styles.avatarEmoji}>{u.role === 'admin' ? '🛡️' : '👤'}</Text>
+                  <Text style={styles.avatarEmoji}>{u.role === 'admin' ? '' : ''}</Text>
                 </View>
                 <View style={styles.info}>
                   <Text style={styles.name}>{u.name}</Text>
                   <Text style={styles.email}>{u.email}</Text>
                   <View style={styles.metaRow}>
-                    <Text style={styles.meta}>{u.isPro ? '⭐ Pro' : '🆓 Free'}</Text>
-                    <Text style={styles.meta}>⚡ {u.gravityScore}</Text>
-                    <Text style={[styles.meta, u.role === 'admin' && styles.metaAdmin]}>{u.role === 'admin' ? '🛡️ Admin' : '🎮 Player'}</Text>
+                    <Text style={styles.meta}>{u.isPro ? ' Pro' : ' Free'}</Text>
+                    <Text style={styles.meta}> {u.gravityScore}</Text>
+                    <Text style={[styles.meta, u.role === 'admin' && styles.metaAdmin]}>{u.role === 'admin' ? ' Admin' : ' Player'}</Text>
                   </View>
                 </View>
               </View>
               <View style={styles.actions}>
                 <TouchableOpacity style={styles.actionBtn} onPress={() => {}}>
-                  <Text style={styles.actionText}>👁️ View</Text>
+                  <Text style={styles.actionText}> View</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.actionBtn} onPress={() => {}}>
-                  <Text style={styles.actionText}>✏️ Edit Role</Text>
+                  <Text style={styles.actionText}> Edit Role</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.actionBtn, styles.actionBtnDanger]} onPress={() => {}}>
-                  <Text style={styles.actionTextDanger}>🗑️ Delete</Text>
+                  <Text style={styles.actionTextDanger}> Delete</Text>
                 </TouchableOpacity>
               </View>
             </View>

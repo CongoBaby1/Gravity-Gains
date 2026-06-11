@@ -7,10 +7,10 @@ import { useRouter } from 'expo-router';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const summaryCards = [
-  { emoji: '👥', label: 'Daily Active Users', value: '1,847', change: '+12% vs last week', positive: true },
-  { emoji: '🔥', label: 'Workouts Completed', value: '3,241', change: '+8% vs last week', positive: true },
-  { emoji: '⏱️', label: 'Avg Session Time', value: '28 min', change: '-3% vs last week', positive: false },
-  { emoji: '🏆', label: 'Challenges Joined', value: '567', change: '+22% vs last week', positive: true },
+  { emoji: '', label: 'Daily Active Users', value: '1,847', change: '+12% vs last week', positive: true },
+  { emoji: '', label: 'Workouts Completed', value: '3,241', change: '+8% vs last week', positive: true },
+  { emoji: '', label: 'Avg Session Time', value: '28 min', change: '-3% vs last week', positive: false },
+  { emoji: '', label: 'Challenges Joined', value: '567', change: '+22% vs last week', positive: true },
 ];
 
 const weeklyData = [
@@ -34,7 +34,7 @@ export default function AdminAnalyticsScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>📊 Analytics</Text>
+          <Text style={styles.title}> Analytics</Text>
         </View>
 
         <Text style={styles.sectionTitle}>Key Metrics (Text Summary)</Text>
@@ -63,7 +63,7 @@ export default function AdminAnalyticsScreen() {
             })}
           </View>
           <View style={styles.legend}>
-            <Text style={styles.legendText}>📊 Workouts per day · Max: {maxWorkouts}</Text>
+            <Text style={styles.legendText}> Workouts per day · Max: {maxWorkouts}</Text>
           </View>
         </View>
 

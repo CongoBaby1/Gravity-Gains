@@ -38,16 +38,16 @@ interface ExercisePlan {
 }
 
 const PLANS: Record<string, ExercisePlan[]> = {
-  'wall-sit': [{ id: 'wall-sit', name: 'Wall Sit', emoji: '🪑', sets: 3, holdSeconds: 60 }],
-  'plank': [{ id: 'plank', name: 'Dead-Stop Plank', emoji: '📏', sets: 3, holdSeconds: 45 }],
-  'superman': [{ id: 'superman', name: 'Superman Hold', emoji: '🦸', sets: 3, holdSeconds: 30 }],
-  'push-up-hold': [{ id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪', sets: 3, holdSeconds: 30 }],
-  'horse-stance': [{ id: 'horse-stance', name: 'Horse Stance', emoji: '🐴', sets: 3, holdSeconds: 60 }],
-  'cat-cow': [{ id: 'cat-cow', name: 'Cat-Cow', emoji: '🐈', sets: 2, holdSeconds: 60 }],
+  'wall-sit': [{ id: 'wall-sit', name: 'Wall Sit', emoji: '', sets: 3, holdSeconds: 60 }],
+  'plank': [{ id: 'plank', name: 'Dead-Stop Plank', emoji: '', sets: 3, holdSeconds: 45 }],
+  'superman': [{ id: 'superman', name: 'Superman Hold', emoji: '', sets: 3, holdSeconds: 30 }],
+  'push-up-hold': [{ id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '', sets: 3, holdSeconds: 30 }],
+  'horse-stance': [{ id: 'horse-stance', name: 'Horse Stance', emoji: '', sets: 3, holdSeconds: 60 }],
+  'cat-cow': [{ id: 'cat-cow', name: 'Cat-Cow', emoji: '', sets: 2, holdSeconds: 60 }],
 };
 
 const DEFAULT_PLAN: ExercisePlan[] = [
-  { id: 'ex1', name: 'Exercise A', emoji: '🏋️', sets: 3, holdSeconds: 45 },
+  { id: 'ex1', name: 'Exercise A', emoji: '', sets: 3, holdSeconds: 45 },
 ];
 
 function formatTime(seconds: number) {
@@ -191,7 +191,7 @@ export default function WorkoutScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scroll}>
-          <Text style={styles.title}>🎉 Workout Complete!</Text>
+          <Text style={styles.title}> Workout Complete!</Text>
           <Text style={styles.subtitle}>Total hold time: {formatTime(totalTime)}</Text>
           {records.map((r, i) => (
             <View key={i} style={styles.summaryCard}>
@@ -200,7 +200,7 @@ export default function WorkoutScreen() {
           ))}
           <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/programs')}>
             <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
-              <Text style={styles.ctaText}>🏠 Back to Programs</Text>
+              <Text style={styles.ctaText}> Back to Programs</Text>
             </LinearGradient>
           </TouchableOpacity>
         </ScrollView>
@@ -218,7 +218,7 @@ export default function WorkoutScreen() {
           <View style={styles.micRow}>
             {listening && <View style={styles.micDot} />}
             <Text style={styles.micText}>
-              {listening ? '🎙️ Listening' : ''}
+              {listening ? ' Listening' : ''}
               {lastHeard ? `  ·  Heard: "${lastHeard}"` : ''}
             </Text>
           </View>
@@ -238,7 +238,7 @@ export default function WorkoutScreen() {
 
       {prFlash && (
         <View style={styles.prBanner}>
-          <Text style={styles.prText}>🏆 Personal Record!</Text>
+          <Text style={styles.prText}> Personal Record!</Text>
         </View>
       )}
 
@@ -246,14 +246,14 @@ export default function WorkoutScreen() {
         {phase === 'idle' && (
           <TouchableOpacity activeOpacity={0.8} onPress={startCountdown}>
             <View style={[styles.controlBtn, { backgroundColor: Colors.success }]} >
-              <Text style={styles.controlText}>▶️ Start</Text>
+              <Text style={styles.controlText}>▶ Start</Text>
             </View>
           </TouchableOpacity>
         )}
 
         {phase === 'countdown' && (
           <View style={[styles.controlBtn, { backgroundColor: Colors.darkElevated }]} >
-            <Text style={styles.controlText}>⏳ {countdown}</Text>
+            <Text style={styles.controlText}> {countdown}</Text>
           </View>
         )}
 
@@ -261,12 +261,12 @@ export default function WorkoutScreen() {
           <>
             <TouchableOpacity activeOpacity={0.8} onPress={pause}>
               <View style={[styles.controlBtn, { backgroundColor: Colors.warning }]} >
-                <Text style={styles.controlText}>⏸️ Pause</Text>
+                <Text style={styles.controlText}> Pause</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={0.8} onPress={stop}>
               <View style={[styles.controlBtn, { backgroundColor: Colors.danger }]} >
-                <Text style={styles.controlText}>⏹️ Stop</Text>
+                <Text style={styles.controlText}> Stop</Text>
               </View>
             </TouchableOpacity>
           </>
@@ -275,7 +275,7 @@ export default function WorkoutScreen() {
         {phase === 'paused' && (
           <TouchableOpacity activeOpacity={0.8} onPress={resume}>
             <View style={[styles.controlBtn, { backgroundColor: Colors.success }]} >
-              <Text style={styles.controlText}>▶️ Resume</Text>
+              <Text style={styles.controlText}>▶ Resume</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -284,12 +284,12 @@ export default function WorkoutScreen() {
           <>
             <TouchableOpacity activeOpacity={0.8} onPress={repeat}>
               <View style={[styles.controlBtn, { backgroundColor: Colors.info }]} >
-                <Text style={styles.controlText}>🔁 Repeat</Text>
+                <Text style={styles.controlText}> Repeat</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={0.8} onPress={next}>
               <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.controlBtn}>
-                <Text style={styles.controlText}>⏭️ Next</Text>
+                <Text style={styles.controlText}> Next</Text>
               </LinearGradient>
             </TouchableOpacity>
           </>

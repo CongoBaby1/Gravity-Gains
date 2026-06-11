@@ -43,7 +43,7 @@ export default function ProfileScreen() {
               <Text style={styles.name}>{user?.name || 'Athlete'}</Text>
               <Text style={styles.email}>{user?.email || ''}</Text>
               <View style={styles.roleBadge}>
-                <Text style={styles.roleText}>{user?.role === 'admin' ? '🔒 Admin' : '👤 Player'}</Text>
+                <Text style={styles.roleText}>{user?.role === 'admin' ? ' Admin' : ' Player'}</Text>
               </View>
             </View>
           </View>
@@ -51,7 +51,7 @@ export default function ProfileScreen() {
 
         {/* Gravity Score History Sparkline */}
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>📈 Gravity Score History</Text>
+          <Text style={styles.sectionTitle}> Gravity Score History</Text>
           <View style={styles.sparkContainer}>
             {SCORE_HISTORY.map((item, index) => {
               const heightPercent = (item.score / maxScore) * 100;
@@ -89,7 +89,7 @@ export default function ProfileScreen() {
           }}
           activeOpacity={0.7}
         >
-          <Text style={styles.listText}>⚙️ Settings</Text>
+          <Text style={styles.listText}> Settings</Text>
           <Text style={styles.listArrow}>›</Text>
         </TouchableOpacity>
 
@@ -99,7 +99,7 @@ export default function ProfileScreen() {
           onPress={handleLogout}
           activeOpacity={0.8}
         >
-          <Text style={styles.logoutText}>🚪 Log Out</Text>
+          <Text style={styles.logoutText}> Log Out</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

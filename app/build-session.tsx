@@ -13,12 +13,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const EXERCISES = [
-  { id: 'wall-sit', name: 'Wall Sit', emoji: '🪑' },
-  { id: 'plank', name: 'Dead-Stop Plank', emoji: '📏' },
-  { id: 'superman', name: 'Superman Hold', emoji: '🦸' },
-  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪' },
-  { id: 'horse-stance', name: 'Horse Stance', emoji: '🐴' },
-  { id: 'cat-cow', name: 'Cat-Cow', emoji: '🐈' },
+  { id: 'wall-sit', name: 'Wall Sit', emoji: '' },
+  { id: 'plank', name: 'Dead-Stop Plank', emoji: '' },
+  { id: 'superman', name: 'Superman Hold', emoji: '' },
+  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '' },
+  { id: 'horse-stance', name: 'Horse Stance', emoji: '' },
+  { id: 'cat-cow', name: 'Cat-Cow', emoji: '' },
 ];
 
 export default function BuildSessionScreen() {
@@ -58,7 +58,7 @@ export default function BuildSessionScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.header}>⚙️ Build Session</Text>
+        <Text style={styles.header}> Build Session</Text>
         <Text style={styles.sub}>Pick exercises and set your intervals</Text>
 
         {/* Exercise Selector */}
@@ -85,7 +85,7 @@ export default function BuildSessionScreen() {
                 >
                   {ex.name}
                 </Text>
-                {active && <Text style={styles.checkMark}>✓</Text>}
+                {active && <Text style={styles.checkMark}></Text>}
               </TouchableOpacity>
             );
           })}
@@ -143,7 +143,7 @@ export default function BuildSessionScreen() {
             end={{ x: 1, y: 0 }}
             style={[styles.cta, !canStart && { opacity: 0.5 }]}
           >
-            <Text style={styles.ctaText}>▶️ Start Custom Session</Text>
+            <Text style={styles.ctaText}>▶ Start Custom Session</Text>
           </LinearGradient>
         </TouchableOpacity>
       </ScrollView>

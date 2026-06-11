@@ -11,11 +11,11 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 };
 
 const foundation5 = [
-  { id: 'wall-sit', name: 'Wall Sit', emoji: '🪑', duration: '3-5 min', difficulty: 'Beginner', exercises: 1 },
-  { id: 'plank', name: 'Dead-Stop Plank', emoji: '📏', duration: '2-4 min', difficulty: 'Beginner', exercises: 1 },
-  { id: 'superman', name: 'Superman Hold', emoji: '🦸', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
-  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪', duration: '2-4 min', difficulty: 'Intermediate', exercises: 1 },
-  { id: 'horse-stance', name: 'Horse Stance', emoji: '🐴', duration: '3-5 min', difficulty: 'Intermediate', exercises: 1 },
+  { id: 'wall-sit', name: 'Wall Sit', emoji: '', duration: '3-5 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'plank', name: 'Dead-Stop Plank', emoji: '', duration: '2-4 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'superman', name: 'Superman Hold', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '', duration: '2-4 min', difficulty: 'Intermediate', exercises: 1 },
+  { id: 'horse-stance', name: 'Horse Stance', emoji: '', duration: '3-5 min', difficulty: 'Intermediate', exercises: 1 },
 ];
 
 const mobilityPrograms: typeof foundation5 = [];
@@ -36,17 +36,17 @@ function ProgramCard({ program }: { program: typeof foundation5[0] }) {
         <View style={styles.cardMeta}>
           <Text style={styles.cardName}>{program.name}</Text>
           <View style={styles.metaRow}>
-            <Text style={styles.metaText}>⏱ {program.duration}</Text>
+            <Text style={styles.metaText}> {program.duration}</Text>
             <View style={[styles.badge, { backgroundColor: `${dColor}20` }]}>
               <Text style={[styles.badgeText, { color: dColor }]}>{program.difficulty}</Text>
             </View>
-            <Text style={styles.metaText}>📝 {program.exercises} exercise{program.exercises > 1 ? 's' : ''}</Text>
+            <Text style={styles.metaText}> {program.exercises} exercise{program.exercises > 1 ? 's' : ''}</Text>
           </View>
         </View>
       </View>
 
       <View style={[styles.startBtn, { backgroundColor: dColor }]}>
-        <Text style={styles.startBtnText}>▶️ Start Program</Text>
+        <Text style={styles.startBtnText}>▶ Start Program</Text>
       </View>
     </TouchableOpacity>
   );
@@ -56,7 +56,7 @@ export default function ProgramsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.title}>🗂️ Programs</Text>
+        <Text style={styles.title}> Programs</Text>
         <Text style={styles.subtitle}>Foundation 5 — master the basics</Text>
         {foundation5.map((p) => (
           <ProgramCard key={p.id} program={p} />

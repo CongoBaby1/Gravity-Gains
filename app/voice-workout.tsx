@@ -171,7 +171,7 @@ export default function VoiceWorkoutScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.center}>
-          <Text style={styles.doneEmoji}>🎯</Text>
+          <Text style={styles.doneEmoji}></Text>
           <Text style={styles.doneTitle}>Session Complete</Text>
           <Text style={styles.doneSub}>{sessionName}</Text>
           <View style={styles.statRow}>
@@ -243,15 +243,15 @@ export default function VoiceWorkoutScreen() {
           ) : (
             <>
               <TouchableOpacity style={styles.controlButtonSecondary} onPress={handlePause} activeOpacity={0.85}>
-                <Text style={styles.controlButtonSecondaryText}>⏸ Pause</Text>
+                <Text style={styles.controlButtonSecondaryText}> Pause</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.controlButtonSecondary} onPress={handleSkip} activeOpacity={0.85}>
-                <Text style={styles.controlButtonSecondaryText}>⏭ Skip</Text>
+                <Text style={styles.controlButtonSecondaryText}> Skip</Text>
               </TouchableOpacity>
             </>
           )}
           <TouchableOpacity style={styles.controlButtonDanger} onPress={handleEnd} activeOpacity={0.85}>
-            <Text style={styles.controlButtonDangerText}>⏹ End</Text>
+            <Text style={styles.controlButtonDangerText}> End</Text>
           </TouchableOpacity>
         </View>
 
@@ -260,7 +260,7 @@ export default function VoiceWorkoutScreen() {
           <View style={styles.micRow}>
             {listening && <View style={styles.micDot} />}
             <Text style={styles.micText}>
-              {listening ? '🎙️ Listening' : ''}
+              {listening ? ' Listening' : ''}
               {lastHeard ? `  ·  Heard: "${lastHeard}"` : ''}
             </Text>
           </View>

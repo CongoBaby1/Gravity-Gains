@@ -51,7 +51,7 @@ export default function AdminChallengesScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>🏆 Challenges</Text>
+          <Text style={styles.title}> Challenges</Text>
         </View>
 
         <View style={styles.list}>
@@ -59,7 +59,7 @@ export default function AdminChallengesScreen() {
             <View key={c.id} style={[styles.card, !c.active && styles.cardInactive]}>
               <View style={styles.rowTop}>
                 <View style={styles.badgeWrap}>
-                  <Text style={styles.badge}>{c.active ? '🔥 Active' : '⏸️ Inactive'}</Text>
+                  <Text style={styles.badge}>{c.active ? ' Active' : ' Inactive'}</Text>
                 </View>
                 <Switch
                   value={c.active}
@@ -70,7 +70,7 @@ export default function AdminChallengesScreen() {
               </View>
 
               <Text style={styles.name}>{c.name}</Text>
-              <Text style={styles.meta}>📅 {c.duration} · 👥 {c.participants} participants</Text>
+              <Text style={styles.meta}> {c.duration} ·  {c.participants} participants</Text>
 
               {editingId === c.id ? (
                 <View style={styles.editWrap}>
@@ -82,7 +82,7 @@ export default function AdminChallengesScreen() {
                   />
                   <View style={styles.editActions}>
                     <TouchableOpacity style={styles.saveBtn} onPress={() => saveEdit(c.id)}>
-                      <Text style={styles.saveText}>💾 Save</Text>
+                      <Text style={styles.saveText}> Save</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cancelBtn} onPress={() => setEditingId('')}>
                       <Text style={styles.cancelText}>Cancel</Text>
@@ -95,13 +95,13 @@ export default function AdminChallengesScreen() {
 
               <View style={styles.actions}>
                 <TouchableOpacity style={styles.actionBtn} onPress={() => startEdit(c)}>
-                  <Text style={styles.actionText}>✏️ Edit Desc</Text>
+                  <Text style={styles.actionText}> Edit Desc</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.actionBtn} onPress={() => {}}>
-                  <Text style={styles.actionText}>👥 Participants</Text>
+                  <Text style={styles.actionText}> Participants</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.actionBtn, styles.actionBtnDanger]} onPress={() => {}}>
-                  <Text style={styles.actionTextDanger}>🗑️ Delete</Text>
+                  <Text style={styles.actionTextDanger}> Delete</Text>
                 </TouchableOpacity>
               </View>
             </View>

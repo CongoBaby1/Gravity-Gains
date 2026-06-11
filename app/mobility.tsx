@@ -9,7 +9,7 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 };
 
 const MOBILITY_EXERCISES = [
-  { id: 'cat-cow', name: 'Cat-Cow', emoji: '🐈', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'cat-cow', name: 'Cat-Cow', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
 ];
 
 function ExerciseCard({ exercise }: { exercise: typeof MOBILITY_EXERCISES[0] }) {
@@ -27,17 +27,17 @@ function ExerciseCard({ exercise }: { exercise: typeof MOBILITY_EXERCISES[0] }) 
         <View style={styles.cardMeta}>
           <Text style={styles.cardName}>{exercise.name}</Text>
           <View style={styles.metaRow}>
-            <Text style={styles.metaText}>⏱ {exercise.duration}</Text>
+            <Text style={styles.metaText}> {exercise.duration}</Text>
             <View style={[styles.badge, { backgroundColor: `${dColor}20` }]}>
               <Text style={[styles.badgeText, { color: dColor }]}>{exercise.difficulty}</Text>
             </View>
-            <Text style={styles.metaText}>📝 {exercise.exercises} exercise{exercise.exercises > 1 ? 's' : ''}</Text>
+            <Text style={styles.metaText}> {exercise.exercises} exercise{exercise.exercises > 1 ? 's' : ''}</Text>
           </View>
         </View>
       </View>
 
       <View style={[styles.startBtn, { backgroundColor: dColor }]}>
-        <Text style={styles.startBtnText}>▶️ Start Program</Text>
+        <Text style={styles.startBtnText}>▶ Start Program</Text>
       </View>
     </TouchableOpacity>
   );
@@ -47,7 +47,7 @@ export default function MobilityScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.title}>🗂️ Programs</Text>
+        <Text style={styles.title}> Programs</Text>
         <Text style={styles.subtitle}>Mobility Stretching — flexibility & range-of-motion</Text>
         {MOBILITY_EXERCISES.map((e) => (
           <ExerciseCard key={e.id} exercise={e} />

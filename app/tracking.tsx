@@ -4,10 +4,10 @@ import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useAuth } from '@/hooks/useAuth';
 
 const measurements = [
-  { key: 'chest', label: 'Chest', emoji: '📏' },
-  { key: 'waist', label: 'Waist', emoji: '📏' },
-  { key: 'arms', label: 'Arms', emoji: '💪' },
-  { key: 'legs', label: 'Legs', emoji: '🦵' },
+  { key: 'chest', label: 'Chest', emoji: '' },
+  { key: 'waist', label: 'Waist', emoji: '' },
+  { key: 'arms', label: 'Arms', emoji: '' },
+  { key: 'legs', label: 'Legs', emoji: '' },
 ];
 
 const prList = [
@@ -36,11 +36,11 @@ export default function TrackingScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.title}>📊 Progress Tracking</Text>
+        <Text style={styles.title}> Progress Tracking</Text>
 
         {/* Weight Log */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>⚖️ Weight Log</Text>
+          <Text style={styles.cardTitle}> Weight Log</Text>
           <View style={styles.rowBetween}>
             <TextInput
               style={styles.input}
@@ -52,13 +52,13 @@ export default function TrackingScreen() {
             <Text style={styles.unit}>kg</Text>
           </View>
           <View style={styles.chartPlaceholder}>
-            <Text style={styles.chartText}>📈 Weight trend mini-chart placeholder</Text>
+            <Text style={styles.chartText}> Weight trend mini-chart placeholder</Text>
           </View>
         </View>
 
         {/* Measurements */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>📐 Measurements (cm)</Text>
+          <Text style={styles.cardTitle}> Measurements (cm)</Text>
           <View style={styles.measGrid}>
             {measurements.map((m) => (
               <View key={m.key} style={styles.measItem}>
@@ -78,7 +78,7 @@ export default function TrackingScreen() {
 
         {/* Gravity Score */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>🎯 Gravity Score History</Text>
+          <Text style={styles.cardTitle}> Gravity Score History</Text>
           {scoreHistory.map((h, i) => (
             <View key={i} style={styles.timelineRow}>
               <Text style={styles.timelineDot}>●</Text>
@@ -93,14 +93,14 @@ export default function TrackingScreen() {
 
         {/* Streak */}
         <View style={[styles.card, styles.streakCard]}>
-          <Text style={styles.streakEmoji}>🔥</Text>
+          <Text style={styles.streakEmoji}></Text>
           <Text style={styles.streakNumber}>{streak}</Text>
           <Text style={styles.streakLabel}>day workout streak</Text>
         </View>
 
         {/* Photo Gallery */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>📸 Photo Gallery</Text>
+          <Text style={styles.cardTitle}> Photo Gallery</Text>
           <View style={styles.photoGrid}>
             <View style={styles.photoBox}><Text style={styles.photoText}>Before</Text></View>
             <View style={styles.photoBox}><Text style={styles.photoText}>After</Text></View>
@@ -109,11 +109,11 @@ export default function TrackingScreen() {
 
         {/* PRs */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>🏆 Personal Records</Text>
+          <Text style={styles.cardTitle}> Personal Records</Text>
           {prList.map((pr, i) => (
             <View key={i} style={styles.prRow}>
               <Text style={styles.prExercise}>{pr.exercise}</Text>
-              <Text style={styles.prTime}>⏱ {pr.time}</Text>
+              <Text style={styles.prTime}> {pr.time}</Text>
               <Text style={styles.prDate}>{pr.date}</Text>
             </View>
           ))}

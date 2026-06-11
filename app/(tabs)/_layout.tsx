@@ -22,7 +22,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}>🏠</Text>
+            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}></Text>
           ),
         }}
       />
@@ -31,7 +31,7 @@ export default function TabLayout() {
         options={{
           title: 'Workouts',
           tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}>💪</Text>
+            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}></Text>
           ),
         }}
       />
@@ -40,7 +40,7 @@ export default function TabLayout() {
         options={{
           title: 'Library',
           tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}>📚</Text>
+            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}></Text>
           ),
         }}
       />
@@ -49,7 +49,7 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}>👤</Text>
+            <Text style={{ fontSize: 20, color: focused ? Colors.orange : Colors.textMuted }}></Text>
           ),
         }}
       />

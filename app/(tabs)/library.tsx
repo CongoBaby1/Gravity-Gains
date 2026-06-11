@@ -19,20 +19,20 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 };
 
 const CATEGORY_EMOJIS: Record<string, string> = {
-  Legs: '🦵',
-  Core: '📏',
-  'Upper Body': '💪',
-  'Posterior Chain': '🦸',
-  Mobility: '🔄',
+  Legs: '',
+  Core: '',
+  'Upper Body': '',
+  'Posterior Chain': '',
+  Mobility: '',
 };
 
 const EXERCISES = [
-  { id: 'wall-sit', name: 'Wall Sit', muscles: 'Quads, Glutes', difficulty: 'Beginner', category: 'Legs', emoji: '🪑' },
-  { id: 'plank', name: 'Dead-Stop Plank', muscles: 'Core, Abs', difficulty: 'Beginner', category: 'Core', emoji: '📏' },
-  { id: 'superman', name: 'Superman Hold', muscles: 'Lower Back, Glutes', difficulty: 'Beginner', category: 'Posterior Chain', emoji: '🦸' },
-  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '💪' },
-  { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs', emoji: '🐴' },
-  { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '🐈' },
+  { id: 'wall-sit', name: 'Wall Sit', muscles: 'Quads, Glutes', difficulty: 'Beginner', category: 'Legs', emoji: '' },
+  { id: 'plank', name: 'Dead-Stop Plank', muscles: 'Core, Abs', difficulty: 'Beginner', category: 'Core', emoji: '' },
+  { id: 'superman', name: 'Superman Hold', muscles: 'Lower Back, Glutes', difficulty: 'Beginner', category: 'Posterior Chain', emoji: '' },
+  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '' },
+  { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs', emoji: '' },
+  { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
 ];
 
 const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];
@@ -77,7 +77,7 @@ export default function LibraryScreen() {
         >
           {CATEGORIES.map((cat) => {
             const active = activeCategory === cat;
-            const emoji = CATEGORY_EMOJIS[cat] || '🏋️';
+            const emoji = CATEGORY_EMOJIS[cat] || '';
             return (
               <TouchableOpacity
                 key={cat}

@@ -13,7 +13,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Colors, Spacing, FontSizes } from '@/constants/colors';
 
 const RECENT_ACTIVITIES = [
-  { id: '1', title: 'Foundation 5 — Day 3', date: 'Today', duration: '28 min', route: '/programs' as const, emoji: '🏗️', difficulty: 'Beginner' },
+  { id: '1', title: 'Foundation 5 — Day 3', date: 'Today', duration: '28 min', route: '/programs' as const, emoji: '', difficulty: 'Beginner' },
 ];
 
 const DIFFICULTY_COLORS: Record<string, string> = {
@@ -44,7 +44,7 @@ export default function DashboardScreen() {
       <ScrollView contentContainerStyle={styles.scroll}>
         {/* Welcome Banner */}
         <View style={styles.header}>
-          <Text style={styles.greeting}>👋 Welcome back, {user?.name || 'Athlete'}</Text>
+          <Text style={styles.greeting}> Welcome back, {user?.name || 'Athlete'}</Text>
           <TouchableOpacity onPress={handleBrandTap} activeOpacity={1}>
             <Image source={require('@/assets/images/logo.jpg')} style={styles.brandLogo} resizeMode="contain" />
           </TouchableOpacity>
@@ -58,7 +58,7 @@ export default function DashboardScreen() {
               <Text style={styles.scoreValue}>{score}</Text>
             </View>
             <View style={[styles.pill, { backgroundColor: Colors.goldMuted }]}>
-              <Text style={[styles.pillText, { color: Colors.gold }]}>🏆 Rank: {score > 800 ? 'Elite' : score > 400 ? 'Warrior' : 'Rookie'}</Text>
+              <Text style={[styles.pillText, { color: Colors.gold }]}> Rank: {score > 800 ? 'Elite' : score > 400 ? 'Warrior' : 'Rookie'}</Text>
             </View>
           </View>
         </View>
@@ -66,7 +66,7 @@ export default function DashboardScreen() {
         {/* Workout Streak */}
         <View style={styles.card}>
           <View style={styles.streakRow}>
-            <Text style={styles.streakEmoji}>🔥</Text>
+            <Text style={styles.streakEmoji}></Text>
             <View style={{ flex: 1 }}>
               <Text style={styles.streakValue}>{streak} day streak</Text>
               <Text style={styles.streakSub}>Keep the momentum alive!</Text>
@@ -81,7 +81,7 @@ export default function DashboardScreen() {
             onPress={() => router.push('/(tabs)/workouts')}
             activeOpacity={0.8}
           >
-            <Text style={styles.actionEmoji}>▶️</Text>
+            <Text style={styles.actionEmoji}>▶</Text>
             <Text style={[styles.actionText, { color: Colors.orange }]}>Start Workout</Text>
           </TouchableOpacity>
 
@@ -90,7 +90,7 @@ export default function DashboardScreen() {
             onPress={() => router.push('/(tabs)/library')}
             activeOpacity={0.8}
           >
-            <Text style={styles.actionEmoji}>📝</Text>
+            <Text style={styles.actionEmoji}></Text>
             <Text style={[styles.actionText, { color: Colors.blue }]}>Take Assessment</Text>
           </TouchableOpacity>
         </View>

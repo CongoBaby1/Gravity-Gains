@@ -6,11 +6,11 @@ import { Colors, Spacing, FontSizes } from '@/constants/colors';
 import { useAuth } from '@/hooks/useAuth';
 
 const TESTS = [
-  { id: 'wall-sit', name: 'Wall Sit', emoji: '🪑', category: 'Leg Strength' },
-  { id: 'plank', name: 'Dead-Stop Plank', emoji: '📏', category: 'Core Strength' },
-  { id: 'superman', name: 'Superman Hold', emoji: '🦸', category: 'Posterior Chain' },
-  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪', category: 'Upper Body' },
-  { id: 'horse-stance', name: 'Horse Stance Hold', emoji: '🐴', category: 'Mobility' },
+  { id: 'wall-sit', name: 'Wall Sit', emoji: '', category: 'Leg Strength' },
+  { id: 'plank', name: 'Dead-Stop Plank', emoji: '', category: 'Core Strength' },
+  { id: 'superman', name: 'Superman Hold', emoji: '', category: 'Posterior Chain' },
+  { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '', category: 'Upper Body' },
+  { id: 'horse-stance', name: 'Horse Stance Hold', emoji: '', category: 'Mobility' },
 ];
 
 function formatTime(seconds: number) {
@@ -115,7 +115,7 @@ export default function AssessmentScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scroll}>
-          <Text style={styles.title}>🎯 Gravity Score</Text>
+          <Text style={styles.title}> Gravity Score</Text>
           <View style={styles.scoreCircle}>
             <Text style={styles.scoreNumber}>{totalScore}</Text>
             <Text style={styles.scoreLabel}>/ 1000</Text>
@@ -142,13 +142,13 @@ export default function AssessmentScreen() {
 
           <TouchableOpacity activeOpacity={0.8} onPress={resetAll} style={{ marginTop: Spacing.lg }}>
             <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
-              <Text style={styles.ctaText}>🔄 Retake Assessment</Text>
+              <Text style={styles.ctaText}> Retake Assessment</Text>
             </LinearGradient>
           </TouchableOpacity>
 
           <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/(tabs)')}>
             <View style={[styles.cta, { backgroundColor: Colors.darkElevated, marginTop: Spacing.md }]} >
-              <Text style={[styles.ctaText, { color: Colors.textPrimary }]}>🏠 Go Home</Text>
+              <Text style={[styles.ctaText, { color: Colors.textPrimary }]}> Go Home</Text>
             </View>
           </TouchableOpacity>
         </ScrollView>
@@ -159,7 +159,7 @@ export default function AssessmentScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.title}>🧪 Gravity Assessment™</Text>
+        <Text style={styles.title}> Gravity Assessment</Text>
         <Text style={styles.subtitle}>Test {activeIndex + 1} of {TESTS.length}</Text>
 
         <View style={styles.testCard}>
@@ -176,7 +176,7 @@ export default function AssessmentScreen() {
           {phase === 'idle' && (
             <TouchableOpacity activeOpacity={0.8} onPress={startTest}>
               <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
-                <Text style={styles.ctaText}>▶️ Start</Text>
+                <Text style={styles.ctaText}>▶ Start</Text>
               </LinearGradient>
             </TouchableOpacity>
           )}
@@ -190,7 +190,7 @@ export default function AssessmentScreen() {
           {phase === 'running' && (
             <TouchableOpacity activeOpacity={0.8} onPress={stopTest}>
               <View style={[styles.cta, { backgroundColor: Colors.danger }]} >
-                <Text style={styles.ctaText}>⏹️ Stop</Text>
+                <Text style={styles.ctaText}> Stop</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -198,7 +198,7 @@ export default function AssessmentScreen() {
           {phase === 'done' && (
             <TouchableOpacity activeOpacity={0.8} onPress={nextTest}>
               <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
-                <Text style={styles.ctaText}>➡️ {activeIndex < TESTS.length - 1 ? 'Next Test' : 'See Results'}</Text>
+                <Text style={styles.ctaText}> {activeIndex < TESTS.length - 1 ? 'Next Test' : 'See Results'}</Text>
               </LinearGradient>
             </TouchableOpacity>
           )}

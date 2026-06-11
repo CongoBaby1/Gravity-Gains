@@ -16,24 +16,24 @@ export default function AdminSubscriptionsScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>💳 Subscriptions</Text>
+          <Text style={styles.title}> Subscriptions</Text>
         </View>
 
         <View style={styles.statsRow}>
           <View style={[styles.statCard, { borderColor: Colors.orange }]}>
-            <Text style={styles.statEmoji}>⭐</Text>
+            <Text style={styles.statEmoji}></Text>
             <Text style={styles.statValue}>412</Text>
             <Text style={styles.statLabel}>Pro Users</Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statEmoji}>🆓</Text>
+            <Text style={styles.statEmoji}></Text>
             <Text style={styles.statValue}>2,435</Text>
             <Text style={styles.statLabel}>Free Users</Text>
           </View>
         </View>
 
         <View style={styles.revenueCard}>
-          <Text style={styles.sectionTitle}>💰 Revenue (Placeholder)</Text>
+          <Text style={styles.sectionTitle}> Revenue (Placeholder)</Text>
           <Text style={styles.revenueValue}>$12,360/mo</Text>
           <View style={styles.breakdown}>
             <View style={styles.breakRow}>
@@ -55,7 +55,7 @@ export default function AdminSubscriptionsScreen() {
             { user: 'jessica@example.com', action: 'renewal', time: '1d ago' },
           ].map((item, i) => (
             <View key={i} style={styles.changeRow}>
-              <Text style={styles.changeEmoji}>{item.action === 'upgrade' ? '⬆️' : item.action === 'downgrade' ? '⬇️' : '🔄'}</Text>
+              <Text style={styles.changeEmoji}>{item.action === 'upgrade' ? '⬆' : item.action === 'downgrade' ? '⬇' : ''}</Text>
               <View style={styles.changeInfo}>
                 <Text style={styles.changeText}>{item.user}</Text>
                 <Text style={styles.changeMeta}>{item.action === 'upgrade' ? 'Upgraded to Pro' : item.action === 'downgrade' ? 'Downgraded to Free' : 'Annual renewal'} · {item.time}</Text>

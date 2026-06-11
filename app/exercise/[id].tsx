@@ -40,7 +40,7 @@ interface ExerciseData {
 const DATA: Record<string, ExerciseData> = {
   'wall-sit': {
     name: 'Wall Sit',
-    emoji: '🪑',
+    emoji: '',
     diagram: [
       { label: 'Back flat', detail: 'against wall' },
       { label: 'Knees at', detail: '90°' },
@@ -65,7 +65,7 @@ const DATA: Record<string, ExerciseData> = {
   },
   'plank': {
     name: 'Dead-Stop Plank',
-    emoji: '📏',
+    emoji: '',
     diagram: [
       { label: 'Elbows under', detail: 'shoulders' },
       { label: 'Body straight', detail: 'head to heels' },
@@ -90,7 +90,7 @@ const DATA: Record<string, ExerciseData> = {
   },
   'superman': {
     name: 'Superman Hold',
-    emoji: '🦸',
+    emoji: '',
     diagram: [
       { label: 'Arms extended', detail: 'overhead' },
       { label: 'Lift chest &', detail: 'legs off floor' },
@@ -115,7 +115,7 @@ const DATA: Record<string, ExerciseData> = {
   },
   'push-up-hold': {
     name: 'Mid-Range Push-Up Hold',
-    emoji: '💪',
+    emoji: '',
     diagram: [
       { label: 'Elbows at', detail: '~90°' },
       { label: 'Body rigid', detail: 'straight line' },
@@ -140,7 +140,7 @@ const DATA: Record<string, ExerciseData> = {
   },
   'horse-stance': {
     name: 'Horse Stance',
-    emoji: '🐴',
+    emoji: '',
     diagram: [
       { label: 'Feet wide', detail: 'toes out' },
       { label: 'Thighs parallel', detail: 'to ground' },
@@ -165,7 +165,7 @@ const DATA: Record<string, ExerciseData> = {
   },
   'cat-cow': {
     name: 'Cat-Cow',
-    emoji: '🐈',
+    emoji: '',
     diagram: [
       { label: 'Spine rounded', detail: 'upward (Cat)' },
       { label: 'Spine arched', detail: 'downward (Cow)' },
@@ -194,7 +194,7 @@ const DATA: Record<string, ExerciseData> = {
 
 const DEFAULT: ExerciseData = {
   name: 'Exercise',
-  emoji: '🏋️',
+  emoji: '',
   diagram: [
     { label: 'Position', detail: 'your body' },
     { label: 'Maintain', detail: 'good form' },
@@ -239,7 +239,7 @@ export default function ExerciseDetailScreen() {
         <View style={styles.headerRow}>
           <Text style={styles.emoji}>{ex.emoji}</Text>
           <TouchableOpacity activeOpacity={0.7} onPress={() => setFav((f) => !f)} style={styles.starBtn}>
-            <Text style={styles.star}>{fav ? '★' : '☆'}</Text>
+            <Text style={styles.star}>{fav ? '' : ''}</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>{ex.name}</Text>
@@ -273,7 +273,7 @@ export default function ExerciseDetailScreen() {
           <Text style={[styles.sectionTitle, { color: Colors.danger }]}>Common Mistakes</Text>
           {ex.mistakes.map((m, i) => (
             <View key={i} style={styles.mistakeRow}>
-              <Text style={styles.mistakeIcon}>❌</Text>
+              <Text style={styles.mistakeIcon}></Text>
               <Text style={styles.mistakeText}>{m}</Text>
             </View>
           ))}
@@ -281,7 +281,7 @@ export default function ExerciseDetailScreen() {
 
         {/* Coach Cue */}
         <View style={styles.cueCard}>
-          <Text style={styles.cueLabel}>💬 Coach Cue</Text>
+          <Text style={styles.cueLabel}> Coach Cue</Text>
           <Text style={styles.cueText}>"{ex.cue}"</Text>
         </View>
 
@@ -303,7 +303,7 @@ export default function ExerciseDetailScreen() {
             end={{ x: 1, y: 0 }}
             style={styles.cta}
           >
-            <Text style={styles.ctaText}>▶️ Start Workout</Text>
+            <Text style={styles.ctaText}>▶ Start Workout</Text>
           </LinearGradient>
         </TouchableOpacity>
       </ScrollView>

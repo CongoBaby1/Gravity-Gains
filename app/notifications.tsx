@@ -16,12 +16,12 @@ interface Notification {
 }
 
 const INITIAL_NOTIFICATIONS: Notification[] = [
-  { id: '1', icon: '🔔', title: 'Workout Reminder', message: 'Your evening core session is waiting. 15 minutes to stronger abs!', time: '10 min ago', read: false },
-  { id: '2', icon: '🎉', title: 'New PR!', message: 'You held a 3-minute plank — a new personal record!', time: '2h ago', read: false },
-  { id: '3', icon: '🔥', title: 'Streak Warning', message: 'Complete a workout today to keep your 12-day streak alive.', time: '4h ago', read: true },
-  { id: '4', icon: '🏆', title: 'Challenge Update', message: '30-Day Core Challenge: Day 14 complete. You are 45% done!', time: '1d ago', read: true },
-  { id: '5', icon: '🤖', title: 'Coach Tip', message: 'Try elevating your feet for the next wall sit to increase difficulty.', time: '2d ago', read: true },
-  { id: '6', icon: '👥', title: 'Friend Activity', message: 'Sarah Chen just joined the 7-Day Wall Sit challenge.', time: '3d ago', read: true },
+  { id: '1', icon: '', title: 'Workout Reminder', message: 'Your evening core session is waiting. 15 minutes to stronger abs!', time: '10 min ago', read: false },
+  { id: '2', icon: '', title: 'New PR!', message: 'You held a 3-minute plank — a new personal record!', time: '2h ago', read: false },
+  { id: '3', icon: '', title: 'Streak Warning', message: 'Complete a workout today to keep your 12-day streak alive.', time: '4h ago', read: true },
+  { id: '4', icon: '', title: 'Challenge Update', message: '30-Day Core Challenge: Day 14 complete. You are 45% done!', time: '1d ago', read: true },
+  { id: '5', icon: '', title: 'Coach Tip', message: 'Try elevating your feet for the next wall sit to increase difficulty.', time: '2d ago', read: true },
+  { id: '6', icon: '', title: 'Friend Activity', message: 'Sarah Chen just joined the 7-Day Wall Sit challenge.', time: '3d ago', read: true },
 ];
 
 export default function NotificationsScreen() {
@@ -50,7 +50,7 @@ export default function NotificationsScreen() {
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
           <View style={styles.titleRow}>
-            <Text style={styles.title}>🔔 Notifications</Text>
+            <Text style={styles.title}> Notifications</Text>
             {unreadCount > 0 && (
               <View style={styles.badge}>
                 <Text style={styles.badgeText}>{unreadCount}</Text>
@@ -61,16 +61,16 @@ export default function NotificationsScreen() {
 
         <View style={styles.actionRow}>
           <TouchableOpacity style={styles.actionBtn} onPress={markAllRead}>
-            <Text style={styles.actionText}>✉️ Mark All Read</Text>
+            <Text style={styles.actionText}> Mark All Read</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.actionBtn, styles.actionBtnDanger]} onPress={clearAll}>
-            <Text style={styles.actionTextDanger}>🗑️ Clear All</Text>
+            <Text style={styles.actionTextDanger}> Clear All</Text>
           </TouchableOpacity>
         </View>
 
         {notifications.length === 0 && (
           <View style={styles.empty}>
-            <Text style={styles.emptyEmoji}>📭</Text>
+            <Text style={styles.emptyEmoji}></Text>
             <Text style={styles.emptyText}>No notifications</Text>
           </View>
         )}

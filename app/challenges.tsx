@@ -17,11 +17,11 @@ interface Challenge {
 }
 
 const INITIAL_CHALLENGES: Challenge[] = [
-  { id: '1', name: '7-Day Wall Sit', duration: '7 days', participants: 1240, emoji: '🧱', joined: false, progress: 0 },
-  { id: '2', name: '30-Day Core', duration: '30 days', participants: 892, emoji: '🍑', joined: true, progress: 45 },
-  { id: '3', name: 'Horse Stance Mastery', duration: '21 days', participants: 456, emoji: '🐴', joined: false, progress: 0 },
-  { id: '4', name: '100-Day Consistency', duration: '100 days', participants: 203, emoji: '💯', joined: true, progress: 12 },
-  { id: '5', name: '5-Min Plank', duration: '14 days', participants: 678, emoji: '🕐', joined: false, progress: 0 },
+  { id: '1', name: '7-Day Wall Sit', duration: '7 days', participants: 1240, emoji: '', joined: false, progress: 0 },
+  { id: '2', name: '30-Day Core', duration: '30 days', participants: 892, emoji: '', joined: true, progress: 45 },
+  { id: '3', name: 'Horse Stance Mastery', duration: '21 days', participants: 456, emoji: '', joined: false, progress: 0 },
+  { id: '4', name: '100-Day Consistency', duration: '100 days', participants: 203, emoji: '', joined: true, progress: 12 },
+  { id: '5', name: '5-Min Plank', duration: '14 days', participants: 678, emoji: '', joined: false, progress: 0 },
 ];
 
 const leaderboard = [
@@ -50,7 +50,7 @@ export default function ChallengesScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>🏆 Challenges Hub</Text>
+          <Text style={styles.title}> Challenges Hub</Text>
         </View>
 
         {myChallenges.length > 0 && (
@@ -77,19 +77,19 @@ export default function ChallengesScreen() {
             <View key={c.id} style={styles.card}>
               <Text style={styles.cardEmoji}>{c.emoji}</Text>
               <Text style={styles.cardName}>{c.name}</Text>
-              <Text style={styles.cardMeta}>📅 {c.duration} · 👥 {c.participants}</Text>
+              <Text style={styles.cardMeta}> {c.duration} ·  {c.participants}</Text>
               <TouchableOpacity style={styles.joinBtn} onPress={() => joinChallenge(c.id)}>
-                <Text style={styles.joinText}>➕ Join Challenge</Text>
+                <Text style={styles.joinText}> Join Challenge</Text>
               </TouchableOpacity>
             </View>
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>🏅 Leaderboard</Text>
+        <Text style={styles.sectionTitle}> Leaderboard</Text>
         <View style={styles.leaderboard}>
           {leaderboard.map((entry) => (
             <View key={entry.rank} style={[styles.lbRow, entry.name === 'You' && styles.lbRowYou]}>
-              <Text style={styles.lbRank}>{entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : `#${entry.rank}`}</Text>
+              <Text style={styles.lbRank}>{entry.rank === 1 ? '' : entry.rank === 2 ? '' : entry.rank === 3 ? '' : `#${entry.rank}`}</Text>
               <Text style={styles.lbName}>{entry.name}</Text>
               <Text style={styles.lbScore}>{entry.score.toLocaleString()}</Text>
             </View>

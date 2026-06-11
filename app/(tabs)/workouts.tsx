@@ -25,7 +25,7 @@ const WORKOUTS = [
     duration: '10-15 min',
     difficulty: 'Beginner',
     muscles: 'Hips, Spine, Ankles',
-    emoji: '🧘',
+    emoji: '',
   },
   {
     id: '1',
@@ -35,7 +35,7 @@ const WORKOUTS = [
     duration: '30 min',
     difficulty: 'Beginner',
     muscles: 'Full Body',
-    emoji: '🏗️',
+    emoji: '',
   },
   {
     id: '6',
@@ -45,7 +45,7 @@ const WORKOUTS = [
     duration: 'Custom',
     difficulty: 'Any',
     muscles: 'You Choose',
-    emoji: '⚙️',
+    emoji: '',
   },
 ];
 
@@ -71,7 +71,7 @@ export default function WorkoutsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.header}>💪 Workouts</Text>
+        <Text style={styles.header}> Workouts</Text>
         <Text style={styles.sub}>Choose a session to begin</Text>
 
         {WORKOUTS.map((w) => {
@@ -87,12 +87,12 @@ export default function WorkoutsScreen() {
                 <View style={[styles.badge, { backgroundColor: `${dColor}20` }]}>
                   <Text style={[styles.badgeText, { color: dColor }]}>{w.difficulty}</Text>
                 </View>
-                <Text style={styles.duration}>⏱️ {w.duration}</Text>
+                <Text style={styles.duration}> {w.duration}</Text>
               </View>
 
               <Text style={styles.emoji}>{w.emoji}</Text>
               <Text style={styles.name}>{w.name}</Text>
-              <Text style={styles.muscles}>🎯 {w.muscles}</Text>
+              <Text style={styles.muscles}> {w.muscles}</Text>
 
               <View style={[styles.button, { backgroundColor: dColor }]}>
                 <Text style={styles.buttonText}>Start Session</Text>

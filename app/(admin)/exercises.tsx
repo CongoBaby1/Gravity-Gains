@@ -52,7 +52,7 @@ export default function AdminExercisesScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>🏋️ Exercises</Text>
+          <Text style={styles.title}> Exercises</Text>
         </View>
 
         <TextInput
@@ -116,7 +116,7 @@ export default function AdminExercisesScreen() {
               ))}
             </View>
             <TouchableOpacity style={styles.saveBtn} onPress={() => setShowAdd(false)}>
-              <Text style={styles.saveBtnText}>💾 Save</Text>
+              <Text style={styles.saveBtnText}> Save</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -131,15 +131,15 @@ export default function AdminExercisesScreen() {
                     <Text style={styles.meta}>{ex.category}</Text>
                     <Text style={[styles.meta, { color: difficultyColor(ex.difficulty) }]}>{ex.difficulty}</Text>
                   </View>
-                  <Text style={styles.muscles}>💪 {ex.muscles.join(', ')}</Text>
+                  <Text style={styles.muscles}> {ex.muscles.join(', ')}</Text>
                 </View>
               </View>
               <View style={styles.actions}>
                 <TouchableOpacity style={styles.actionBtn} onPress={() => {}}>
-                  <Text style={styles.actionText}>✏️ Edit</Text>
+                  <Text style={styles.actionText}> Edit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.actionBtn, styles.actionBtnDanger]} onPress={() => {}}>
-                  <Text style={styles.actionTextDanger}>🗑️ Delete</Text>
+                  <Text style={styles.actionTextDanger}> Delete</Text>
                 </TouchableOpacity>
               </View>
             </View>

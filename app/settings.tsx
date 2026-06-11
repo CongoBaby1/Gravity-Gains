@@ -65,7 +65,7 @@ export default function SettingsScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>⚙️ Settings</Text>
+          <Text style={styles.title}> Settings</Text>
         </View>
 
         {/* Profile */}
@@ -160,19 +160,19 @@ export default function SettingsScreen() {
         <Text style={styles.sectionTitle}>Notification Preferences</Text>
         <View style={styles.formCard}>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>🔔 Workout Reminders</Text>
+            <Text style={styles.toggleLabel}> Workout Reminders</Text>
             <Switch value={notifWorkout} onValueChange={setNotifWorkout} trackColor={{ false: Colors.textMuted, true: Colors.orange }} thumbColor={Colors.textPrimary} />
           </View>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>🎉 PR Alerts</Text>
+            <Text style={styles.toggleLabel}> PR Alerts</Text>
             <Switch value={notifPR} onValueChange={setNotifPR} trackColor={{ false: Colors.textMuted, true: Colors.orange }} thumbColor={Colors.textPrimary} />
           </View>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>🔥 Streak Warnings</Text>
+            <Text style={styles.toggleLabel}> Streak Warnings</Text>
             <Switch value={notifStreak} onValueChange={setNotifStreak} trackColor={{ false: Colors.textMuted, true: Colors.orange }} thumbColor={Colors.textPrimary} />
           </View>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>🏆 Challenge Updates</Text>
+            <Text style={styles.toggleLabel}> Challenge Updates</Text>
             <Switch value={notifChallenges} onValueChange={setNotifChallenges} trackColor={{ false: Colors.textMuted, true: Colors.orange }} thumbColor={Colors.textPrimary} />
           </View>
         </View>
@@ -180,21 +180,21 @@ export default function SettingsScreen() {
         {/* Subscription */}
         <Text style={styles.sectionTitle}>Subscription</Text>
         <View style={[styles.formCard, user?.isPro ? styles.proCard : styles.freeCard]}>
-          <Text style={styles.subTitle}>{user?.isPro ? '⭐ Pro Plan' : '🆓 Free Plan'}</Text>
+          <Text style={styles.subTitle}>{user?.isPro ? ' Pro Plan' : ' Free Plan'}</Text>
           <Text style={styles.subDesc}>{user?.isPro ? 'You have full access to all features.' : 'Upgrade to unlock advanced analytics, AI coaching, and all challenges.'}</Text>
           {!user?.isPro && (
             <TouchableOpacity style={styles.upgradeBtn} onPress={() => {}}>
-              <Text style={styles.upgradeText}>⭐ Upgrade to Pro</Text>
+              <Text style={styles.upgradeText}> Upgrade to Pro</Text>
             </TouchableOpacity>
           )}
         </View>
 
         <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
-          <Text style={styles.saveText}>💾 Save Changes</Text>
+          <Text style={styles.saveText}> Save Changes</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.logoutBtn} onPress={handleSignOut}>
-          <Text style={styles.logoutText}>🚪 Log Out</Text>
+          <Text style={styles.logoutText}> Log Out</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

@@ -10,10 +10,10 @@ interface Message {
 }
 
 const QUICK_ACTIONS = [
-  { label: 'Start workout', icon: '▶️' },
-  { label: 'Explain Wall Sit', icon: '🪑' },
-  { label: 'My progress', icon: '📊' },
-  { label: 'Motivate me', icon: '💪' },
+  { label: 'Start workout', icon: '▶' },
+  { label: 'Explain Wall Sit', icon: '' },
+  { label: 'My progress', icon: '' },
+  { label: 'Motivate me', icon: '' },
 ];
 
 function coachReply(userText: string, user: ReturnType<typeof useAuth>['user']): string {
@@ -22,17 +22,17 @@ function coachReply(userText: string, user: ReturnType<typeof useAuth>['user']):
   if (t.includes('wall sit') || t.includes('explain')) return 'Wall Sit: back flat against the wall, knees at 90°, arms relaxed. Hold as long as you can while breathing steady. Perfect for quads & glutes!';
   if (t.includes('progress')) {
     const score = user?.gravityScore ?? 0;
-    return `Your Gravity Score is ${score}. You\'re improving week over week — keep the streak alive! 🔥`;
+    return `Your Gravity Score is ${score}. You\'re improving week over week — keep the streak alive! `;
   }
-  if (t.includes('motivat')) return 'Every second you hold is a vote for the person you want to become. You\'ve got this. 💪🔥';
-  if (t.includes('hello') || t.includes('hi')) return `Hey ${user?.name ?? 'Athlete'}! I\'m Gravity Coach 🧠. How can I help you today?`;
+  if (t.includes('motivat')) return 'Every second you hold is a vote for the person you want to become. You\'ve got this. ';
+  if (t.includes('hello') || t.includes('hi')) return `Hey ${user?.name ?? 'Athlete'}! I\'m Gravity Coach . How can I help you today?`;
   return 'I\'m here to help! Ask me about workouts, exercises, or your progress.';
 }
 
 export default function CoachScreen() {
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
-    { id: 'welcome', role: 'coach', text: `Hey ${user?.name ?? 'Athlete'}! I'm Gravity Coach 🧠. Ready to level up?` },
+    { id: 'welcome', role: 'coach', text: `Hey ${user?.name ?? 'Athlete'}! I'm Gravity Coach . Ready to level up?` },
   ]);
   const [input, setInput] = useState('');
   const flatListRef = useRef<FlatList>(null);
@@ -56,9 +56,9 @@ export default function CoachScreen() {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.header}>
-          <Text style={styles.headerEmoji}>🧠</Text>
+          <Text style={styles.headerEmoji}></Text>
           <View>
-            <Text style={styles.headerTitle}>Gravity Coach™</Text>
+            <Text style={styles.headerTitle}>Gravity Coach</Text>
             <Text style={styles.headerStatus}>● Online</Text>
           </View>
         </View>
@@ -70,7 +70,7 @@ export default function CoachScreen() {
           contentContainerStyle={{ padding: Spacing.md, paddingBottom: Spacing.sm }}
           renderItem={({ item }) => (
             <View style={[styles.bubbleRow, item.role === 'user' ? styles.bubbleRowRight : styles.bubbleRowLeft]}>
-              {item.role === 'coach' && <Text style={styles.bubbleAvatar}>🧠</Text>}
+              {item.role === 'coach' && <Text style={styles.bubbleAvatar}></Text>}
               <View style={[styles.bubble, item.role === 'user' ? styles.bubbleUser : styles.bubbleCoach]}>
                 <Text style={[styles.bubbleText, item.role === 'user' ? styles.bubbleTextUser : styles.bubbleTextCoach]}>{item.text}</Text>
               </View>
@@ -97,7 +97,7 @@ export default function CoachScreen() {
             returnKeyType="send"
           />
           <TouchableOpacity activeOpacity={0.7} onPress={() => send(input)} style={styles.sendBtn}>
-            <Text style={styles.sendBtnText}>➡️</Text>
+            <Text style={styles.sendBtnText}></Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

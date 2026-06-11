@@ -64,7 +64,7 @@ export default function AdminAiPromptsScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>🤖 AI Prompts</Text>
+          <Text style={styles.title}> AI Prompts</Text>
         </View>
 
         <View style={styles.list}>
@@ -81,7 +81,7 @@ export default function AdminAiPromptsScreen() {
                   />
                   <View style={styles.editActions}>
                     <TouchableOpacity style={styles.saveBtn} onPress={() => saveEdit(p.id)}>
-                      <Text style={styles.saveText}>💾 Save</Text>
+                      <Text style={styles.saveText}> Save</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cancelBtn} onPress={cancelEdit}>
                       <Text style={styles.cancelText}>Cancel</Text>
@@ -92,7 +92,7 @@ export default function AdminAiPromptsScreen() {
                 <View>
                   <Text style={styles.promptContent}>{p.content}</Text>
                   <TouchableOpacity style={styles.editBtn} onPress={() => startEdit(p)}>
-                    <Text style={styles.editText}>✏️ Edit Prompt</Text>
+                    <Text style={styles.editText}> Edit Prompt</Text>
                   </TouchableOpacity>
                 </View>
               )}
