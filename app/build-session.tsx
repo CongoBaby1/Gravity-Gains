@@ -20,6 +20,7 @@ const EXERCISES = [
   { id: 'horse-stance', name: 'Horse Stance', emoji: '' },
   { id: 'cat-cow', name: 'Cat-Cow', emoji: '' },
   { id: 'hip-mobility', name: 'Hip Mobility', emoji: '' },
+  { id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '' },
 ];
 
 export default function BuildSessionScreen() {

@@ -24,6 +24,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'horse-stance': require('@/assets/exercises/horse-stance.png'),
   'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
   'hip-mobility': require('@/assets/exercises/hip-mobility.jpg'),
+  'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
 };
 
 interface ExerciseData {
@@ -218,6 +219,34 @@ const DATA: Record<string, ExerciseData> = {
     ],
     cue: 'Draw the biggest circle possible with your hips.',
     holds: { beginner: '30 sec each direction', intermediate: '60 sec each direction', advanced: '90 sec each direction' },
+  },
+  'shoulder-mobility': {
+    name: 'Shoulder Mobility',
+    emoji: '',
+    diagram: [
+      { label: 'Arms extended', detail: 'to the sides' },
+      { label: 'Controlled circles', detail: 'full range of motion' },
+      { label: 'Relaxed shoulders', detail: 'avoid shrugging' },
+    ],
+    primary: ['Deltoids', 'Rotator Cuff'],
+    secondary: ['Upper Trapezius', 'Rhomboids', 'Chest (Pectorals)'],
+    instructions: [
+      'Stand tall with feet shoulder-width apart.',
+      'Extend arms straight out to your sides.',
+      'Slowly perform forward arm circles.',
+      'Reverse direction and perform backward arm circles.',
+      'Move through a comfortable, controlled range of motion.',
+      'Keep shoulders relaxed and avoid shrugging.',
+    ],
+    mistakes: [
+      'Moving too fast',
+      'Shrugging shoulders toward ears',
+      'Using momentum instead of control',
+      'Locking elbows rigidly',
+      'Using only small circles',
+    ],
+    cue: 'Draw the biggest smooth circles you can without lifting your shoulders.',
+    holds: { beginner: '30 sec forward / 30 sec backward', intermediate: '60 sec forward / 60 sec backward', advanced: '90+ sec forward / 90+ sec backward' },
   },
 };
 
