@@ -22,6 +22,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'superman': require('@/assets/exercises/superman.png'),
   'push-up-hold': require('@/assets/exercises/push-up-hold.png'),
   'horse-stance': require('@/assets/exercises/horse-stance.png'),
+  'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
 };
 
 interface ExerciseData {
@@ -161,6 +162,33 @@ const DATA: Record<string, ExerciseData> = {
     ],
     cue: 'Spread the floor apart with your feet.',
     holds: { beginner: '30 sec', intermediate: '90 sec', advanced: '180+ sec' },
+  },
+  'cat-cow': {
+    name: 'Cat-Cow',
+    emoji: '🐈',
+    diagram: [
+      { label: 'Spine rounded', detail: 'upward (Cat)' },
+      { label: 'Spine arched', detail: 'downward (Cow)' },
+      { label: 'Hands under shoulders', detail: 'knees under hips' },
+    ],
+    primary: ['Spinal Erectors', 'Lower Back'],
+    secondary: ['Abdominals', 'Hip Flexors', 'Upper Back', 'Glutes'],
+    instructions: [
+      'Start on all fours with hands under shoulders and knees under hips.',
+      'Exhale and round your spine upward, tucking your chin toward your chest (Cat Position).',
+      'Inhale and slowly arch your back while lifting your chest and gaze (Cow Position).',
+      'Move smoothly between both positions.',
+      'Synchronize each movement with your breathing.',
+    ],
+    mistakes: [
+      'Moving too fast',
+      'Holding your breath',
+      'Not using full spinal range of motion',
+      'Locking elbows',
+      'Shrugging shoulders toward ears',
+    ],
+    cue: 'Move with your breath, not with momentum.',
+    holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '120+ sec' },
   },
 };
 

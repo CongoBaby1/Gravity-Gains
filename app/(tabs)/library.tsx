@@ -32,9 +32,10 @@ const EXERCISES = [
   { id: 'superman', name: 'Superman Hold', muscles: 'Lower Back, Glutes', difficulty: 'Beginner', category: 'Posterior Chain', emoji: '🦸' },
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '💪' },
   { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs', emoji: '🐴' },
+  { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '🐈' },
 ];
 
-const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain'];
+const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];
 
 export default function LibraryScreen() {
   const router = useRouter();

@@ -18,6 +18,7 @@ const EXERCISES = [
   { id: 'superman', name: 'Superman Hold', emoji: '🦸' },
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪' },
   { id: 'horse-stance', name: 'Horse Stance', emoji: '🐴' },
+  { id: 'cat-cow', name: 'Cat-Cow', emoji: '🐈' },
 ];
 
 export default function BuildSessionScreen() {
