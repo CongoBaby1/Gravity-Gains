@@ -18,16 +18,6 @@ const EXERCISES = [
   { id: 'superman', name: 'Superman Hold', emoji: '🦸' },
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '💪' },
   { id: 'horse-stance', name: 'Horse Stance', emoji: '🐴' },
-  { id: 'air-squat', name: 'Air Squat', emoji: '🦵' },
-  { id: 'lunge-walk', name: 'Lunge Walk', emoji: '🚶' },
-  { id: 'hollow-body', name: 'Hollow Body Hold', emoji: '🍩' },
-  { id: 'pull-up', name: 'Pull-Up', emoji: '🤸' },
-  { id: 'inverted-row', name: 'Inverted Row', emoji: '📐' },
-  { id: 'glute-bridge', name: 'Glute Bridge', emoji: '🍑' },
-  { id: 'single-leg-rdl', name: 'Single-Leg RDL', emoji: '🦵' },
-  { id: '90-hip', name: '90/90 Hip Switch', emoji: '🔄' },
-  { id: 'cat-cow', name: 'Cat-Cow', emoji: '🐈' },
-  { id: 'deep-squat', name: 'Deep Squat Hold', emoji: '🪑' },
 ];
 
 export default function BuildSessionScreen() {

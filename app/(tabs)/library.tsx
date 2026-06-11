@@ -32,19 +32,9 @@ const EXERCISES = [
   { id: 'superman', name: 'Superman Hold', muscles: 'Lower Back, Glutes', difficulty: 'Beginner', category: 'Posterior Chain', emoji: '🦸' },
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '💪' },
   { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs', emoji: '🐴' },
-  { id: 'air-squat', name: 'Air Squat', muscles: 'Legs', difficulty: 'Beginner', category: 'Legs', emoji: '🦵' },
-  { id: 'lunge-walk', name: 'Lunge Walk', muscles: 'Legs, Glutes', difficulty: 'Beginner', category: 'Legs', emoji: '🚶' },
-  { id: 'hollow-body', name: 'Hollow Body Hold', muscles: 'Core', difficulty: 'Intermediate', category: 'Core', emoji: '🍩' },
-  { id: 'pull-up', name: 'Pull-Up', muscles: 'Back, Biceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '🤸' },
-  { id: 'inverted-row', name: 'Inverted Row', muscles: 'Back, Biceps', difficulty: 'Beginner', category: 'Upper Body', emoji: '📐' },
-  { id: 'glute-bridge', name: 'Glute Bridge', muscles: 'Glutes, Hamstrings', difficulty: 'Beginner', category: 'Posterior Chain', emoji: '🍑' },
-  { id: 'single-leg-rdl', name: 'Single-Leg RDL', muscles: 'Hamstrings, Glutes', difficulty: 'Intermediate', category: 'Posterior Chain', emoji: '🦵' },
-  { id: '90-hip', name: '90/90 Hip Switch', muscles: 'Hips', difficulty: 'Beginner', category: 'Mobility', emoji: '🔄' },
-  { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '🐈' },
-  { id: 'deep-squat', name: 'Deep Squat Hold', muscles: 'Hips, Ankles', difficulty: 'Beginner', category: 'Mobility', emoji: '🪑' },
 ];
 
-const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];
+const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain'];
 
 export default function LibraryScreen() {
   const router = useRouter();

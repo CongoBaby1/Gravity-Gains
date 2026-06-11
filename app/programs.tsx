@@ -18,13 +18,7 @@ const foundation5 = [
   { id: 'horse-stance', name: 'Horse Stance', emoji: '🐴', duration: '3-5 min', difficulty: 'Intermediate', exercises: 1 },
 ];
 
-const mobilityPrograms = [
-  { id: 'morning', name: 'Morning Mobility', emoji: '🌅', duration: '10 min', difficulty: 'Beginner', exercises: 6 },
-  { id: 'hip', name: 'Hip Mobility', emoji: '🦵', duration: '12 min', difficulty: 'Intermediate', exercises: 8 },
-  { id: 'shoulder', name: 'Shoulder Mobility', emoji: '🙆', duration: '10 min', difficulty: 'Intermediate', exercises: 7 },
-  { id: 'back', name: 'Back Mobility', emoji: '🧘', duration: '12 min', difficulty: 'Beginner', exercises: 6 },
-  { id: 'recovery', name: 'Recovery Flow', emoji: '😌', duration: '15 min', difficulty: 'All Levels', exercises: 10 },
-];
+const mobilityPrograms: typeof foundation5 = [];
 
 function ProgramCard({ program }: { program: typeof foundation5[0] }) {
   const router = useRouter();

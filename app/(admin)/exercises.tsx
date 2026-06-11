@@ -20,8 +20,8 @@ const MOCK_EXERCISES: Exercise[] = [
   { id: '1', name: 'Wall Sit', category: 'Lower Body', difficulty: 'beginner', muscles: ['Quads', 'Glutes'] },
   { id: '2', name: 'Plank', category: 'Core', difficulty: 'beginner', muscles: ['Core', 'Shoulders'] },
   { id: '3', name: 'Horse Stance', category: 'Lower Body', difficulty: 'intermediate', muscles: ['Quads', 'Adductors'] },
-  { id: '4', name: 'Pull-Up', category: 'Upper Body', difficulty: 'advanced', muscles: ['Lats', 'Biceps'] },
-  { id: '5', name: 'Burpee', category: 'Full Body', difficulty: 'intermediate', muscles: ['Chest', 'Legs', 'Core'] },
+  { id: '4', name: 'Push-Up Hold', category: 'Upper Body', difficulty: 'intermediate', muscles: ['Chest', 'Triceps'] },
+  { id: '5', name: 'Superman Hold', category: 'Core', difficulty: 'beginner', muscles: ['Lower Back', 'Glutes'] },
 ];
 
 export default function AdminExercisesScreen() {
