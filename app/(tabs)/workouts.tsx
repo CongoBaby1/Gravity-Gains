@@ -18,6 +18,16 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 
 const WORKOUTS = [
   {
+    id: 'mobility',
+    name: 'Mobility Stretching',
+    slug: 'mobility',
+    isProgram: false,
+    duration: '10-15 min',
+    difficulty: 'Beginner',
+    muscles: 'Hips, Spine, Ankles',
+    emoji: '🧘',
+  },
+  {
     id: '1',
     name: 'Foundation 5',
     slug: 'programs',
@@ -49,6 +59,10 @@ export default function WorkoutsScreen() {
     }
     if (w.slug === 'build-session') {
       router.push('/build-session');
+      return;
+    }
+    if (w.slug === 'mobility') {
+      router.push('/mobility');
       return;
     }
     router.push(`/exercise/${w.slug}`);
