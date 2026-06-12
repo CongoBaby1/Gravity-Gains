@@ -237,9 +237,14 @@ export default function VoiceWorkoutScreen() {
         {/* Controls */}
         <View style={styles.controls}>
           {phase === 'idle' ? (
-            <TouchableOpacity style={styles.controlButton} onPress={handleStart} activeOpacity={0.85}>
-              <Text style={styles.controlButtonText}>▶ Start</Text>
-            </TouchableOpacity>
+            <>
+              <TouchableOpacity style={styles.controlButton} onPress={handleStart} activeOpacity={0.85}>
+                <Text style={styles.controlButtonText}>▶ Start</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.controlButtonDanger} onPress={handleEnd} activeOpacity={0.85}>
+                <Text style={styles.controlButtonDangerText}> Stop</Text>
+              </TouchableOpacity>
+            </>
           ) : (
             <>
               <TouchableOpacity style={styles.controlButtonSecondary} onPress={handlePause} activeOpacity={0.85}>
@@ -248,12 +253,12 @@ export default function VoiceWorkoutScreen() {
               <TouchableOpacity style={styles.controlButtonSecondary} onPress={handleSkip} activeOpacity={0.85}>
                 <Text style={styles.controlButtonSecondaryText}> Skip</Text>
               </TouchableOpacity>
+              <TouchableOpacity style={styles.controlButtonDanger} onPress={handleEnd} activeOpacity={0.85}>
+                <Text style={styles.controlButtonDangerText}> Stop</Text>
+              </TouchableOpacity>
             </>
           )}
           {phase === 'idle' && <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>}
-          <TouchableOpacity style={styles.controlButtonDanger} onPress={handleEnd} activeOpacity={0.85}>
-            <Text style={styles.controlButtonDangerText}> End</Text>
-          </TouchableOpacity>
         </View>
 
         {/* Voice status */}
