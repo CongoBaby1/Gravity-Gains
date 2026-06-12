@@ -441,22 +441,17 @@ export default function ExerciseDetailScreen() {
           </View>
         </View>
 
-        {/* Start / Stop Button Row */}
-        <View style={styles.startStopRow}>
-          <TouchableOpacity activeOpacity={0.8} onPress={() => router.push(`/workout/${id}`)} style={{ flex: 1 }}>
-            <LinearGradient
-              colors={[Colors.orange, Colors.orangeLight]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.cta}
-            >
-              <Text style={styles.ctaText}>▶ Start Workout</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8} onPress={() => router.back()} style={[styles.stopBtn, { marginLeft: Spacing.md }]}>
-            <Text style={styles.stopBtnText}> Stop</Text>
-          </TouchableOpacity>
-        </View>
+        {/* Start Workout Button */}
+        <TouchableOpacity activeOpacity={0.8} onPress={() => router.push(`/workout/${id}`)}>
+          <LinearGradient
+            colors={[Colors.orange, Colors.orangeLight]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.cta}
+          >
+            <Text style={styles.ctaText}>▶ Start Workout</Text>
+          </LinearGradient>
+        </TouchableOpacity>
         <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>
       </ScrollView>
     </SafeAreaView>
@@ -614,25 +609,6 @@ const styles = StyleSheet.create({
   ctaText: {
     color: Colors.textPrimary,
     fontWeight: '800',
-    fontSize: FontSizes.lg,
-  },
-  startStopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.md,
-  },
-  stopBtn: {
-    backgroundColor: Colors.danger,
-    borderRadius: 14,
-    paddingVertical: Spacing.lg,
-    paddingHorizontal: Spacing.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 120,
-  },
-  stopBtnText: {
-    color: '#fff',
-    fontWeight: '700',
     fontSize: FontSizes.lg,
   },
   stopCue: {

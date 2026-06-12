@@ -254,18 +254,11 @@ export default function WorkoutScreen() {
 
       <View style={styles.controls}>
         {phase === 'idle' && (
-          <>
-            <TouchableOpacity activeOpacity={0.8} onPress={startCountdown}>
-              <View style={[styles.controlBtn, { backgroundColor: Colors.success }]} >
-                <Text style={styles.controlText}>▶ Start</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8} onPress={stop}>
-              <View style={[styles.controlBtn, { backgroundColor: Colors.danger }]} >
-                <Text style={styles.controlText}> Stop</Text>
-              </View>
-            </TouchableOpacity>
-          </>
+          <TouchableOpacity activeOpacity={0.8} onPress={startCountdown}>
+            <View style={[styles.controlBtn, { backgroundColor: Colors.success }]} >
+              <Text style={styles.controlText}>▶ Start</Text>
+            </View>
+          </TouchableOpacity>
         )}
         {phase === 'idle' && <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>}
 

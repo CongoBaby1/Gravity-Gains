@@ -237,14 +237,9 @@ export default function VoiceWorkoutScreen() {
         {/* Controls */}
         <View style={styles.controls}>
           {phase === 'idle' ? (
-            <>
-              <TouchableOpacity style={styles.controlButton} onPress={handleStart} activeOpacity={0.85}>
-                <Text style={styles.controlButtonText}>▶ Start</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.controlButtonDanger} onPress={handleEnd} activeOpacity={0.85}>
-                <Text style={styles.controlButtonDangerText}> Stop</Text>
-              </TouchableOpacity>
-            </>
+            <TouchableOpacity style={styles.controlButton} onPress={handleStart} activeOpacity={0.85}>
+              <Text style={styles.controlButtonText}>▶ Start</Text>
+            </TouchableOpacity>
           ) : (
             <>
               <TouchableOpacity style={styles.controlButtonSecondary} onPress={handlePause} activeOpacity={0.85}>

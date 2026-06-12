@@ -174,22 +174,13 @@ export default function AssessmentScreen() {
           </View>
 
           {phase === 'idle' && (
-            <>
-              <View style={styles.startStopRow}>
-                <TouchableOpacity activeOpacity={0.8} onPress={startTest} style={{ flex: 1 }}>
-                  <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
-                    <Text style={styles.ctaText}>▶ Start</Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} onPress={stopTest} style={[styles.stopBtn, { marginLeft: Spacing.md }]}>
-                  <View style={[styles.cta, { backgroundColor: Colors.danger }]} >
-                    <Text style={[styles.ctaText, { color: '#fff' }]}> Stop</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>
-            </>
+            <TouchableOpacity activeOpacity={0.8} onPress={startTest}>
+              <LinearGradient colors={[Colors.orange, Colors.orangeLight]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.cta}>
+                <Text style={styles.ctaText}>▶ Start</Text>
+              </LinearGradient>
+            </TouchableOpacity>
           )}
+          {phase === 'idle' && <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>}
 
           {phase === 'countdown' && (
             <View style={[styles.cta, { backgroundColor: Colors.darkElevated }]} >
@@ -254,20 +245,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   ctaText: { color: Colors.textPrimary, fontWeight: '700', fontSize: FontSizes.lg },
-  startStopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.md,
-  },
-  stopBtn: {
-    backgroundColor: Colors.danger,
-    borderRadius: 14,
-    paddingVertical: Spacing.md,
-    paddingHorizontal: Spacing.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 100,
-  },
   stopCue: {
     color: '#EF4444',
     fontWeight: '700',
