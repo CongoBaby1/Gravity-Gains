@@ -23,6 +23,7 @@ const EXERCISES = [
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '' },
   { id: 'hamstring-reach', name: 'Hamstring Reach', emoji: '' },
   { id: 'butterfly-stretch', name: 'Butterfly Stretch', emoji: '' },
+  { id: 'worlds-greatest-stretch', name: "World's Greatest Stretch", emoji: '' },
 ];
 
 export default function BuildSessionScreen() {

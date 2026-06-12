@@ -27,6 +27,7 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
   'hamstring-reach': require('@/assets/exercises/hamstring-reach.jpg'),
   'butterfly-stretch': require('@/assets/exercises/butterfly-stretch.jpg'),
+  'worlds-greatest-stretch': require('@/assets/exercises/worlds-greatest-stretch.jpg'),
 };
 
 interface ExerciseData {
@@ -305,6 +306,35 @@ const DATA: Record<string, ExerciseData> = {
     ],
     cue: 'Sit tall and let your knees fall naturally.',
     holds: { beginner: '30 sec', intermediate: '60 sec', advanced: '120+ sec' },
+  },
+  'worlds-greatest-stretch': {
+    name: "World's Greatest Stretch",
+    emoji: '',
+    diagram: [
+      { label: 'Deep lunge', detail: 'hands inside front foot' },
+      { label: 'Lower back knee', detail: 'if needed' },
+      { label: 'Rotate torso', detail: 'reach arm to ceiling' },
+    ],
+    primary: ['Hip Flexors', 'Hamstrings', 'Glutes'],
+    secondary: ['Thoracic Spine', 'Shoulders', 'Adductors (Inner Thighs)', 'Core', 'Calves'],
+    instructions: [
+      'Start in a deep lunge position.',
+      'Place both hands on the floor inside the front foot.',
+      'Lower the back knee if needed.',
+      'Rotate your torso and reach the inside arm toward the ceiling.',
+      'Hold briefly at the top.',
+      'Return the hand to the floor.',
+      'Repeat on the opposite side.',
+    ],
+    mistakes: [
+      'Rounding the lower back',
+      'Letting the front knee collapse inward',
+      'Rotating only the arm instead of the torso',
+      'Holding your breath',
+      'Moving too quickly',
+    ],
+    cue: 'Open the hips, then open the chest.',
+    holds: { beginner: '30 sec per side', intermediate: '60 sec per side', advanced: '90+ sec per side' },
   },
 };
 

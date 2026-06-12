@@ -37,6 +37,7 @@ const EXERCISES = [
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', muscles: 'Deltoids, Rotator Cuff', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'hamstring-reach', name: 'Hamstring Reach', muscles: 'Hamstrings, Calves', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'butterfly-stretch', name: 'Butterfly Stretch', muscles: 'Adductors, Hip Flexors', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
+  { id: 'worlds-greatest-stretch', name: "World's Greatest Stretch", muscles: 'Hip Flexors, Hamstrings, Glutes', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
 ];
 
 const CATEGORIES = ['All', 'Legs', 'Core', 'Upper Body', 'Posterior Chain', 'Mobility'];

@@ -18,7 +18,9 @@ const foundation5 = [
   { id: 'horse-stance', name: 'Horse Stance', emoji: '', duration: '3-5 min', difficulty: 'Intermediate', exercises: 1 },
 ];
 
-const mobilityPrograms: typeof foundation5 = [];
+const mobilityPrograms: typeof foundation5 = [
+  { id: 'worlds-greatest-stretch', name: "World's Greatest Stretch", emoji: '', duration: '2-4 min', difficulty: 'Beginner', exercises: 1 },
+];
 
 function ProgramCard({ program }: { program: typeof foundation5[0] }) {
   const router = useRouter();
