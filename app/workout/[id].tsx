@@ -260,6 +260,7 @@ export default function WorkoutScreen() {
             </View>
           </TouchableOpacity>
         )}
+        {phase === 'idle' && <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>}
 
         {phase === 'countdown' && (
           <View style={[styles.controlBtn, { backgroundColor: Colors.darkElevated }]} >
@@ -374,4 +375,12 @@ const styles = StyleSheet.create({
     marginTop: Spacing.lg,
   },
   ctaText: { color: Colors.textPrimary, fontWeight: '700', fontSize: FontSizes.lg },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.sm,
+  },
 });

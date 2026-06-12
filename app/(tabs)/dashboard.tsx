@@ -84,6 +84,7 @@ export default function DashboardScreen() {
             <Text style={styles.actionEmoji}>▶</Text>
             <Text style={[styles.actionText, { color: Colors.orange }]}>Start Workout</Text>
           </TouchableOpacity>
+          <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>
 
           <TouchableOpacity
             style={[styles.actionCard, { backgroundColor: Colors.blueMuted }]}
@@ -263,5 +264,13 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.xs,
     fontWeight: '700',
     textTransform: 'uppercase',
+  },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.sm,
   },
 });

@@ -44,6 +44,7 @@ function ExerciseCard({ exercise }: { exercise: typeof MOBILITY_EXERCISES[0] }) 
       <View style={[styles.startBtn, { backgroundColor: dColor }]}>
         <Text style={styles.startBtnText}>▶ Start Program</Text>
       </View>
+      <Text style={[styles.stopCue, { marginTop: Spacing.xs }]}>SAY STOP TO END EXERCISE</Text>
     </TouchableOpacity>
   );
 }
@@ -98,4 +99,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   startBtnText: { color: '#000', fontWeight: '700', fontSize: FontSizes.base },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.xs,
+  },
 });

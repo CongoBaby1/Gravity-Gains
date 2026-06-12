@@ -97,6 +97,7 @@ export default function WorkoutsScreen() {
               <View style={[styles.button, { backgroundColor: dColor }]}>
                 <Text style={styles.buttonText}>Start Session</Text>
               </View>
+              <Text style={[styles.stopCue, { marginTop: Spacing.xs }]}>SAY STOP TO END EXERCISE</Text>
             </TouchableOpacity>
           );
         })}
@@ -178,5 +179,13 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '800',
     fontSize: FontSizes.base,
+  },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.xs,
   },
 });

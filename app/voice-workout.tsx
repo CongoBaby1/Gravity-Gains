@@ -250,6 +250,7 @@ export default function VoiceWorkoutScreen() {
               </TouchableOpacity>
             </>
           )}
+          {phase === 'idle' && <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>}
           <TouchableOpacity style={styles.controlButtonDanger} onPress={handleEnd} activeOpacity={0.85}>
             <Text style={styles.controlButtonDangerText}> End</Text>
           </TouchableOpacity>
@@ -349,4 +350,12 @@ const styles = StyleSheet.create({
   micRow: { flexDirection: 'row', alignItems: 'center', marginTop: Spacing.sm, gap: Spacing.xs, paddingHorizontal: Spacing.md },
   micDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#EF4444' },
   micText: { color: Colors.textSecondary, fontSize: FontSizes.sm },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.sm,
+  },
 });

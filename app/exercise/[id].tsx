@@ -452,6 +452,7 @@ export default function ExerciseDetailScreen() {
             <Text style={styles.ctaText}>▶ Start Workout</Text>
           </LinearGradient>
         </TouchableOpacity>
+        <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -609,6 +610,14 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
     fontWeight: '800',
     fontSize: FontSizes.lg,
+  },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.sm,
   },
 });
 // cache-bust: Tue Jun  9 02:42:51 UTC 2026

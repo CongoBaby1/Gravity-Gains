@@ -180,6 +180,7 @@ export default function AssessmentScreen() {
               </LinearGradient>
             </TouchableOpacity>
           )}
+          {phase === 'idle' && <Text style={styles.stopCue}>SAY STOP TO END EXERCISE</Text>}
 
           {phase === 'countdown' && (
             <View style={[styles.cta, { backgroundColor: Colors.darkElevated }]} >
@@ -264,4 +265,12 @@ const styles = StyleSheet.create({
   scoreVal: { color: Colors.textPrimary, fontSize: FontSizes.base, fontWeight: '700' },
   barBg: { height: 10, backgroundColor: Colors.darkElevated, borderRadius: 5, overflow: 'hidden' },
   barFg: { height: '100%', borderRadius: 5 },
+  stopCue: {
+    color: '#EF4444',
+    fontWeight: '700',
+    fontSize: FontSizes.sm,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginTop: Spacing.sm,
+  },
 });
