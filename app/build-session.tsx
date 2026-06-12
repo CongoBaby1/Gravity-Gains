@@ -18,10 +18,9 @@ const EXERCISES = [
   { id: 'superman', name: 'Superman Hold', emoji: '' },
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '' },
   { id: 'horse-stance', name: 'Horse Stance', emoji: '' },
-  { id: 'cat-cow', name: 'Cat-Cow', emoji: '' },
+  { id: 'cat-cow', name: 'Back Mobility', emoji: '' },
   { id: 'hip-mobility', name: 'Hip Mobility', emoji: '' },
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '' },
-  { id: 'back-mobility', name: 'Back Mobility', emoji: '' },
   { id: 'hamstring-reach', name: 'Hamstring Reach', emoji: '' },
   { id: 'butterfly-stretch', name: 'Butterfly Stretch', emoji: '' },
 ];

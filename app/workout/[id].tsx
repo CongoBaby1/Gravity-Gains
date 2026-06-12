@@ -14,7 +14,6 @@ const EXERCISE_IMAGES: Record<string, any> = {
   'cat-cow': require('@/assets/exercises/cat-cow.jpg'),
   'hip-mobility': require('@/assets/exercises/hip-mobility.jpg'),
   'shoulder-mobility': require('@/assets/exercises/shoulder-mobility.jpg'),
-  'back-mobility': require('@/assets/exercises/back-mobility.jpg'),
   'hamstring-reach': require('@/assets/exercises/hamstring-reach.jpg'),
   'butterfly-stretch': require('@/assets/exercises/butterfly-stretch.jpg'),
 };
@@ -48,10 +47,9 @@ const PLANS: Record<string, ExercisePlan[]> = {
   'superman': [{ id: 'superman', name: 'Superman Hold', emoji: '', sets: 3, holdSeconds: 30 }],
   'push-up-hold': [{ id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', emoji: '', sets: 3, holdSeconds: 30 }],
   'horse-stance': [{ id: 'horse-stance', name: 'Horse Stance', emoji: '', sets: 3, holdSeconds: 60 }],
-  'cat-cow': [{ id: 'cat-cow', name: 'Cat-Cow', emoji: '', sets: 2, holdSeconds: 60 }],
+  'cat-cow': [{ id: 'cat-cow', name: 'Back Mobility', emoji: '', sets: 2, holdSeconds: 60 }],
   'hip-mobility': [{ id: 'hip-mobility', name: 'Hip Mobility', emoji: '', sets: 2, holdSeconds: 60 }],
   'shoulder-mobility': [{ id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '', sets: 2, holdSeconds: 60 }],
-  'back-mobility': [{ id: 'back-mobility', name: 'Back Mobility', emoji: '', sets: 2, holdSeconds: 30 }],
   'hamstring-reach': [{ id: 'hamstring-reach', name: 'Hamstring Reach', emoji: '', sets: 2, holdSeconds: 30 }],
   'butterfly-stretch': [{ id: 'butterfly-stretch', name: 'Butterfly Stretch', emoji: '', sets: 2, holdSeconds: 30 }],
 };

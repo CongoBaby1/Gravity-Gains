@@ -32,10 +32,9 @@ const EXERCISES = [
   { id: 'superman', name: 'Superman Hold', muscles: 'Lower Back, Glutes', difficulty: 'Beginner', category: 'Posterior Chain', emoji: '' },
   { id: 'push-up-hold', name: 'Mid-Range Push-Up Hold', muscles: 'Chest, Triceps', difficulty: 'Intermediate', category: 'Upper Body', emoji: '' },
   { id: 'horse-stance', name: 'Horse Stance', muscles: 'Adductors, Quads', difficulty: 'Intermediate', category: 'Legs', emoji: '' },
-  { id: 'cat-cow', name: 'Cat-Cow', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
+  { id: 'cat-cow', name: 'Back Mobility', muscles: 'Spine, Core', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'hip-mobility', name: 'Hip Mobility', muscles: 'Hip Flexors, Glutes', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', muscles: 'Deltoids, Rotator Cuff', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
-  { id: 'back-mobility', name: 'Back Mobility', muscles: 'Spinal Erectors, Lower Back', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'hamstring-reach', name: 'Hamstring Reach', muscles: 'Hamstrings, Calves', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
   { id: 'butterfly-stretch', name: 'Butterfly Stretch', muscles: 'Adductors, Hip Flexors', difficulty: 'Beginner', category: 'Mobility', emoji: '' },
 ];

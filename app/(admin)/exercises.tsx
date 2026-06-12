@@ -22,9 +22,9 @@ const MOCK_EXERCISES: Exercise[] = [
   { id: '3', name: 'Horse Stance', category: 'Lower Body', difficulty: 'intermediate', muscles: ['Quads', 'Adductors'] },
   { id: '4', name: 'Push-Up Hold', category: 'Upper Body', difficulty: 'intermediate', muscles: ['Chest', 'Triceps'] },
   { id: '5', name: 'Superman Hold', category: 'Core', difficulty: 'beginner', muscles: ['Lower Back', 'Glutes'] },
-  { id: '6', name: 'Hip Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Hip Flexors', 'Glutes'] },
-  { id: '7', name: 'Shoulder Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Deltoids', 'Rotator Cuff'] },
-  { id: '8', name: 'Back Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Spinal Erectors', 'Lower Back'] },
+  { id: '6', name: 'Back Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Spine', 'Core'] },
+  { id: '7', name: 'Hip Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Hip Flexors', 'Glutes'] },
+  { id: '8', name: 'Shoulder Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Deltoids', 'Rotator Cuff'] },
   { id: '9', name: 'Hamstring Reach', category: 'Mobility', difficulty: 'beginner', muscles: ['Hamstrings', 'Calves'] },
   { id: '10', name: 'Butterfly Stretch', category: 'Mobility', difficulty: 'beginner', muscles: ['Adductors', 'Hip Flexors'] },
 ];
