@@ -14,6 +14,7 @@ const MOBILITY_EXERCISES = [
   { id: 'shoulder-mobility', name: 'Shoulder Mobility', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
   { id: 'hamstring-reach', name: 'Hamstring Reach', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
   { id: 'butterfly-stretch', name: 'Butterfly Stretch', emoji: '', duration: '2-3 min', difficulty: 'Beginner', exercises: 1 },
+  { id: 'worlds-greatest-stretch', name: "World's Greatest Stretch", emoji: '', duration: '2-4 min', difficulty: 'Beginner', exercises: 1 },
 ];
 
 function ExerciseCard({ exercise }: { exercise: typeof MOBILITY_EXERCISES[0] }) {

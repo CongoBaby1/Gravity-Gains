@@ -27,6 +27,7 @@ const MOCK_EXERCISES: Exercise[] = [
   { id: '8', name: 'Shoulder Mobility', category: 'Mobility', difficulty: 'beginner', muscles: ['Deltoids', 'Rotator Cuff'] },
   { id: '9', name: 'Hamstring Reach', category: 'Mobility', difficulty: 'beginner', muscles: ['Hamstrings', 'Calves'] },
   { id: '10', name: 'Butterfly Stretch', category: 'Mobility', difficulty: 'beginner', muscles: ['Adductors', 'Hip Flexors'] },
+  { id: '11', name: "World's Greatest Stretch", category: 'Mobility', difficulty: 'beginner', muscles: ['Hip Flexors', 'Hamstrings', 'Glutes'] },
 ];
 
 export default function AdminExercisesScreen() {
